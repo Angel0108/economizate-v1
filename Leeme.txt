@@ -12,3 +12,6 @@ git clone https://gitlab.com/Angel0108/Economizate.git
 -El web.war deployarlo en Tomcat
 -Browser http://localhost:8080/web/home.jsf
 
+
+*Obervaciones:
+Proyecto web no permite le uso del patrón observadoer. Ignorar proyecto web y crear aplicación de escritorio.
