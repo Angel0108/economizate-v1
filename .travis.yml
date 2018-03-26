@@ -1,5 +1,5 @@
 language: java
 
 script: 
-  - cd project 
+  - cd economizate 
   - mvn clean install
