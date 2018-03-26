@@ -25,6 +25,7 @@
   <modules>
     <module>dominio</module>
     <module>web</module>
+    <module>vista-swing</module>
   </modules>
   
   <reporting>
@@ -33,7 +34,7 @@
                         <groupId>org.codehaus.mojo</groupId>
                         <artifactId>cobertura-maven-plugin</artifactId>
                         <configuration>
-			                <check></check>
+			                <check/>
 			                <formats>
 			                    <format>html</format>
 			                    <format>xml</format>
