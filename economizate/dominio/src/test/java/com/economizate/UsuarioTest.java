@@ -1,20 +1,43 @@
 package com.economizate;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
+import com.economizate.datos.ListaUsuarios;
 import com.economizate.entidades.Usuario;
-import com.economizate.servicios.impl.UsuariosImpl;
 
-import junit.framework.Assert;
+import junit.framework.AssertionFailedError;
 
 public class UsuarioTest {
 	
+	private ListaUsuarios usuarios;
+	
+	@Before
+	public void llenarLista() {
+		usuarios = new ListaUsuarios();
+		usuarios.agregarUsuario("pepe", "gonzalez", "pepeGonzalez@gmail.com");
+		usuarios.agregarUsuario("juan", "sanchez", "juanSanchez@gmail.com");
+		usuarios.agregarUsuario("carlos", "gaitan", "elGaita@gmail.com");
+	}
+	
 	@Test
-	public void buscarUnUsuarioPorEmailYEncontrarElUsuaioOK() {
-		Usuario usuario = new UsuariosImpl().buscarUsuarioPorEmail("pepeGonzalez@gmail.com");
-		assertEquals("No encontre el usuario: ", usuario.getEmail(), "pepeGonzalez@gmail.com");
+	public void buscarUnUsuarioPorEmailYEncontrarElUsuarioOK() throws Exception {
+		Usuario usuario = usuarios.buscarUsuarioPorEmail("pepeGonzalez@gmail.com");
+		assertEquals("Buscar usaurio: ", usuario!= null ? usuario.getEmail() : null, "pepeGonzalez@gmail.com");
+	}
+	
+	@Test
+	public void buscarUnUsuarioQueNoEstaEnLaListaYObtenerExcepcion() {
+		try{
+			Usuario usuario = usuarios.buscarUsuarioPorEmail("pepu@gmail.com");
+			Assert.fail("Test fallido");
+		}catch(Exception e) {
+			assertEquals("Excepción no encuentro usuario", e.getMessage(), "No se encontró el usuario");
+		}
+		
 	}
 	
 }
