@@ -1,8 +1,8 @@
 package com.economizate.servicios;
 
-import java.io.File;
+import java.io.IOException;
 
 public interface ImportadorStrategy {
 
-	public void importarFile(File archivo);
+	public String importarFile(String filename) throws IOException;
 }
