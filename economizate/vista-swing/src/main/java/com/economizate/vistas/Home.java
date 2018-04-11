@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import com.economizate.entidades.Usuario;
+import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
@@ -74,7 +75,8 @@ public class Home implements ActionListener{
 	public void iniciarBotonEgreso() {
 		botonEgreso =new JButton("Egreso");
 		botonEgreso.setBounds(250,100,100, 40); 
-		botonEgreso.addActionListener(this);
+		botonEgreso.addActionListener(
+				new EgresoListener(this, email, usuarios.buscarUsuarioPorEmail(email).getSaldo().getTotal()));
 		
 	}
 	
