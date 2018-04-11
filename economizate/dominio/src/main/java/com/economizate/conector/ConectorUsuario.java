@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.economizate.entidades.Saldo;
 import com.economizate.entidades.Usuario;
 
 public class ConectorUsuario {
@@ -37,6 +38,18 @@ public class ConectorUsuario {
 		return usuario;
 	}
 	
+	public Usuario usuarioNuevo() {
+		Usuario usuario = new Usuario();
+		usuario.setNombre("pepe");
+		usuario.setApellido("gonzalez");
+		usuario.setEmail("pepeGonzalez@gmail.com");
+		usuario.setSaldo(new ConectorSaldo().nuevoSaldo());
+		return usuario;
+	}
+	
+	public Saldo obtenerSaldoUsuario(String email) {
+		return usuarioNuevo().getSaldo();
+	}
 	
 
 }

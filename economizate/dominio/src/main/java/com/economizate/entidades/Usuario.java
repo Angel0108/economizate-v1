@@ -1,10 +1,11 @@
 package com.economizate.entidades;
 
-public class Usuario {
+public class Usuario extends java.util.Observable{
 	
 	private String nombre;
 	private String apellido;
 	private String email;
+	private Saldo saldo;
 	
 	public Usuario() {
 		super();
@@ -23,6 +24,7 @@ public class Usuario {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+		
 	}
 
 	public String getApellido() {
@@ -39,6 +41,14 @@ public class Usuario {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public Saldo getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(Saldo saldo) {
+		this.saldo = saldo;
 	}
 	
 	
