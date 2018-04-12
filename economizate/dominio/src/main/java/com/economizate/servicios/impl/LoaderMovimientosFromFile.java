@@ -27,7 +27,9 @@ public class LoaderMovimientosFromFile {
 				throw new ValidationException("Registro inválido. Línea " + linea);
 			}
 			
-		}
-		
+		}		
 	}
+	
+	
+	
 }
