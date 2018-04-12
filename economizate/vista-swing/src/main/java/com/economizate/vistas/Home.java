@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.IngresoListener;
+import com.economizate.listeners.ReportesListener;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
@@ -88,7 +89,7 @@ public class Home implements ActionListener{
 	public void iniciarBotonReportes() {
 		botonReportes =new JButton("Reportes");
 		botonReportes.setBounds(250,200,100, 40); 
-		botonReportes.addActionListener(this);
+		botonReportes.addActionListener(new ReportesListener(this, email));
 		
 	}
 	

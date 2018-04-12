@@ -66,8 +66,8 @@ public class MovimientoMonetario {
 
 	@Override
 	public String toString() {
-		return "MovimientoMonetario [id=" + id + ", fecha=" + fecha + ", descripcion=" + descripcion + ", observacion="
-				+ observacion + ", importe=" + importe + "]";
+		return "MovimientoMonetario [id=" + id + ", fecha=" + fecha + ",\n descripcion=" + descripcion + ",\n observacion="
+				+ observacion + ",\n importe=" + importe + "]";
 	}
 	
 	

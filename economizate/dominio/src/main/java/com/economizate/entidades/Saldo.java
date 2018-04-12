@@ -2,6 +2,7 @@ package com.economizate.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Saldo extends java.util.Observable{
 	
@@ -44,4 +45,9 @@ public class Saldo extends java.util.Observable{
 		this.id = id;
 	}
 	
+	public String imprimirHistoricoMovimientos() {
+		List<String> movimientosImpresos = 
+				movimientos.stream().map( m -> m.toString()).collect(Collectors.toList());
+		return movimientos.stream().map( m -> m.toString()).toString();
+	}
 }
