@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import com.economizate.entidades.Saldo;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
@@ -16,7 +17,7 @@ import com.economizate.listeners.ReportesListener;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
-public class Home implements ActionListener{
+public class Home implements ActionListener, java.util.Observer{
 	
 	private static Logger logger = Logger.getLogger(Home.class.getName());
 	
@@ -27,29 +28,28 @@ public class Home implements ActionListener{
 	private JButton botonEgresosPeriodicos;
 	private JButton botonReportes;
 	private JLabel nombreUsuario;
-	private JLabel saldoUsuario;
+	private JLabel saldoUsuario = new JLabel();
 	
 	private Usuarios usuarios;
 	private String email;
-	//private Usuario usuario;
 	
 	public Home() {
-		usuarios = new UsuariosImpl();
+		usuarios = new UsuariosImpl(this);
 
-		ventana = new JFrame();
-		iniciarBotones();
-		iniciarJLabels();
+		iniciarComponentes();
 	}
 	
 	public Home(String email) {
 		this.email = email;
-		usuarios = new UsuariosImpl();
-
+		usuarios = new UsuariosImpl(this);
+		
+		iniciarComponentes();
+	}
+	
+	public void iniciarComponentes() {
 		ventana = new JFrame();
 		iniciarBotones();
 		iniciarJLabels();
-		
-		//usuario = new UsuariosImpl().buscarUsuarioPorEmail(email);
 	}
 	
 	public void iniciarBotones() {
@@ -100,7 +100,7 @@ public class Home implements ActionListener{
 		nombreUsuario.setBounds(20,50, 250,20);      
 		nombreUsuario.setVisible(false);
 		
-		saldoUsuario = new JLabel();
+		//saldoUsuario = new JLabel();
 		saldoUsuario.setBounds(280,50, 250,20);      
 		saldoUsuario.setVisible(false);
 	}
@@ -147,9 +147,11 @@ public class Home implements ActionListener{
 	}
 	
 	public void update(Observable o, Object arg) {
-		System.out.println("Update Observable Home");
-		//logger.info("Update Observable Home");
+		logger.info("Inicio acción update observable Home");
+		Saldo saldo = (Saldo) o;
+		double total = (Double) arg;
 		
+		saldoUsuario.setText("Saldo2: " +  total);
 	}
 	
 	public JFrame getVentanaHome() {
@@ -162,5 +164,13 @@ public class Home implements ActionListener{
 	
 	public JFrame getVentana() {
 		return ventana;
+	}
+	
+	public Usuarios getServicioUsuario() {
+		return usuarios;
+	}
+	
+	public void setServicioUsuario(Usuarios usuarios) {
+		this.usuarios = usuarios;
 	}
 }

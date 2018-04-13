@@ -1,11 +1,13 @@
 package com.economizate.vistas;
 
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -13,6 +15,7 @@ import javax.swing.JTextField;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.entidades.Saldo;
 import com.economizate.entidades.Usuario;
+import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Ingreso implements java.util.Observer{
@@ -22,29 +25,36 @@ public class Ingreso implements java.util.Observer{
 	private JFrame ventana;
 	private Home ventanaHome;
 	
-	private JButton botonIngreso;
+	private JButton botonIngreso, botonOk;
 	private JLabel nombreUsuario;
 	
-	private JLabel saldoUsuario;
+	private JLabel saldoUsuario = new JLabel();
 	
 	private JLabel descripcionLabel, observacionLabel, importeLabel;
 	private JTextField descripcion, observacion, importe;
 	
+	private JDialog dialogoOK;
+	
 	private String email;
 	private double saldo;
 	
+	Usuarios usuarios;
+	
 	public Ingreso() {
-		
-		iniciarBotonIngreso();
-		iniciarLabels();
-		iniciarTextFields();
+		iniciarComponentes();
 	}
 	
 	public Ingreso(Home ventanaHome, String email, double saldo) {
+		usuarios = new UsuariosImpl(this);
+		
 		this.ventanaHome = ventanaHome;
 		this.email = email;
 		this.saldo = saldo;
 		
+		iniciarComponentes();
+	}
+	
+	public void iniciarComponentes() {
 		iniciarBotonIngreso();
 		iniciarLabels();
 		iniciarTextFields();
@@ -54,11 +64,11 @@ public class Ingreso implements java.util.Observer{
 		botonIngreso =new JButton("Aceptar");
 		botonIngreso.setBounds(50,400,100, 40); 
 		botonIngreso.addActionListener(
-				new ControladorIngreso(new UsuariosImpl().buscarUsuarioPorEmail(email), this, ventanaHome));
+				new ControladorIngreso(new UsuariosImpl(this).buscarUsuarioPorEmail(email), this, ventanaHome, usuarios));
 	}
 	
 	public void iniciarLabels() {
-		saldoUsuario = new JLabel();
+		
 		saldoUsuario.setBounds(280,20, 250,20);  
 		saldoUsuario.setText("Saldo: " + saldo);
 		
@@ -115,11 +125,24 @@ public class Ingreso implements java.util.Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		Saldo saldo = (Saldo) o;
-		double total = (Double) arg;
-		//logger.info("Update como observador : Observable es " + o.getClass() + ", objecto pasado es " + arg.getClass());
-		System.out.println("Update como observador : Observable es " + o.getClass() + ", objecto pasado es " + arg.getClass());
-		saldoUsuario.setText("Saldo2: " +  saldo);
+		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto pasado es " + arg.getClass());
+		
+		botonOk = new JButton("OK");
+		dialogoOK = new JDialog(ventana, "Transaccion OK", true);
+		dialogoOK.setLayout( new FlowLayout() );
+		
+		dialogoOK.add(botonOk);
+		botonOk.addActionListener(new ActionListener() {
+			public void actionPerformed( ActionEvent e )  
+            {  
+				dialogoOK.setVisible(false);  
+            }  
+		});
+		dialogoOK.setSize(200,100);    
+		dialogoOK.setVisible(true);  
+		
+		//Esta es una función de simulación
+		//saldoUsuario.setText("Saldo2: " +  saldo.getTotal());
 	}
 	
 	public String getImporteTextFieldValue() {

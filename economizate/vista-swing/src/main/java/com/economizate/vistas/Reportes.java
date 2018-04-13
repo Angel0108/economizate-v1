@@ -30,8 +30,8 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		iniciarBotones();
 	}
 	
-	public Reportes(String email) {
-		usuarios = new UsuariosImpl();
+	public Reportes(String email, Usuarios usuarios) {
+		this.usuarios = usuarios;
 		this.email = email;
 		iniciarBotones();
 		iniciarJLabels();

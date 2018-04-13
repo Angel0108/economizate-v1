@@ -10,7 +10,6 @@ import com.economizate.vistas.Reportes;
 
 public class ReportesListener implements ActionListener{
 
-	
 	private Home home;
 	private JFrame ventana;
 	private String email;
@@ -23,8 +22,7 @@ public class ReportesListener implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		ventana.setVisible(false);
-		new Reportes(email).iniciarVista();
-		
+		new Reportes(email, home.getServicioUsuario()).iniciarVista();
 	}
 
 }

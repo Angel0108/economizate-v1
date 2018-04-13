@@ -26,7 +26,9 @@ public class UsuarioTest {
 	@Test
 	public void buscarUnUsuarioPorEmailYEncontrarElUsuarioOK() throws Exception {
 		Usuario usuario = usuarios.buscarUsuarioPorEmail("pepeGonzalez@gmail.com");
-		assertEquals("Buscar usaurio: ", usuario!= null ? usuario.getEmail() : null, "pepeGonzalez@gmail.com");
+		assertEquals("Buscar usuario: ", usuario!= null ? usuario.getEmail() : null, "pepeGonzalez@gmail.com");
+		assertEquals("Buscar usuario: ", usuario!= null ? usuario.getApellido() : null, "gonzalez");
+		assertEquals("Buscar usuario: ", usuario!= null ? usuario.getNombre() : null, "pepe");
 	}
 	
 	@Test
@@ -37,7 +39,12 @@ public class UsuarioTest {
 		}catch(Exception e) {
 			assertEquals("Excepción no encuentro usuario", e.getMessage(), "No se encontró el usuario");
 		}
-		
+	}
+	
+	@Test
+	public void buscarUnUsuarioPorEmailYChequearSuSaldoInicialEnCeroConExito() throws Exception {
+		Usuario usuario = usuarios.buscarUsuarioPorEmail("pepeGonzalez@gmail.com");
+		assertEquals("Buscar saldo en cero: ", usuario!= null ? usuario.getSaldo().getTotal() : null, new Double(0));
 	}
 	
 }

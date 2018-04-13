@@ -2,6 +2,7 @@ package com.economizate.servicios.impl;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Observer;
 
 import com.economizate.conector.ConectorSaldo;
 import com.economizate.entidades.MovimientoMonetario;
@@ -11,6 +12,13 @@ public class SaldosImpl implements Saldos{
 	
 	private ConectorSaldo conector = new ConectorSaldo();
 
+	public SaldosImpl() {
+	}
+	
+	public SaldosImpl(Observer observer) {
+		conector.addObserver(observer);
+	}
+	
 	@Override
 	public List<MovimientoMonetario> obtenerHistorialMovimientos() {
 		return conector.obtenerHistorialDeMovimientos();

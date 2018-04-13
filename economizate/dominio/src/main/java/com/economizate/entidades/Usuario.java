@@ -1,6 +1,10 @@
 package com.economizate.entidades;
 
+import java.util.logging.Logger;
+
 public class Usuario extends java.util.Observable{
+	
+	private static Logger logger = Logger.getLogger(Saldo.class.getName());
 	
 	private String nombre;
 	private String apellido;

@@ -3,6 +3,7 @@ package com.economizate.conector;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Observer;
 
 import com.economizate.entidades.Saldo;
 import com.economizate.entidades.Usuario;
@@ -10,6 +11,9 @@ import com.economizate.entidades.Usuario;
 public class ConectorUsuario {
 	
 	private ConectorMysql conector;
+	private Usuario usuario;
+	
+	private Observer observer;
 
 	public ConectorUsuario() {
 		conector = new ConectorMysql();
@@ -39,11 +43,20 @@ public class ConectorUsuario {
 	}
 	
 	public Usuario usuarioNuevo() {
-		Usuario usuario = new Usuario();
-		usuario.setNombre("pepe");
-		usuario.setApellido("gonzalez");
-		usuario.setEmail("pepeGonzalez@gmail.com");
-		usuario.setSaldo(new ConectorSaldo().nuevoSaldo());
+		if(usuario == null) {
+			usuario = new Usuario();
+			usuario.setNombre("pepe");
+			usuario.setApellido("gonzalez");
+			usuario.setEmail("pepeGonzalez@gmail.com");
+			Saldo saldo;
+			if(observer != null) {
+				saldo = new ConectorSaldo().nuevoSaldo(observer);
+				saldo.addObserver(observer);
+			}else {
+				saldo = new ConectorSaldo().nuevoSaldo();
+			}
+			usuario.setSaldo(saldo);
+		}	
 		return usuario;
 	}
 	
@@ -51,5 +64,9 @@ public class ConectorUsuario {
 		return usuarioNuevo().getSaldo();
 	}
 	
+	public void addObserver(Observer o) {
+		this.observer = o;
+		//usuario.addObserver(o);
+	}
 
 }
