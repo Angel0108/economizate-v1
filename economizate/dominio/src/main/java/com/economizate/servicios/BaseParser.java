@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public abstract class BaseParser {
 
-	private String FileName; 
+	protected String FileName; 
 	
 	public BaseParser() 
     { 

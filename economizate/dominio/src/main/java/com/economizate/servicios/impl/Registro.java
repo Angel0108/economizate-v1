@@ -8,15 +8,7 @@ public class Registro {
 	private String observacion;
 	private String importe;
 	
-	protected ValidadorRegistroStrategy validador;
 	
-	void setValidador(ValidadorRegistroStrategy v) {
-		this.validador = v;
-	}
-	
-	public boolean isValid() {
-		return validador.validate(this);
-	}
 
 	/**
 	 * @return the concepto

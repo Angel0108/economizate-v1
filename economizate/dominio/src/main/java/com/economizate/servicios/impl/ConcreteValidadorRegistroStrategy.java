@@ -1,25 +1,22 @@
 package com.economizate.servicios.impl;
 
+import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.ValidadorRegistroStrategy;
 
 public class ConcreteValidadorRegistroStrategy implements ValidadorRegistroStrategy {
 	
 	
 	@Override
-	public boolean validate(Registro r) {
+	public boolean validate(MovimientoMonetario mov) {
 
-		if(r.getConcepto().isEmpty()) {
+		if(mov.getDescripcion().isEmpty()) {
 			return false;
-		} else if(r.getObservacion().isEmpty()) {
+		} else if(mov.getObservacion().isEmpty()) {
 			return false;
-		} else if(r.getImporte().isEmpty()) {
+		} else if(mov.getImporte() == null || mov.getImporte().equals(0)) {
 			return false;
 		}
-		try {
-			Float.valueOf(r.getImporte());
-		} catch (Exception e) {
-			return false;
-		}		
+				
 		return true;
 	}
 

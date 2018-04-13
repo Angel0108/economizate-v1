@@ -3,13 +3,15 @@ package com.economizate.entidades;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.economizate.servicios.ValidadorRegistroStrategy;
+
 public class MovimientoMonetario {
 	
 	private long id;
 	private Date fecha;
 	private String descripcion;
 	private String observacion;
-	private double importe;
+	private Double importe;
 			
 	
 	public MovimientoMonetario(String descripcion, String observacion, double importe) {
@@ -57,7 +59,7 @@ public class MovimientoMonetario {
 		this.observacion = observacion;
 	}
 
-	public double getImporte() {
+	public Double getImporte() {
 		return importe;
 	}
 
@@ -72,6 +74,14 @@ public class MovimientoMonetario {
 				+ observacion + ",\n Importe=" + importe;
 	}
 	
+	protected ValidadorRegistroStrategy validador;
 	
+	public void setValidador(ValidadorRegistroStrategy v) {
+		this.validador = v;
+	}
+	
+	public boolean isValid() {
+		return validador.validate(this);
+	}
 	
 }
