@@ -1,5 +1,6 @@
 package com.economizate.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class MovimientoMonetario {
@@ -66,8 +67,9 @@ public class MovimientoMonetario {
 
 	@Override
 	public String toString() {
-		return "MovimientoMonetario [id=" + id + ", fecha=" + fecha + ",\n descripcion=" + descripcion + ",\n observacion="
-				+ observacion + ",\n importe=" + importe + "]";
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		return "Movimiento Monetario: "+ descripcion +"\nID: " + id + "\n Fecha: " + formatter.format(fecha) + ",\n Descripcion:" + ",\n Observacion:"
+				+ observacion + ",\n Importe=" + importe;
 	}
 	
 	
