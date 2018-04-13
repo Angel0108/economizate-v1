@@ -1,5 +1,14 @@
 package com.economizate.servicios.impl;
 
+import java.io.File;
+import java.util.Iterator;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 import com.economizate.servicios.BaseParser;
 
 public class ExcelParser extends BaseParser {
@@ -10,10 +19,9 @@ public class ExcelParser extends BaseParser {
 
 	@Override
 	public String Read() {
-		/*String path="C:\\Book2.xlsx";
 		try {
 
-		        File f = new File( path );
+		        File f = new File( FileName );
 		        Workbook wb = WorkbookFactory.create(f);
 		        Sheet mySheet = wb.getSheetAt(0);
 		        Iterator<Row> rowIter = mySheet.rowIterator();
@@ -29,7 +37,7 @@ public class ExcelParser extends BaseParser {
 		    {
 		        System.out.println( "exception" );
 		        e.printStackTrace();
-		    }*/
+		    }
 		return "";
 	}
 

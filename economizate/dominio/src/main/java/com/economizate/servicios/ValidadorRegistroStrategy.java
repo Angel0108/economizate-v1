@@ -1,8 +1,8 @@
 package com.economizate.servicios;
 
-import com.economizate.servicios.impl.Registro;
+import com.economizate.entidades.MovimientoMonetario;
 
 public interface ValidadorRegistroStrategy {
 
-	public boolean validate(Registro r);
+	public boolean validate(MovimientoMonetario r);
 }

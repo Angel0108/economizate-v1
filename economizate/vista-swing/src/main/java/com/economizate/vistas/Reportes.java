@@ -12,20 +12,47 @@ import javax.swing.JTextPane;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
+import javax.swing.JScrollBar;
+import com.toedter.calendar.JDateChooser;
 
-public class Reportes implements ActionListener{
+public class Reportes extends JFrame implements ActionListener{
 	
 private static Logger logger = Logger.getLogger(Reportes.class.getName());
 	
 	private JFrame ventana;
 	private JButton botonVolver;
 	private JTextPane listaMovimientos;
+	private JLabel lblFiltrar;
+	private JDateChooser DateChooserDesde;
+	private JDateChooser DateChooserHasta;
+	private JLabel lblDesde;
 	
 	private Usuarios usuarios;
 	
 	private String email;
 	
 	public Reportes() {
+		getContentPane().setLayout(null);
+		
+		botonVolver = new JButton("Volver");
+		botonVolver.setBounds(186, 406, 89, 23);
+		getContentPane().add(botonVolver);
+		
+		listaMovimientos = new JTextPane();
+		listaMovimientos.setBounds(21, 104, 403, 291);
+		getContentPane().add(listaMovimientos);
+	
+		
+		lblDesde = new JLabel("Fecha desde:");
+		lblDesde.setBounds(40, 50, 119, 14);
+		getContentPane().add(lblDesde);
+		
+		JLabel lblHasta = new JLabel("Hasta:");
+		lblHasta.setBounds(238, 43, 32, 14);
+		getContentPane().add(lblHasta);
+		
+		
+		
 		usuarios = new UsuariosImpl();
 		iniciarBotones();
 	}
@@ -35,17 +62,23 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		this.email = email;
 		iniciarBotones();
 		iniciarJLabels();
+		iniciarJDChoosers();
 	}
 	
 	public void iniciarVista() {
 		ventana = new JFrame();
 		
-		ventana.add(botonVolver);
-		ventana.add(listaMovimientos);
+		ventana.getContentPane().add(botonVolver);
+		ventana.getContentPane().add(listaMovimientos);
+		ventana.getContentPane().add(lblFiltrar);
+		ventana.getContentPane().add(DateChooserDesde);
+		ventana.getContentPane().add(DateChooserHasta);
+		ventana.getContentPane().add(lblDesde);
+
 		
-		ventana.setTitle("Ingreso");
+		ventana.setTitle("Reporte de movimientos");
 		ventana.setSize(600,500);
-		ventana.setLayout(null); 
+		ventana.getContentPane().setLayout(null); 
 		ventana.setVisible(true);
 	}
 	
@@ -62,8 +95,30 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 				.buscarUsuarioPorEmail(email)
 				.getSaldo()
 				.getMovimientos());
-		listaMovimientos.setBounds(20, 20, 500, 100);
+		listaMovimientos.setBounds(20, 100, 550, 300);
+		listaMovimientos.setEditable(false);
+		
+		lblFiltrar = new JLabel("Filtrar:");
+		lblFiltrar.setBounds(21, 11, 46, 14);
+		getContentPane().add(lblFiltrar);
+		
+		lblDesde = new JLabel("Fecha desde:");
+		lblDesde.setBounds(21, 43, 65, 14);
+		getContentPane().add(lblDesde);
+		
+		
 
+	}
+	
+	private void iniciarJDChoosers() {
+		DateChooserDesde = new JDateChooser();
+		DateChooserDesde.setBounds(130, 35, 87, 20);
+		getContentPane().add(DateChooserDesde);
+		
+		//falta terminar este ..
+		DateChooserHasta = new JDateChooser();
+		DateChooserHasta.setBounds(300, 35, 87, 20);
+		getContentPane().add(DateChooserHasta);
 	}
 
 	public void actionPerformed(ActionEvent e) {
