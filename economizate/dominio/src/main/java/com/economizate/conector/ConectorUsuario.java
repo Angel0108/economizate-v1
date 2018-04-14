@@ -5,7 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Observer;
 
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 
 public class ConectorUsuario {
@@ -48,7 +48,7 @@ public class ConectorUsuario {
 			usuario.setNombre("pepe");
 			usuario.setApellido("gonzalez");
 			usuario.setEmail("pepeGonzalez@gmail.com");
-			Saldo saldo;
+			Cuenta saldo;
 			if(observer != null) {
 				saldo = new ConectorSaldo().nuevoSaldo(observer);
 				saldo.addObserver(observer);
@@ -60,7 +60,7 @@ public class ConectorUsuario {
 		return usuario;
 	}
 	
-	public Saldo obtenerSaldoUsuario(String email) {
+	public Cuenta obtenerSaldoUsuario(String email) {
 		return usuarioNuevo().getSaldo();
 	}
 	

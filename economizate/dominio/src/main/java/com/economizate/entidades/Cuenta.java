@@ -5,32 +5,32 @@ import java.util.List;
 import java.util.Observer;
 import java.util.logging.Logger;
 
-public class Saldo extends java.util.Observable{
+public class Cuenta extends java.util.Observable{
 	
-	private static Logger logger = Logger.getLogger(Saldo.class.getName());
+	private static Logger logger = Logger.getLogger(Cuenta.class.getName());
 	
 	private long id;
 	private List<MovimientoMonetario> movimientos;
 	private double total;
 	
-	public Saldo () {
+	public Cuenta () {
 		this.movimientos = new ArrayList<>();
 		this.total = 0;
 	}
 	
-	public Saldo (Observer o) {
+	public Cuenta (Observer o) {
 		this.addObserver(o);
 		this.movimientos = new ArrayList<>();
 		this.total = 0;
 	}
 	
-	public Saldo (Observer o, double total) {
+	public Cuenta (Observer o, double total) {
 		this.addObserver(o);
 		this.movimientos = new ArrayList<>();
 		this.total = total;
 	}
 	
-	public Saldo (List<MovimientoMonetario> movimientos, double total) {
+	public Cuenta (List<MovimientoMonetario> movimientos, double total) {
 		this.movimientos = movimientos;
 		this.total = total;
 	}

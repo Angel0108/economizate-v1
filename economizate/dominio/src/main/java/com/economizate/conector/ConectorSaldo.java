@@ -4,17 +4,17 @@ import java.util.List;
 import java.util.Observer;
 
 import com.economizate.entidades.MovimientoMonetario;
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 
 public class ConectorSaldo {
 	
 	private double total = 100;
-	private Saldo saldo;
+	private Cuenta saldo;
 	private Observer observer;
 		
-	public Saldo nuevoSaldo() {
+	public Cuenta nuevoSaldo() {
 		if (saldo == null) {
-			saldo = new Saldo();
+			saldo = new Cuenta();
 			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 100);
 			saldo.getMovimientos().add(ingreso);
 			saldo.setTotal(obtenerSaldo());
@@ -22,10 +22,10 @@ public class ConectorSaldo {
 		return saldo;
 	}
 	
-	public Saldo nuevoSaldo(Observer o) {
+	public Cuenta nuevoSaldo(Observer o) {
 		if (saldo == null) {
 			observer = o;
-			saldo = new Saldo(o, obtenerSaldo());
+			saldo = new Cuenta(o, obtenerSaldo());
 			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 100);
 			saldo.getMovimientos().add(ingreso);
 			saldo.setTotalTest(obtenerSaldo());

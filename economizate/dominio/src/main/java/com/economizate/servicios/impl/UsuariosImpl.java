@@ -3,7 +3,7 @@ package com.economizate.servicios.impl;
 import java.util.Observer;
 
 import com.economizate.conector.ConectorUsuario;
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Usuarios;
 
@@ -22,7 +22,7 @@ public class UsuariosImpl implements Usuarios{
 		return conector.usuarioNuevo();
 	}
 
-	public Saldo obtenerSaldoUsuario(Usuario usuario) {
+	public Cuenta obtenerSaldoUsuario(Usuario usuario) {
 		return conector.obtenerSaldoUsuario(usuario.getEmail());
 	}
 

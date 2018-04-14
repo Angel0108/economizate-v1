@@ -4,12 +4,12 @@ import java.util.logging.Logger;
 
 public class Usuario extends java.util.Observable{
 	
-	private static Logger logger = Logger.getLogger(Saldo.class.getName());
+	private static Logger logger = Logger.getLogger(Cuenta.class.getName());
 	
 	private String nombre;
 	private String apellido;
 	private String email;
-	private Saldo saldo;
+	private Cuenta saldo;
 	
 	public Usuario() {
 		super();
@@ -47,11 +47,11 @@ public class Usuario extends java.util.Observable{
 		this.email = email;
 	}
 
-	public Saldo getSaldo() {
+	public Cuenta getSaldo() {
 		return saldo;
 	}
 
-	public void setSaldo(Saldo saldo) {
+	public void setSaldo(Cuenta saldo) {
 		this.saldo = saldo;
 	}
 	
