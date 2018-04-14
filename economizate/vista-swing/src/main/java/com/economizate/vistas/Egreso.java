@@ -14,10 +14,14 @@ import javax.swing.JTextField;
 
 import com.economizate.controladores.ControladorEgreso;
 import com.economizate.controladores.ControladorIngreso;
+import com.economizate.entidades.Alerta;
 import com.economizate.entidades.Saldo;
 import com.economizate.entidades.Usuario;
+import com.economizate.servicios.Alertas;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
+import com.economizate.servicios.impl.AlertaAmarilla;
+import com.economizate.servicios.impl.AlertasImpl;
 import com.economizate.servicios.impl.SaldosImpl;
 import com.economizate.servicios.impl.UsuariosImpl;
 
@@ -41,6 +45,7 @@ public class Egreso implements java.util.Observer{
 	private double saldo;
 	
 	Usuarios usuarios;
+	AlertaAmarilla alertas;
 	
 	public Egreso() {
 		
@@ -127,10 +132,11 @@ public class Egreso implements java.util.Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto pasado es " + arg.getClass());
+		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto es " + arg.getClass() + arg);
 		
 		botonOk = new JButton("OK");
-		if(100 - (Double) arg >= 20) 
+		
+		if((Double) arg < (double) 20) 
 			dialogoOK = new JDialog(ventana, "Simulacro de Alerta", true);
 		else
 			dialogoOK = new JDialog(ventana, "Transaccion", true);

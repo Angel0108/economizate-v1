@@ -12,8 +12,9 @@ import javax.swing.JTextPane;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
-import javax.swing.JScrollBar;
 import com.toedter.calendar.JDateChooser;
+
+import javax.swing.JScrollBar;
 
 public class Reportes extends JFrame implements ActionListener{
 	
