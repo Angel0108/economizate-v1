@@ -6,7 +6,7 @@ public interface IAlertas {
 
 	public Alerta crearAlerta(); 
 	
-	public boolean esNecesarioAlerta();
+	public boolean muestraAlerta();
 	
 	public String getMensaje();
 }

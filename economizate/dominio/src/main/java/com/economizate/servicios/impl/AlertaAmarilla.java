@@ -25,7 +25,7 @@ public class AlertaAmarilla extends Alertas implements IAlertas {
 	}
 
 	@Override
-	public boolean esNecesarioAlerta() {
+	public boolean muestraAlerta() {
 		// TODO Auto-generated method stub
 		return true;
 	}

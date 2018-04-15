@@ -22,7 +22,7 @@ public class AlertaRoja extends Alertas implements IAlertas {
 	}
 
 	@Override
-	public boolean esNecesarioAlerta() {		
+	public boolean muestraAlerta() {		
 		return true;
 	}
 

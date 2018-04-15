@@ -3,6 +3,8 @@ package com.economizate.servicios.impl;
 import java.io.File;
 import java.util.Iterator;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -17,28 +19,37 @@ public class ExcelParser extends BaseParser {
 		super();
 	}
 
+	public ExcelParser(String nombreArchivo) {
+		super(nombreArchivo);
+	}
+	
 	@Override
 	public String Read() {
+		StringBuilder resultado = new StringBuilder();
 		try {
-
+				
 		        File f = new File( FileName );
+		        Delimiter = ";";
 		        Workbook wb = WorkbookFactory.create(f);
-		        Sheet mySheet = (Sheet) wb.getSheetAt(0);
+		        org.apache.poi.ss.usermodel.Sheet mySheet = wb.getSheetAt(0);
 		        Iterator<Row> rowIter = ((org.apache.poi.ss.usermodel.Sheet) mySheet).rowIterator();
 		        for ( Iterator<Row> rowIterator = ((org.apache.poi.ss.usermodel.Sheet) mySheet).rowIterator() ;rowIterator.hasNext(); )
 		        {
 		            for (  Iterator<Cell> cellIterator = ((Row)rowIterator.next()).cellIterator() ; cellIterator.hasNext() ;  ) 
-		            {
-		                System.out.println ( ( (Cell)cellIterator.next() ).toString() );
+		            {		            	
+		            	resultado.append(( (Cell)cellIterator.next() ).toString());
+		                if(cellIterator.hasNext()) {
+		                	resultado.append(Delimiter);	
+		                }
 		            }
-		            System.out.println( " **************************************************************** ");
+		            resultado.append(System.getProperty("line.separator"));
 		        }
 		    } catch ( Exception e )
 		    {
 		        System.out.println( "exception" );
 		        e.printStackTrace();
 		    }
-		return "";
+		return resultado.toString();
 	}
 
 	@Override

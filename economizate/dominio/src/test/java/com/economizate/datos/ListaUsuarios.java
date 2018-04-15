@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 
 public class ListaUsuarios {
@@ -25,14 +25,14 @@ public class ListaUsuarios {
 	}
 	
 	public void agregarUsuario(Usuario usuario) {
-		Saldo saldo = new Saldo();
+		Cuenta saldo = new Cuenta();
 		usuario.setSaldo(saldo);
 		usuarios.add(usuario);
 	}
 	
 	public void agregarUsuario(String nombre, String apellido, String email) {
 		Usuario usuario = new Usuario(nombre, apellido, email);
-		Saldo saldo = new Saldo();
+		Cuenta saldo = new Cuenta();
 		usuario.setSaldo(saldo);
 		usuarios.add(usuario);
 	}
