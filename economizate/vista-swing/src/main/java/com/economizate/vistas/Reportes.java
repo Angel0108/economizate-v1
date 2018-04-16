@@ -32,6 +32,7 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 	private JDateChooser dateChooserHasta;
 	private JLabel lblDesde;
 	private JLabel lblHasta;
+	private Home ventanaHome;
 	
 	private Usuarios usuarios;
 	
@@ -137,6 +138,15 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		
 
 	}
+	
+	public Home getVentanaHome() {
+		return ventanaHome;
+	}
+
+	public void setVentanaHome(Home ventanaHome) {
+		this.ventanaHome = ventanaHome;
+	}
+
 	
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
