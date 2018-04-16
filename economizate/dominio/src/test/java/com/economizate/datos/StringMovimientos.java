@@ -1,6 +1,5 @@
 package com.economizate.datos;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,18 +9,13 @@ public class StringMovimientos {
 
 	public StringMovimientos() {
 		super();
-		this.movimientos = new ArrayList<>();
-	}
-	
-	@Deprecated
-	private List<String> llenarLista(){
-		return Arrays.asList(
+		this.movimientos = Arrays.asList(
 				"compra;chino;50;5",
 				"compra;chino;50b;2" );
 	}
 	
 	public List<String> getMovimientos() {
-		return llenarLista();
+		return movimientos;
 	}	
 	
 }

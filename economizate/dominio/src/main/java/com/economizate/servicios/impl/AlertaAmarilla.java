@@ -1,6 +1,5 @@
 package com.economizate.servicios.impl;
 
-import com.economizate.conector.ConectorAlerta;
 import com.economizate.entidades.Alerta;
 import com.economizate.servicios.Alertas;
 import com.economizate.servicios.IAlertas;

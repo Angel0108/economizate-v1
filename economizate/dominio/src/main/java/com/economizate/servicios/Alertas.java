@@ -1,7 +1,6 @@
 package com.economizate.servicios;
 
 import com.economizate.conector.ConectorAlerta;
-import com.economizate.entidades.Alerta;
 
 public abstract class Alertas implements IAlertas {
 	
