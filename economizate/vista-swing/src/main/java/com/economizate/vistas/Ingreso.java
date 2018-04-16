@@ -18,7 +18,7 @@ import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
-public class Ingreso implements java.util.Observer{
+public class Ingreso extends JFrame implements java.util.Observer{
 	
 	private static Logger logger = Logger.getLogger(Ingreso.class.getName());
 	
