@@ -14,7 +14,7 @@ import com.economizate.servicios.BaseWriter;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
 
-public class ExcelWriterTest {
+public class WriterTest {
 
 	@Test
 	public void writeExcelMovimientos() throws IOException {
