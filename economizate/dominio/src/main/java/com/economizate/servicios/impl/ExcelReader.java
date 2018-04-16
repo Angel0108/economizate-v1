@@ -2,24 +2,20 @@ package com.economizate.servicios.impl;
 
 import java.io.File;
 import java.util.Iterator;
-
-import javax.naming.spi.DirStateFactory.Result;
-
-import org.apache.poi.sl.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 
-import com.economizate.servicios.BaseParser;
+import com.economizate.servicios.BaseReader;
 
-public class ExcelParser extends BaseParser {
+public class ExcelReader extends BaseReader {
 
-	public ExcelParser() {
+	public ExcelReader() {
 		super();
 	}
 
-	public ExcelParser(String nombreArchivo) {
+	public ExcelReader(String nombreArchivo) {
 		super(nombreArchivo);
 	}
 	
@@ -32,7 +28,7 @@ public class ExcelParser extends BaseParser {
 		        Delimiter = ";";
 		        Workbook wb = WorkbookFactory.create(f);
 		        org.apache.poi.ss.usermodel.Sheet mySheet = wb.getSheetAt(0);
-		        Iterator<Row> rowIter = ((org.apache.poi.ss.usermodel.Sheet) mySheet).rowIterator();
+		        //Iterator<Row> rowIter = ((org.apache.poi.ss.usermodel.Sheet) mySheet).rowIterator();
 		        for ( Iterator<Row> rowIterator = ((org.apache.poi.ss.usermodel.Sheet) mySheet).rowIterator() ;rowIterator.hasNext(); )
 		        {
 		            for (  Iterator<Cell> cellIterator = ((Row)rowIterator.next()).cellIterator() ; cellIterator.hasNext() ;  ) 

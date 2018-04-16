@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.economizate.entidades.Cuenta;
-import com.economizate.entidades.Usuario;
-
 public class StringMovimientos {
 
 	private List<String> movimientos;

@@ -2,27 +2,26 @@ package com.economizate.servicios.impl;
 
 import java.io.IOException;
 
-import com.economizate.servicios.BaseParser;
+import com.economizate.servicios.BaseReader;
 
-public class CSVParser extends BaseParser {
+public class PipeReader extends BaseReader {
 
-	public CSVParser(String FileName) {
+	public PipeReader(String FileName) {
 		super(FileName);
 	}
 
-	public CSVParser() {
+	public PipeReader() {
 		super();
 	}
 
 	@Override
 	public String Read() throws IOException {
-		Delimiter = ",";
+		Delimiter = "|";
 		return super.Read();
 	}
 
 	@Override
 	public String toString() {
-		return ParserType.CSV.toString();
+		return ParserType.PIPE.toString();
 	}
-
 }

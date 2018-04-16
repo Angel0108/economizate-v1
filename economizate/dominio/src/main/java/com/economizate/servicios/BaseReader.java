@@ -4,16 +4,16 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public abstract class BaseParser {
+public abstract class BaseReader {
 
 	protected String FileName; 
 	
-	public BaseParser() 
+	public BaseReader() 
     { 
         //Results = new List<IEmployeeResult>(); 
     } 
     
-    public BaseParser(String FileName) 
+    public BaseReader(String FileName) 
     { 
         this.FileName = FileName; 
     } 

@@ -8,16 +8,25 @@ import java.util.List;
 import javax.xml.bind.ValidationException;
 
 import com.economizate.entidades.MovimientoMonetario;
-import com.economizate.servicios.ImportadorStrategy;
+import com.economizate.servicios.BaseReader;
+import com.economizate.servicios.FactoryImportador;
 
 public class LoaderMovimientosFromFile {
 
-	public LoaderMovimientosFromFile(String filename) throws IOException, ParseException, ValidationException {
-		
-		/*ImportadorStrategy importador = new TxtImportadorStrategy();
-		ParserListRegistrosMovimientos parser = new ParserListRegistrosMovimientos(importador.importarFile(filename));
-		List<MovimientoMonetario> registrosMovimientos = parser.parse();
-		
+	private List<MovimientoMonetario> registrosMovimientos;
+	
+	public LoaderMovimientosFromFile(String nombreArchivo) throws IOException, ParseException {				
+		BaseReader importador = FactoryImportador.getParseador(nombreArchivo);
+		ParserListRegistrosMovimientos parser = new ParserListRegistrosMovimientos(importador.Read());
+		registrosMovimientos = parser.parse();
+	}
+	
+	public List<MovimientoMonetario> getMovimientos() throws ValidationException {
+		validarMovimientos();
+		return registrosMovimientos;
+	}
+	
+	private void validarMovimientos() throws ValidationException {
 		Iterator<MovimientoMonetario> iterator = registrosMovimientos.iterator();
 		int linea = 0;
 		while (iterator.hasNext()) {
@@ -28,9 +37,8 @@ public class LoaderMovimientosFromFile {
 				throw new ValidationException("Registro inválido. Línea " + linea);
 			}
 			
-		}		*/
+		}
 	}
-	
 	
 	
 }
