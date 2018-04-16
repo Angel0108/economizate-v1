@@ -5,7 +5,7 @@ import com.economizate.servicios.impl.ExcelReader;
 import com.economizate.servicios.impl.ParserType;
 import com.economizate.servicios.impl.PipeReader;
 
-public class FactoryImportador {
+public class FactoryReader {
 
 	public static BaseReader getParseador(String nombreArchivo) {
 		

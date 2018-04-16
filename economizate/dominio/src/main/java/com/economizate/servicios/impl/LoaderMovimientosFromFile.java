@@ -9,14 +9,14 @@ import javax.xml.bind.ValidationException;
 
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseReader;
-import com.economizate.servicios.FactoryImportador;
+import com.economizate.servicios.FactoryReader;
 
 public class LoaderMovimientosFromFile {
 
 	private List<MovimientoMonetario> registrosMovimientos;
 	
 	public LoaderMovimientosFromFile(String nombreArchivo) throws IOException, ParseException {				
-		BaseReader importador = FactoryImportador.getParseador(nombreArchivo);
+		BaseReader importador = FactoryReader.getParseador(nombreArchivo);
 		ParserListRegistrosMovimientos parser = new ParserListRegistrosMovimientos(importador.Read());
 		registrosMovimientos = parser.parse();
 	}
