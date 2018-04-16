@@ -15,13 +15,13 @@ import javax.swing.JTextField;
 import com.economizate.controladores.ControladorEgreso;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.entidades.Alerta;
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Alertas;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.AlertaAmarilla;
-import com.economizate.servicios.impl.AlertasImpl;
+import com.economizate.servicios.impl.AlertaRoja;
 import com.economizate.servicios.impl.SaldosImpl;
 import com.economizate.servicios.impl.UsuariosImpl;
 

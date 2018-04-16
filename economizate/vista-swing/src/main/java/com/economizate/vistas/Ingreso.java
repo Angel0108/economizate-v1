@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.economizate.controladores.ControladorIngreso;
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;

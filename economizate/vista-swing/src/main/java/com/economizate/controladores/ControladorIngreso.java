@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;

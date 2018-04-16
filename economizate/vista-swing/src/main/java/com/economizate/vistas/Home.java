@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
@@ -148,7 +148,7 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	public void update(Observable o, Object arg) {
 		logger.info("Inicio acción update observable Home");
-		Saldo saldo = (Saldo) o;
+		Cuenta cuenta = (Cuenta) o;
 		double total = (Double) arg;
 		
 		saldoUsuario.setText("Saldo2: " +  total);

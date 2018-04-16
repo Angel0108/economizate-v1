@@ -3,7 +3,7 @@ package com.economizate.controladores;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import com.economizate.entidades.Saldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
