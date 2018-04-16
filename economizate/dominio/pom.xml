@@ -41,6 +41,11 @@
     <groupId>org.apache.poi</groupId>
     <artifactId>poi-ooxml</artifactId>
     <version>3.17</version>
-</dependency>
+	</dependency>
+	<dependency>
+      <groupId>com.google.apis</groupId>
+      <artifactId>google-api-services-drive</artifactId>
+      <version>v2-rev306-1.23.0</version>
+    </dependency>
   </dependencies>
 </project>
