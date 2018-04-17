@@ -21,15 +21,16 @@ public class Propiedad {
 		
 		String value = "";
 		try {			
-			inputStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+			inputStream =  Thread.currentThread().getContextClassLoader().getResourceAsStream("config.properties");
+			
 		    Properties props = new Properties();
 		    props.load(inputStream);		 
 		    value = props.getProperty(key);	
 		    inputStream.close();
 		} catch (FileNotFoundException ex) {
 			value = "";
-		} catch (IOException ex) {
-		    // I/O error
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		return value;
 	}

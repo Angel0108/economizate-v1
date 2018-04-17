@@ -17,7 +17,7 @@ public class ParserTest {
 	@Test@Ignore
 	public void parserExcel() throws ParseException {
 		
-		ExcelReader parser = new ExcelReader("C:\\Users\\Nico\\Desktop\\prueba.xlsx");
+		ExcelReader parser = new ExcelReader("C:\\Users\\nidibiase\\Desktop\\prueba.xlsx");
 		String resultado = parser.Read();		
 		ParserRegistroMovimiento parser2 = new ParserRegistroMovimiento(resultado, ";");
 		MovimientoMonetario mov = parser2.parse();

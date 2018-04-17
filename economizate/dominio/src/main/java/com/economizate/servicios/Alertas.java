@@ -16,8 +16,5 @@ public abstract class Alertas implements IAlertas {
 	public Alertas() {
 		
 	}
-		
-	
-	//public boolean esNecesarioAlerta(double saldoAnterior, double saldoActual);
 
 }

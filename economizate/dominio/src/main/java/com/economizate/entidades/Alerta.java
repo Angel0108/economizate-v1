@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.economizate.servicios.Alertas;
 
-public class Alerta {
+public class Alerta extends java.util.Observable {
 	
 	private Date fecha;
 	private double saldoAnterior;

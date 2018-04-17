@@ -1,5 +1,6 @@
 package com.economizate;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +18,7 @@ import com.economizate.servicios.impl.MovimientosSheet;
 
 public class WriterTest {
 
-	@Test@Ignore
+	@Test
 	public void writeExcelMovimientos() throws IOException {
 		
 		String nombreArchivo = "C:\\Users\\nidibiase\\Desktop\\prueba.xlsx";
@@ -25,5 +26,13 @@ public class WriterTest {
 		writer.write();
 		Path path = Paths.get(nombreArchivo);
 		Assert.assertTrue(Files.exists(path));
+	}
+	
+	@Test (expected = FileNotFoundException.class) 
+	public void writeExcelMovimientosRutaInvalida() throws IOException {
+		
+		String nombreArchivo = "C:\\Users\\Desktop\\prueba.xlsx";
+		BaseWriter writer = new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()));
+		writer.write();
 	}
 }

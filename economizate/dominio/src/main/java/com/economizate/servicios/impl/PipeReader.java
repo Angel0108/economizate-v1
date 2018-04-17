@@ -22,6 +22,6 @@ public class PipeReader extends BaseReader {
 
 	@Override
 	public String toString() {
-		return ParserType.PIPE.toString();
+		return ParserType.TXT.toString();
 	}
 }

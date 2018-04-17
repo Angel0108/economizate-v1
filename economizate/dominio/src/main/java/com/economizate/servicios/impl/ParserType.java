@@ -2,6 +2,6 @@ package com.economizate.servicios.impl;
 
 public enum ParserType {
 	CSV, 
-    PIPE, 
+    TXT, 
     EXCEL
 }
