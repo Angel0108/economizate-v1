@@ -4,33 +4,30 @@ import com.economizate.entidades.Alerta;
 import com.economizate.servicios.Alertas;
 import com.economizate.servicios.IAlertas;
 
-public class AlertaRoja extends Alertas implements IAlertas {
+public class AlertaVerde extends Alertas implements IAlertas {
 
-	public AlertaRoja(double saldoAnterior, double saldoActual) {
+	public AlertaVerde(double saldoAnterior, double saldoActual) {
 		super(saldoAnterior, saldoActual);
 	}
-
-	public AlertaRoja() {
+	
+	public AlertaVerde() {
 		
 	}
 	
 	@Override
 	public Alerta crearAlerta() {
 		Alerta alert = conector.crearAlerta(saldoAnterior, saldoActual);
-		alert.setTipoAlerta(new AlertaRoja());
+		alert.setTipoAlerta(new AlertaVerde());
 		return alert;
 	}
 
 	@Override
-	public boolean muestraAlerta() {		
-		return true;
+	public boolean muestraAlerta() {
+		return false;
 	}
 
 	@Override
 	public String getMensaje() {
-		
-		return Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento");
+		return "";
 	}
-
-	
 }

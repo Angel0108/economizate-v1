@@ -31,7 +31,7 @@ public class AlertaAmarilla extends Alertas implements IAlertas {
 
 	@Override
 	public String getMensaje() {
-		return "Ha superado el 80%";
+		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento");
 	}
 
 
