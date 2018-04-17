@@ -1,13 +1,8 @@
 package com.economizate;
 
 import static org.junit.Assert.*;
-
 import java.text.ParseException;
-
-import junit.framework.Assert;
-
 import org.junit.Test;
-
 import com.economizate.datos.StringMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.impl.ConcreteValidadorRegistroStrategy;
@@ -22,7 +17,7 @@ public class ParserMovimientoTest {
 		ParserRegistroMovimiento parser = new ParserRegistroMovimiento(movsPrueba.getMovimientos().get(0), ";");
 		MovimientoMonetario mov = parser.parse();
 		mov.setValidador(new ConcreteValidadorRegistroStrategy());
-		Assert.assertTrue(mov.isValid());
+		assertTrue(mov.isValid());
 	}
 
 }
