@@ -15,17 +15,12 @@ import javax.swing.JTextField;
 import com.economizate.controladores.ControladorEgreso;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.entidades.Alerta;
-import com.economizate.entidades.Cuenta;
-import com.economizate.entidades.Usuario;
-import com.economizate.servicios.Alertas;
-import com.economizate.servicios.Saldos;
+import com.economizate.servicios.FactoryAlertas;
+import com.economizate.servicios.IAlertas;
+import com.economizate.servicios.InstanciasService;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.AlertaAmarilla;
-import com.economizate.servicios.impl.AlertaRoja;
-import com.economizate.servicios.impl.SaldosImpl;
-import com.economizate.servicios.impl.UsuariosImpl;
 
-public class Egreso implements java.util.Observer{
+public class Egreso extends Home implements java.util.Observer{
 	
 	private static Logger logger = Logger.getLogger(Ingreso.class.getName());
 	
@@ -45,7 +40,10 @@ public class Egreso implements java.util.Observer{
 	private double saldo;
 	
 	Usuarios usuarios;
-	AlertaAmarilla alertas;
+	FactoryAlertas factoryAlertas = new FactoryAlertas();
+	IAlertas alertasService;
+	InstanciasService instanciasService;
+	Alerta alerta;
 	
 	public Egreso() {
 		
@@ -55,11 +53,12 @@ public class Egreso implements java.util.Observer{
 	}
 	
 	public Egreso(Home ventanaHome, String email, double saldo) {
-		usuarios = new UsuariosImpl(this);
-		
 		this.ventanaHome = ventanaHome;
 		this.email = email;
 		this.saldo = saldo;
+		
+		instanciasService = new InstanciasService();
+		usuarios = instanciasService.getUsuariosObservadorService(this);
 		
 		iniciarBotonEgreso();
 		iniciarLabels();
@@ -71,7 +70,7 @@ public class Egreso implements java.util.Observer{
 		botonEgreso.setBounds(50,400,100, 40);
 		
 		botonEgreso.addActionListener(
-				new ControladorEgreso(usuarios.buscarUsuarioPorEmail(email), this, ventanaHome, usuarios));
+				new ControladorEgreso(this.getUsuario(), this, ventanaHome, usuarios));
 	}
 	
 	public void iniciarLabels() {
@@ -125,6 +124,7 @@ public class Egreso implements java.util.Observer{
 		ventana.setSize(400,500);
 		ventana.setLayout(null); 
 		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 	}
 	
 	public double getSaldo() {
@@ -132,17 +132,21 @@ public class Egreso implements java.util.Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto es " + arg.getClass() + arg);
+		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto es " + arg.getClass() + ": " + arg);
 		
 		botonOk = new JButton("OK");
+		alerta = factoryAlertas.crearAlerta(saldo, (Double) arg);
 		
-		if((Double) arg < (double) 20) 
-			dialogoOK = new JDialog(ventana, "Simulacro de Alerta", true);
+		crearMensajeEgreso();
+	}
+	
+	private void crearMensajeEgreso() {
+		if(alerta != null) 
+			dialogoOK = new JDialog(ventana, alerta.getMensaje(), true);
 		else
 			dialogoOK = new JDialog(ventana, "Transaccion", true);
 		
 		dialogoOK.setLayout( new FlowLayout() );
-		
 		dialogoOK.add(botonOk);
 		botonOk.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e )  
@@ -150,11 +154,8 @@ public class Egreso implements java.util.Observer{
 				dialogoOK.setVisible(false);  
             }  
 		});
-		dialogoOK.setSize(200,100);    
+		dialogoOK.setSize(400,100);    
 		dialogoOK.setVisible(true);  
-		
-		//Esta es una función de simulación
-		//saldoUsuario.setText("Saldo2: " +  saldo.getTotal());
 	}
 	
 	public String getImporteTextFieldValue() {
@@ -175,10 +176,6 @@ public class Egreso implements java.util.Observer{
 	
 	public JFrame getVentana() {
 		return ventana;
-	}
-
-	public Home getVentanaHome() {
-		return ventanaHome;
 	}
 
 	public void setVentanaHome(Home ventanaHome) {

@@ -6,10 +6,8 @@ public class Main {
 
 
 	public static void main(String[] args) {
-
-		String emailUsuario = "pepeGonzalez@gmail.com"; //sacar a Test!! (-.-)
 		
-		Home home = new Home(emailUsuario);
+		Home home = new Home();
 		home.iniciarVista();
 		
 	}

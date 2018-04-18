@@ -1,17 +1,36 @@
 package com.economizate.conector;
 
 import com.economizate.entidades.Alerta;
+import com.economizate.servicios.impl.Propiedad;
 
 public class ConectorAlerta {
 	
-	private Alerta alerta;
+	private Alerta alertaAmarilla;
+	private Alerta alertaRoja;
+	private Alerta alertaVerde;
 	
-	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
-		if(alerta == null) {
-			alerta = new Alerta(saldoAnterior, saldoActual);
-			alerta.setMensaje("Alerta tipo 80%");
+	public Alerta crearAlertaAmarilla(double saldoAnterior, double saldoActual) {
+		if(alertaAmarilla == null) {
+			alertaAmarilla = new Alerta(saldoAnterior, saldoActual);
+			alertaAmarilla.setMensaje(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"));
 		}
-		return alerta;
+		return alertaAmarilla;
+	}
+	
+	public Alerta crearAlertaRoja(double saldoAnterior, double saldoActual) {
+		if(alertaRoja == null) {
+			alertaRoja = new Alerta(saldoAnterior, saldoActual);
+			alertaRoja.setMensaje(Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento"));
+		}
+		return alertaRoja;
+	}
+	
+	public Alerta crearAlertaVerde(double saldoAnterior, double saldoActual) {
+		if(alertaVerde == null) {
+			alertaVerde = new Alerta(saldoAnterior, saldoActual);
+			alertaVerde.setMensaje("Alerta Roja: el egreso supera el 95% del saldo total.");
+		}
+		return alertaVerde;
 	}
 
 }

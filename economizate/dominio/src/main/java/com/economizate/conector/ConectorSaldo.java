@@ -8,7 +8,7 @@ import com.economizate.entidades.Cuenta;
 
 public class ConectorSaldo {
 	
-	private double total = 100;
+	private double total = 103;
 	private Cuenta saldo;
 	private Observer observer;
 		
@@ -26,8 +26,12 @@ public class ConectorSaldo {
 		if (saldo == null) {
 			observer = o;
 			saldo = new Cuenta(o, obtenerSaldo());
-			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 100);
+			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 95);
+			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", 10);
+			MovimientoMonetario ingreso3 = new MovimientoMonetario("supermercado", -5);
 			saldo.getMovimientos().add(ingreso);
+			saldo.getMovimientos().add(ingreso2);
+			saldo.getMovimientos().add(ingreso3);
 			saldo.setTotalTest(obtenerSaldo());
 		}
 		return saldo;
@@ -42,7 +46,7 @@ public class ConectorSaldo {
 	}
 	
 	public void cambiarSaldo(double importe) {
-		total += importe;
+		total = importe;
 		nuevoSaldo().setTotal(total);
 	}
 	

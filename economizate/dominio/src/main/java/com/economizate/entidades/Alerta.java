@@ -2,25 +2,19 @@ package com.economizate.entidades;
 
 import java.util.Date;
 
-import com.economizate.servicios.Alertas;
 
-public class Alerta extends java.util.Observable {
+public class Alerta {
 	
 	private Date fecha;
 	private double saldoAnterior;
 	private double saldoActual;
 	private String mensaje;
-	private Alertas tipoAlerta;
 	
 	public Alerta(double saldoAnterior, double saldoActual) {
 		this.saldoAnterior = saldoAnterior;
 		this.saldoActual = saldoActual;
 	}
 
-	public void setTipoAlerta(Alertas tipo) {
-		this.tipoAlerta = tipo;
-	}
-	
 	public double getSaldoAnterior() {
 		return saldoAnterior;
 	}
@@ -38,9 +32,9 @@ public class Alerta extends java.util.Observable {
 	}
 
 	public String getMensaje() {
-		return tipoAlerta.getMensaje();
+		return mensaje;
 	}
-
+	
 	public void setMensaje(String mensaje) {
 		this.mensaje = mensaje;
 	}

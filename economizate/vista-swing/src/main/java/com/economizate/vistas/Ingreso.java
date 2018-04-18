@@ -13,22 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import com.economizate.controladores.ControladorIngreso;
-import com.economizate.entidades.Cuenta;
-import com.economizate.entidades.Usuario;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
-public class Ingreso extends JFrame implements java.util.Observer{
+public class Ingreso extends Home implements java.util.Observer{
 	
 	private static Logger logger = Logger.getLogger(Ingreso.class.getName());
 	
 	private JFrame ventana;
 	private Home ventanaHome;
 	
-	private JButton botonIngreso, botonOk;
+	public JButton botonIngreso, botonOk;
 	private JLabel nombreUsuario;
 	
-	private JLabel saldoUsuario = new JLabel();
+	private JLabel saldoUsuario;
 	
 	private JLabel descripcionLabel, observacionLabel, importeLabel;
 	private JTextField descripcion, observacion, importe;
@@ -46,7 +44,6 @@ public class Ingreso extends JFrame implements java.util.Observer{
 	
 	public Ingreso(Home ventanaHome, String email, double saldo) {
 		usuarios = new UsuariosImpl(this);
-		
 		this.ventanaHome = ventanaHome;
 		this.email = email;
 		this.saldo = saldo;
@@ -64,11 +61,11 @@ public class Ingreso extends JFrame implements java.util.Observer{
 		botonIngreso =new JButton("Aceptar");
 		botonIngreso.setBounds(50,400,100, 40); 
 		botonIngreso.addActionListener(
-				new ControladorIngreso(new UsuariosImpl(this).buscarUsuarioPorEmail(email), this, ventanaHome, usuarios));
+				new ControladorIngreso(this.getUsuario(), this, ventanaHome, usuarios, this.saldos));
 	}
 	
 	public void iniciarLabels() {
-		
+		saldoUsuario = new JLabel();
 		saldoUsuario.setBounds(280,20, 250,20);  
 		saldoUsuario.setText("Saldo: " + saldo);
 		
@@ -118,6 +115,7 @@ public class Ingreso extends JFrame implements java.util.Observer{
 		ventana.setSize(400,500);
 		ventana.setLayout(null); 
 		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 	}
 	
 	public double getSaldo() {
@@ -125,7 +123,8 @@ public class Ingreso extends JFrame implements java.util.Observer{
 	}
 
 	public void update(Observable o, Object arg) {
-		logger.info("Update como observador : Observable es " + o.getClass() + ", objecto pasado es " + arg.getClass());
+		logger.info("Update como observador : Observable es " 
+				+ o.getClass() + ", objecto pasado es " + arg.getClass() + " " + arg + " y mi saldo es: " + saldo);
 		
 		botonOk = new JButton("OK");
 		dialogoOK = new JDialog(ventana, "Transaccion OK", true);
@@ -148,6 +147,11 @@ public class Ingreso extends JFrame implements java.util.Observer{
 	public String getImporteTextFieldValue() {
 		return importe.getText();
 	}
+	
+	public String getDescricionTextFieldValue() {
+		return descripcion.getText();
+	}
+
 
 	public JLabel getSaldoUsuario() {
 		return saldoUsuario;
@@ -163,10 +167,6 @@ public class Ingreso extends JFrame implements java.util.Observer{
 	
 	public JFrame getVentana() {
 		return ventana;
-	}
-
-	public Home getVentanaHome() {
-		return ventanaHome;
 	}
 
 	public void setVentanaHome(Home ventanaHome) {

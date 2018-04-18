@@ -5,7 +5,10 @@ import java.awt.event.ActionListener;
 import java.util.logging.Logger;
 
 import com.economizate.entidades.Cuenta;
+import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Usuario;
+import com.economizate.listeners.EgresoListener;
+import com.economizate.listeners.IngresoListener;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.SaldosImpl;
@@ -17,22 +20,22 @@ public class ControladorIngreso implements ActionListener{
 	private static Logger logger = Logger.getLogger(ControladorIngreso.class.getName());
 	
 	Usuarios usuarioService;
+	Saldos saldoService;
 	
 	private Usuario  model;
 	private Ingreso vista;
 	private Home home;
 	
 	public ControladorIngreso() {
-		this.model.addObserver(vista);
 	}
 	
-	public ControladorIngreso(Usuario usuario, Ingreso vista, Home home, Usuarios usuarios) {
+	public ControladorIngreso(Usuario usuario, Ingreso vista, Home home, Usuarios usuarios, Saldos saldos) {
 		this.vista = vista;
 		this.model = usuario;
-		this.home = vista.getVentanaHome();
+		this.home = home;
 		
 		this.usuarioService = usuarios;
-		
+		this.saldoService = saldos;
 		//No es necesario porque se agregan en los constructores de cada servicio
 		//this.model.addObserver(home);
 		//this.model.addObserver(vista);
@@ -41,17 +44,33 @@ public class ControladorIngreso implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		logger.info("Ingreso action controlador");
 		
+		double nuevoTotal = Double.parseDouble(vista.getImporteTextFieldValue())
+				+ model.getSaldo().getTotal();
+		
 		//lo cambio en la "base"
-		usuarioService.obtenerSaldoUsuario(model).setTotal(Double.parseDouble(vista.getImporteTextFieldValue())
-				+ model.getSaldo().getTotal());
+		usuarioService.obtenerSaldoUsuario(model).getMovimientos().add(new MovimientoMonetario(vista.getDescricionTextFieldValue(), nuevoTotal));
+		usuarioService.obtenerSaldoUsuario(model).setTotal(nuevoTotal);
+		//saldoService.cambiarSaldoTotal(nuevoTotal);
+		usuarioService.cambiarSaldoUsuario(nuevoTotal);
 		
 		//actualizo las vistas
-		vista.getSaldoUsuario().setText("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
-		home.setSaldoUsuario("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
-		home.setServicioUsuario(usuarioService);
+		vista.getSaldoUsuario().setText("Saldo: " + String.valueOf(nuevoTotal));
+		home.setSaldoUsuario("Saldo: " + String.valueOf(nuevoTotal));
+		
+		home.ingresoListener.setSaldo(nuevoTotal);
+		//actualizo intancias de usuario en vistas
+		//actualizarInstancias();
 		 
 		//volver Home
 		vista.getVentana().setVisible(false);
 		home.getVentana().setVisible(true);
+	}
+	
+	private void actualizarInstancias() {
+		home.botonIngreso.addActionListener(
+				new IngresoListener(home, home.getEmail(), usuarioService.obtenerSaldoUsuario(model).getTotal()));
+		
+		home.botonEgreso.addActionListener(
+				new EgresoListener(home, home.getEmail(), usuarioService.obtenerSaldoUsuario(model).getTotal()));
 	}
 }

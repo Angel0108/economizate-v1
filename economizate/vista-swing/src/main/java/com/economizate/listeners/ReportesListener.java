@@ -22,7 +22,7 @@ public class ReportesListener implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		ventana.setVisible(false);
-		new Reportes(email, home.getServicioUsuario()).iniciarVista();
+		new Reportes(email, home.getServicioUsuario(), home).iniciarVista();
 	}
 
 }

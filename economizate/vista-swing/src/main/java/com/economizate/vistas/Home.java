@@ -14,6 +14,8 @@ import com.economizate.entidades.Usuario;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.listeners.ReportesListener;
+import com.economizate.servicios.InstanciasService;
+import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.UsuariosImpl;
 
@@ -23,33 +25,51 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	private JFrame ventana;
 	private JButton botonLogin;
-	private JButton botonIngreso;
-	private JButton botonEgreso;
+	public JButton botonIngreso;
+	public JButton botonEgreso;
 	private JButton botonEgresosPeriodicos;
 	private JButton botonReportes;
 	private JLabel nombreUsuario;
 	private JLabel saldoUsuario = new JLabel();
 	
+	private InstanciasService instancias = new InstanciasService();
 	private Usuarios usuarios;
+	public Saldos saldos;
+	private Usuario usuario;
 	private String email;
 	
+	public IngresoListener ingresoListener;
+	
 	public Home() {
-		usuarios = new UsuariosImpl(this);
-
+		this.email = "pepeGonzalez@gmail.com";
+		usuarios = instancias.getUsuariosObservadorService(this);
+		saldos = instancias.getSaldosService();
+		usuario = usuarios.buscarUsuarioPorEmail(email);
 		iniciarComponentes();
+		
 	}
 	
-	public Home(String email) {
-		this.email = email;
-		usuarios = new UsuariosImpl(this);
+	public void iniciarListeners() {
+		ingresoListener = new IngresoListener(this, email, usuarios.obtenerSaldoUsuario(email).getTotal());
+		botonIngreso.addActionListener(ingresoListener);
+	}
+	
+	public void actionPerformed(ActionEvent evento) {
+		logger.info("Iniciando Acción Vista Home");
 		
-		iniciarComponentes();
+		nombreUsuario.setText("Bienvenido: " +  usuario.getEmail());
+		saldoUsuario.setText("Saldo: " + usuario.getSaldo().getTotal());
+		nombreUsuario.setVisible(true);
+		saldoUsuario.setVisible(true);
+		botonLogin.setVisible(false);
+		setVisibilidadBotones(true);
 	}
 	
 	public void iniciarComponentes() {
 		ventana = new JFrame();
 		iniciarBotones();
 		iniciarJLabels();
+		iniciarListeners();
 	}
 	
 	public void iniciarBotones() {
@@ -69,8 +89,7 @@ public class Home implements ActionListener, java.util.Observer{
 	public void iniciarBotonIngreso() {
 		botonIngreso =new JButton("Ingreso");
 		botonIngreso.setBounds(70,100,100, 40); 
-		botonIngreso.addActionListener(
-				new IngresoListener(this, email, usuarios.buscarUsuarioPorEmail(email).getSaldo().getTotal()));
+		botonIngreso.addActionListener(ingresoListener);
 	}
 	
 	public void iniciarBotonEgreso() {
@@ -123,6 +142,7 @@ public class Home implements ActionListener, java.util.Observer{
 		ventana.setSize(400,500);
 		ventana.setLayout(null); 
 		ventana.setVisible(true);
+		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
 	}
 	
 	public void setVisibilidadBotones(boolean visible) {
@@ -131,19 +151,6 @@ public class Home implements ActionListener, java.util.Observer{
 		botonEgreso.setVisible(visible);
 		botonEgresosPeriodicos.setVisible(visible);
 		botonReportes.setVisible(visible);
-	}
-	
-
-	public void actionPerformed(ActionEvent evento) {
-		logger.info("Iniciando Acción Vista Home");
-		
-		Usuario usuario = usuarios.buscarUsuarioPorEmail(email);
-		nombreUsuario.setText("Bienvenido: " +  usuario.getEmail());
-		saldoUsuario.setText("Saldo: " + usuario.getSaldo().getTotal());
-		nombreUsuario.setVisible(true);
-		saldoUsuario.setVisible(true);
-		botonLogin.setVisible(false);
-		setVisibilidadBotones(true);
 	}
 	
 	public void update(Observable o, Object arg) {
@@ -170,7 +177,19 @@ public class Home implements ActionListener, java.util.Observer{
 		return usuarios;
 	}
 	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
 	public void setServicioUsuario(Usuarios usuarios) {
 		this.usuarios = usuarios;
+	}
+	
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+	
+	public String getEmail() {
+		return this.email;
 	}
 }

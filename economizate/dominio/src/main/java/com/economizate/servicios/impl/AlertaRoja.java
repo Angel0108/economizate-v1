@@ -1,36 +1,31 @@
 package com.economizate.servicios.impl;
 
+import com.economizate.conector.ConectorAlerta;
 import com.economizate.entidades.Alerta;
-import com.economizate.servicios.Alertas;
 import com.economizate.servicios.IAlertas;
 
-public class AlertaRoja extends Alertas implements IAlertas {
+public class AlertaRoja implements IAlertas {
 
-	public AlertaRoja(double saldoAnterior, double saldoActual) {
-		super(saldoAnterior, saldoActual);
-	}
-
-	public AlertaRoja() {
-		
-	}
+	ConectorAlerta conector = new ConectorAlerta();
 	
 	@Override
-	public Alerta crearAlerta() {
-		Alerta alert = conector.crearAlerta(saldoAnterior, saldoActual);
-		alert.setTipoAlerta(new AlertaRoja());
-		return alert;
+	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
+		// TODO Auto-generated method stub
+		return conector.crearAlertaRoja(saldoAnterior, saldoActual);
 	}
 
 	@Override
-	public boolean muestraAlerta() {		
-		return true;
+	public boolean muestraAlerta() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
 	public String getMensaje() {
-		
-		return Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento");
+		// TODO Auto-generated method stub
+		return null;
 	}
+	
 
 	
 }

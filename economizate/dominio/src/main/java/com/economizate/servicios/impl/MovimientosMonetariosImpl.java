@@ -35,7 +35,7 @@ public class MovimientosMonetariosImpl implements MovimientosMonetarios {
 
 	@Override
 	public void agregarIngreso(MovimientoMonetario ingreso) {
-		
+		conector.agregarIngreso(ingreso);
 	}
 
 	@Override

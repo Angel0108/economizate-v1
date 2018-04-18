@@ -64,9 +64,12 @@ public class ConectorUsuario {
 		return usuarioNuevo().getSaldo();
 	}
 	
+	public void cambiarSaldoUsuario(double importe) {
+		usuarioNuevo().getSaldo().setTotal(importe);
+	}
+	
 	public void addObserver(Observer o) {
 		this.observer = o;
-		//usuario.addObserver(o);
 	}
 
 }
