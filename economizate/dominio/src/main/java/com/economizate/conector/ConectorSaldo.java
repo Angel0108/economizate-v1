@@ -15,7 +15,12 @@ public class ConectorSaldo {
 	public Cuenta nuevoSaldo() {
 		if (saldo == null) {
 			saldo = new Cuenta();
-			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 100);
+			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", 95);
+			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", 10);
+			MovimientoMonetario ingreso3 = new MovimientoMonetario("supermercado", -5);
+			saldo.getMovimientos().add(ingreso);
+			saldo.getMovimientos().add(ingreso2);
+			saldo.getMovimientos().add(ingreso3);
 			saldo.getMovimientos().add(ingreso);
 			saldo.setTotal(obtenerSaldo());
 		}
