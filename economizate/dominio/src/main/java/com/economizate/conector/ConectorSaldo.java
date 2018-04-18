@@ -8,7 +8,7 @@ import com.economizate.entidades.Cuenta;
 
 public class ConectorSaldo {
 	
-	private double total = 103;
+	private double total = 100;
 	private Cuenta saldo;
 	private Observer observer;
 		

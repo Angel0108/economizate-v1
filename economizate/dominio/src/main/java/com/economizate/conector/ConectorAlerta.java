@@ -28,7 +28,7 @@ public class ConectorAlerta {
 	public Alerta crearAlertaVerde(double saldoAnterior, double saldoActual) {
 		if(alertaVerde == null) {
 			alertaVerde = new Alerta(saldoAnterior, saldoActual);
-			alertaVerde.setMensaje("Alerta Roja: el egreso supera el 95% del saldo total.");
+			alertaVerde.setMensaje("Transaccion OK.");
 		}
 		return alertaVerde;
 	}

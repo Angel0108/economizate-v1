@@ -19,6 +19,7 @@ import com.economizate.servicios.FactoryAlertas;
 import com.economizate.servicios.IAlertas;
 import com.economizate.servicios.InstanciasService;
 import com.economizate.servicios.Usuarios;
+import com.economizate.servicios.impl.AlertaRoja;
 
 public class Egreso extends Home implements java.util.Observer{
 	
@@ -141,11 +142,7 @@ public class Egreso extends Home implements java.util.Observer{
 	}
 	
 	private void crearMensajeEgreso() {
-		if(alerta != null) 
-			dialogoOK = new JDialog(ventana, alerta.getMensaje(), true);
-		else
-			dialogoOK = new JDialog(ventana, "Transaccion", true);
-		
+		dialogoOK = new JDialog(ventana, alerta.getMensaje(), true);
 		dialogoOK.setLayout( new FlowLayout() );
 		dialogoOK.add(botonOk);
 		botonOk.addActionListener(new ActionListener() {
