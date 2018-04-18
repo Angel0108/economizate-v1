@@ -46,6 +46,6 @@ public class ExcelReader extends BaseReader {
 
 	@Override
 	public String toString() {
-		return ParserType.EXCEL.toString();
+		return ParserType.XLSX.toString();
 	}
 }

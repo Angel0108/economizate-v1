@@ -19,7 +19,7 @@ public class FactoryReader {
 			return new CSVReader(nombreArchivo);
 		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.TXT.toString())) {
 			return new PipeReader(nombreArchivo);
-		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.EXCEL.toString())) {
+		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.XLSX.toString())) {
 			return new ExcelReader(nombreArchivo);			
 		} 
 		
