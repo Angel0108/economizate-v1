@@ -21,14 +21,10 @@ public class ExcelWriter extends BaseWriter {
 	@Override
 	public void write() throws IOException, FileNotFoundException {		
 		Workbook workbook = new XSSFWorkbook();
-
 		hoja.createSheet(workbook);
-
-			FileOutputStream fos = new FileOutputStream(nombreArchivo);
-			workbook.write(fos);
-			fos.close();
-			//System.out.println(nombreArchivo + " is successfully written");
-
+		FileOutputStream fos = new FileOutputStream(nombreArchivo);
+		workbook.write(fos);
+		fos.close();
 
 	}
 }

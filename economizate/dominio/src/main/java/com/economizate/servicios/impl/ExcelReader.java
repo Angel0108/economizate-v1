@@ -11,16 +11,12 @@ import com.economizate.servicios.BaseReader;
 
 public class ExcelReader extends BaseReader {
 
-	public ExcelReader() {
-		super();
-	}
-
 	public ExcelReader(String nombreArchivo) {
 		super(nombreArchivo);
 	}
 	
 	@Override
-	public String Read() {
+	public String read() {
 		StringBuilder resultado = new StringBuilder();
 		try {
 				

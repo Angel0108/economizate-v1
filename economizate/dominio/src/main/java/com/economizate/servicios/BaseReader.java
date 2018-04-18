@@ -7,11 +7,6 @@ import java.io.IOException;
 public abstract class BaseReader {
 
 	protected String FileName; 
-	
-	public BaseReader() 
-    { 
-        //Results = new List<IEmployeeResult>(); 
-    } 
     
     public BaseReader(String FileName) 
     { 
@@ -20,10 +15,10 @@ public abstract class BaseReader {
     
     public String Delimiter; 
 
-    public String Read() throws IOException 
+    public String read() throws IOException 
     { 
     	String content = null;
-	    File file = new File(FileName); // For example, foo.txt
+	    File file = new File(FileName);
 	    FileReader reader = null;
 	    try {
 	        reader = new FileReader(file);
@@ -41,8 +36,4 @@ public abstract class BaseReader {
 	    return content;
     } 
    
-
-   //public  List<IEmployeeResult> Results { get; set; } 
-
-	
 }

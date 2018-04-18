@@ -13,6 +13,9 @@ public class RangoFechaCriterio implements Criterio {
 	private Date fechaHasta;
 	
 	public RangoFechaCriterio(Date fechaDesde, Date fechaHasta) {
+		if(fechaHasta.before(fechaDesde)) {
+			throw new IllegalArgumentException("La fecha hasta debe ser posterior a la fecha desde");
+		}
 		this.fechaDesde = fechaDesde;
 		this.fechaHasta = fechaHasta;
 	}

@@ -18,7 +18,7 @@ public class ParserTest {
 	public void parserExcel() throws ParseException {
 		
 		ExcelReader parser = new ExcelReader("C:\\Users\\nidibiase\\Desktop\\prueba.xlsx");
-		String resultado = parser.Read();		
+		String resultado = parser.read();		
 		ParserRegistroMovimiento parser2 = new ParserRegistroMovimiento(resultado, ";");
 		MovimientoMonetario mov = parser2.parse();
 		mov.setValidador(new ConcreteValidadorRegistroStrategy());

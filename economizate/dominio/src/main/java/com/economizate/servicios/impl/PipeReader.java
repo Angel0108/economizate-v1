@@ -10,14 +10,10 @@ public class PipeReader extends BaseReader {
 		super(FileName);
 	}
 
-	public PipeReader() {
-		super();
-	}
-
 	@Override
-	public String Read() throws IOException {
+	public String read() throws IOException {
 		Delimiter = "|";
-		return super.Read();
+		return super.read();
 	}
 
 	@Override

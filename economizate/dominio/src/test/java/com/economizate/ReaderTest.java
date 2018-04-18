@@ -29,7 +29,7 @@ public class ReaderTest {
 	public void readArchivoCSV() throws IOException {
 		
 		importador = FactoryReader.getParseador("C:\\Users\\nidibiase\\Desktop\\prueba.csv");
-		assertFalse(importador.Read().isEmpty());
+		assertFalse(importador.read().isEmpty());
 	}
 	
 }

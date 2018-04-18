@@ -10,20 +10,16 @@ import javax.xml.bind.ValidationException;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseReader;
 import com.economizate.servicios.FactoryReader;
+import com.economizate.servicios.LoaderFromFile;
+import com.economizate.servicios.ParserListaRegistros;
 
-public class LoaderMovimientosFromFile {
+public class LoaderMovimientosFromFile implements LoaderFromFile<MovimientoMonetario> {
 
 	private List<MovimientoMonetario> registrosMovimientos;
+	private String nombreArchivo;
 	
-	public LoaderMovimientosFromFile(String nombreArchivo) throws IOException, ParseException {				
-		BaseReader importador = FactoryReader.getParseador(nombreArchivo);
-		ParserListRegistrosMovimientos parser = new ParserListRegistrosMovimientos(importador.Read());
-		registrosMovimientos = parser.parse();
-	}
-	
-	public List<MovimientoMonetario> getMovimientos() throws ValidationException {
-		validarMovimientos();
-		return registrosMovimientos;
+	public LoaderMovimientosFromFile(String nombreArchivo) {				
+		this.nombreArchivo = nombreArchivo;
 	}
 	
 	private void validarMovimientos() throws ValidationException {
@@ -38,6 +34,19 @@ public class LoaderMovimientosFromFile {
 			}
 			
 		}
+	}
+
+	@Override
+	public void cargarDatos() throws IOException, ParseException {
+		BaseReader importador = FactoryReader.getParseador(nombreArchivo);
+		ParserListaRegistros<MovimientoMonetario> parser = new ParserListRegistrosMovimientos(importador.read());
+		registrosMovimientos = parser.parse();		
+	}
+
+	@Override
+	public List<MovimientoMonetario> getDatos() throws ValidationException {
+		validarMovimientos();
+		return registrosMovimientos;
 	}
 	
 	
