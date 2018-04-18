@@ -3,6 +3,7 @@ package com.economizate.vistas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
+import java.util.Properties;
 import java.util.logging.Logger;
 
 import javax.swing.JButton;
@@ -11,12 +12,14 @@ import javax.swing.JLabel;
 
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
+import com.economizate.listeners.BackupListener;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.listeners.ReportesListener;
 import com.economizate.servicios.InstanciasService;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
+import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Home implements ActionListener, java.util.Observer{
@@ -41,7 +44,7 @@ public class Home implements ActionListener, java.util.Observer{
 	public IngresoListener ingresoListener;
 	
 	public Home() {
-		this.email = "pepeGonzalez@gmail.com";
+		this.email = Propiedad.getInstance().getPropiedad("email");
 		usuarios = instancias.getUsuariosObservadorService(this);
 		saldos = instancias.getSaldosService();
 		usuario = usuarios.buscarUsuarioPorEmail(email);
@@ -101,10 +104,9 @@ public class Home implements ActionListener, java.util.Observer{
 	}
 	
 	public void iniciarBotonEgresoPeriodico() {
-		botonEgresosPeriodicos =new JButton("Cuotas");
+		botonEgresosPeriodicos =new JButton("Backup");
 		botonEgresosPeriodicos.setBounds(70,200,100, 40); 
-		botonEgresosPeriodicos.addActionListener(this);
-		
+		botonEgresosPeriodicos.addActionListener(new BackupListener());
 	}
 	
 	public void iniciarBotonReportes() {

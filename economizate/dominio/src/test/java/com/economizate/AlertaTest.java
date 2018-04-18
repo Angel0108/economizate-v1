@@ -48,7 +48,7 @@ public class AlertaTest {
 		saldoAnterior = 100.0;
 		saldoActual = 19.99;
 		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
-		assertTrue(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));;
+		assertTrue(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
 	
 	@Test
@@ -57,7 +57,7 @@ public class AlertaTest {
 		saldoAnterior = 100.0;
 		saldoActual = 20;
 		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
-		assertTrue(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));;
+		assertTrue(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
 	
 	@Test
@@ -66,6 +66,6 @@ public class AlertaTest {
 		saldoAnterior = 100.0;
 		saldoActual = 20.01;
 		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
-		assertFalse(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));;
+		assertFalse(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
 }
