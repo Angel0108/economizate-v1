@@ -27,7 +27,7 @@ public class WriterTest {
 	@Test (expected = FileNotFoundException.class) 
 	public void writeExcelMovimientosRutaInvalida() throws IOException {
 		
-		String nombreArchivo = "src/test/resources/prueba.xlsx";
+		String nombreArchivo = "src/test/resourcess/prueba.xlsx";
 		BaseWriter writer = new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()));
 		writer.write();
 	}
