@@ -12,7 +12,13 @@ public class MovimientoMonetario {
 	private String descripcion;
 	private String observacion;
 	private Double importe;
-			
+	
+	public MovimientoMonetario(String descripcion, String observacion, double importe, Date fecha) {
+		this.descripcion = descripcion;
+		this.observacion = observacion;
+		this.importe = importe;
+		this.fecha = fecha;
+	}
 	
 	public MovimientoMonetario(String descripcion, String observacion, double importe) {
 		this.descripcion = descripcion;

@@ -17,7 +17,7 @@ public class WriterTest {
 	@Test
 	public void writeExcelMovimientos() throws IOException {
 		
-		String nombreArchivo = "src/test/resources/prueba.xlsx";
+		String nombreArchivo = "src/test/resources/prueba_writer.xlsx";
 		BaseWriter writer = new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()));
 		writer.write();
 		Path path = Paths.get(nombreArchivo);
