@@ -83,5 +83,34 @@ public class MovimientoMonetario {
 	public boolean isValid() {
 		return validador.validate(this);
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MovimientoMonetario other = (MovimientoMonetario) obj;
+		if (descripcion == null) {
+			if (other.descripcion != null)
+				return false;
+		} else if (!descripcion.equals(other.descripcion))
+			return false;
+		if (importe == null) {
+			if (other.importe != null)
+				return false;
+		} else if (!importe.equals(other.importe))
+			return false;
+		if (observacion == null) {
+			if (other.observacion != null)
+				return false;
+		} else if (!observacion.equals(other.observacion))
+			return false;
+		return true;
+	}
+	
+	
 	
 }

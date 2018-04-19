@@ -21,7 +21,6 @@ public class ConectorSaldo {
 			saldo.getMovimientos().add(ingreso);
 			saldo.getMovimientos().add(ingreso2);
 			saldo.getMovimientos().add(ingreso3);
-			saldo.getMovimientos().add(ingreso);
 			saldo.setTotal(obtenerSaldo());
 		}
 		return saldo;
