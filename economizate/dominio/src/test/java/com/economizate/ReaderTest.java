@@ -28,7 +28,7 @@ public class ReaderTest {
 	@Test
 	public void readArchivoCSV() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba.csv");
+		importador = FactoryReader.getParseador("src/test/resources/prueba.CSV");
 		assertFalse(importador.read().isEmpty());
 	}
 	
