@@ -31,8 +31,7 @@ public class RangoFechaCriterio implements Criterio {
 				movsFecha.add(mov);
 			}
 		}
-		
-		return null;
+		return movsFecha;
 	}
 
 }

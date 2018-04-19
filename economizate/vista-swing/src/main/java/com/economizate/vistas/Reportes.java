@@ -2,6 +2,7 @@ package com.economizate.vistas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Observable;
 import java.util.logging.Logger;
@@ -13,8 +14,10 @@ import javax.swing.JTextPane;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.Criterio;
 import com.economizate.servicios.Usuarios;
+import com.economizate.servicios.impl.AndCriterio;
 import com.economizate.servicios.impl.EgresoCriterio;
 import com.economizate.servicios.impl.IngresoCriterio;
+import com.economizate.servicios.impl.RangoFechaCriterio;
 import com.economizate.servicios.impl.TXTWriter;
 import com.economizate.servicios.impl.UsuariosImpl;
 import com.toedter.calendar.JDateChooser;
@@ -50,7 +53,13 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 	private Home ventanaHome;
 	
 	private Usuarios usuarios;
-	private Criterio criterio;
+	private Criterio criterioIngreso;
+	private Criterio criterioEgreso;
+	private Criterio criterioRangoFechas;
+	private Criterio andCriterio;
+	List<MovimientoMonetario> listaFiltrada;
+	 
+	
 	private String email;
 	
 	
@@ -96,13 +105,21 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		exportar.setBounds(350,400,100, 40); 
 		exportar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					new TXTWriter("test").write(usuarios
-							.buscarUsuarioPorEmail(email)
-							.getSaldo()
-							.getMovimientos().toString());
-				} catch (IOException e1) {
-					e1.printStackTrace();
+				if(listaFiltrada == null) {
+					try {
+						new TXTWriter("Movimientos.txt").write(usuarios
+								.buscarUsuarioPorEmail(email)
+								.getSaldo()
+								.getMovimientos().toString());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
+				}else {
+					try {
+						new TXTWriter("MovimientosFiltrados.txt").write(listaFiltrada.toString());
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -112,12 +129,19 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		filtrar.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e )  
             {  
-				criterio = new IngresoCriterio();
-				List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(usuarios
-						.buscarUsuarioPorEmail(email)
-						.getSaldo()
-						.getMovimientos());
+				List<MovimientoMonetario> listaInicial = usuarios.buscarUsuarioPorEmail(email).getSaldo().getMovimientos();
+				 
+				criterioIngreso = new IngresoCriterio();
+				if(dateChooserDesde.getDate() != null && dateChooserHasta.getDate() != null) {
+					criterioRangoFechas = new RangoFechaCriterio(dateChooserDesde.getDate(), dateChooserHasta.getDate());
+					listaFiltrada=  new AndCriterio(criterioIngreso, criterioRangoFechas)
+							.filtrarMovimientos(listaInicial); 
+				}else {
+					listaFiltrada = criterioIngreso.filtrarMovimientos(listaInicial);
+				}
+					
 				listaMovimientos.setText(listaFiltrada.toString());
+				
             }
 		});
 		
@@ -126,8 +150,8 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		filtrarEgresos.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e )  
             {  
-				criterio = new EgresoCriterio();
-				List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(usuarios
+				criterioEgreso = new EgresoCriterio();
+				List<MovimientoMonetario> listaFiltrada = criterioEgreso.filtrarMovimientos(usuarios
 						.buscarUsuarioPorEmail(email)
 						.getSaldo()
 						.getMovimientos());

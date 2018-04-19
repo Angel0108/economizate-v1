@@ -7,8 +7,6 @@ import java.util.logging.Logger;
 
 public class Cuenta extends java.util.Observable{
 	
-	private static Logger logger = Logger.getLogger(Cuenta.class.getName());
-	
 	private long id;
 	private List<MovimientoMonetario> movimientos;
 	private double total;
@@ -48,11 +46,9 @@ public class Cuenta extends java.util.Observable{
 	}
 	
 	public void setTotal(double total) {
-		logger.info("Ingreso a Saldo con " + this.countObservers() + " cantidad de observers");
 		this.total = total;
 		setChanged();
 		notifyObservers(total); //MVC
-		logger.info("Saldo cambiado exitosamente");
 	}
 	
 	public void setTotalTest(double total) {
