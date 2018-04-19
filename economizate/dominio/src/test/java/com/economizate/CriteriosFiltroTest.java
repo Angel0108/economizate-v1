@@ -124,7 +124,8 @@ public class CriteriosFiltroTest {
 	public void filtrarMovimientosFechaDesde01042018FechaHasta310420xxTest() throws ParseException {
 		List<MovimientoMonetario> lista = conectorSaldo.nuevoSaldo().getMovimientos();		
 		Criterio criterioIngresos = new IngresoCriterio();
-		Criterio criterioEgresos = new EgresoCriterio();		
+		Criterio criterioEgresos = new EgresoCriterio();
+		
 		new AndCriterio(new OrCriterio(criterioIngresos, criterioEgresos), new RangoFechaCriterio("01/04/2018", "31/04/20xx")).filtrarMovimientos(lista);		
 
 	}
@@ -135,6 +136,16 @@ public class CriteriosFiltroTest {
 		Criterio criterioIngresos = new IngresoCriterio();
 		Criterio criterioEgresos = new EgresoCriterio();
 		Criterio criterioRangoFechas = new RangoFechaCriterio("01/04/18", "30/04/2018");
+		Criterio criterio = new AndCriterio(new OrCriterio(criterioIngresos, criterioEgresos), criterioRangoFechas);		
+		criterio.filtrarMovimientos(lista);		
+	}
+	
+	@Test (expected=ParseException.class)
+	public void filtrarMovimientosFechaDesde29022018FechaHasta31042018Test() throws ParseException {
+		List<MovimientoMonetario> lista = conectorSaldo.nuevoSaldo().getMovimientos();		
+		Criterio criterioIngresos = new IngresoCriterio();
+		Criterio criterioEgresos = new EgresoCriterio();
+		Criterio criterioRangoFechas = new RangoFechaCriterio("29/02/2018", "30/04/2018");
 		Criterio criterio = new AndCriterio(new OrCriterio(criterioIngresos, criterioEgresos), criterioRangoFechas);		
 		criterio.filtrarMovimientos(lista);		
 	}
