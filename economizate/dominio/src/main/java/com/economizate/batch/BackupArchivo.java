@@ -13,7 +13,7 @@ public class BackupArchivo implements IBackup{
 	
 	public void generarBackupMovimientos() {
 		try {
-			new TXTWriter("backup.txt").write(usuarios
+			new TXTWriter("backup-" + System.currentTimeMillis() + ".txt").write(usuarios
 					.buscarUsuarioPorEmail(Propiedad.getInstance().getPropiedad("email"))
 					.getSaldo()
 					.getMovimientos().toString());

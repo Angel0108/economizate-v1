@@ -42,8 +42,6 @@ public class ControladorEgreso implements ActionListener{
 		usuarioService.obtenerSaldoUsuario(model).setTotal(- Double.parseDouble(vista.getImporteTextFieldValue()) 
 				+ saldoActual);
 		
-		//usuarioService.cambiarSaldoUsuario(- Double.parseDouble(vista.getImporteTextFieldValue()) + saldoActual);
-		
 		//actualizo las vistas
 		vista.getSaldoUsuario().setText("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
 		home.setSaldoUsuario("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
