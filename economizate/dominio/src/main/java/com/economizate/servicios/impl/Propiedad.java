@@ -27,8 +27,6 @@ public class Propiedad {
 		    props.load(inputStream);		 
 		    value = props.getProperty(key);	
 		    inputStream.close();
-		} catch (FileNotFoundException ex) {
-			value = "";
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

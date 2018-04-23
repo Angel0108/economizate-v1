@@ -68,4 +68,5 @@ public class AlertaTest {
 		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
 		assertFalse(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
+	
 }

@@ -2,9 +2,11 @@ package com.economizate;
 
 import static org.junit.Assert.*;
 
-
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
 import org.junit.Test;
+
 import com.economizate.servicios.BaseReader;
 import com.economizate.servicios.FactoryReader;
 
@@ -16,6 +18,8 @@ public class ReaderTest {
 	@Test (expected = IOException.class)
 	public void readArchivoInvalidoConExtension() throws IOException {
 		
+		FactoryReader reader = new FactoryReader();		
+		reader.toString();
 		importador = FactoryReader.getParseador("src/test/resources/prueba.doc");
 	}
 	
@@ -46,4 +50,10 @@ public class ReaderTest {
 		assertFalse(importador.read().isEmpty());
 	}
 	
+	@Test
+	public void readArchivoExcelNoExistente() throws Exception {
+		
+		importador = FactoryReader.getParseador("src/test/resources/prueba22.xlsx");
+		assertTrue(importador.read().isEmpty());
+	}
 }

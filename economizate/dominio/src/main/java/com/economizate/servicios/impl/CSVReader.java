@@ -16,9 +16,4 @@ public class CSVReader extends BaseReader {
 		return super.read();
 	}
 
-	@Override
-	public String toString() {
-		return ParserType.CSV.toString();
-	}
-
 }
