@@ -21,14 +21,16 @@ public class ConectorSaldo {
 		try {
 			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", "ninguna", 95, formater.parse("20180315"));
 			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", "ninguna", 10, formater.parse("20180331"));
-			MovimientoMonetario ingreso3 = new MovimientoMonetario("supermercado", "ninguna", -5, formater.parse("20180409"));
-			MovimientoMonetario ingreso4 = new MovimientoMonetario("horas extras", "ninguna", 20, formater.parse("20180411"));
-			MovimientoMonetario ingreso5 = new MovimientoMonetario("supermercado", "ninguna", -55, formater.parse("20180413"));
+			MovimientoMonetario ingreso3 = new MovimientoMonetario("Luz", "Servicio", -742, formater.parse("20180413"));
+			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -325, formater.parse("20180426"));
+			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 25744, formater.parse("20180418"));
+			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -6214, formater.parse("20180423"));
 			saldo.getMovimientos().add(ingreso);
 			saldo.getMovimientos().add(ingreso2);
 			saldo.getMovimientos().add(ingreso3);
 			saldo.getMovimientos().add(ingreso4);
 			saldo.getMovimientos().add(ingreso5);
+			saldo.getMovimientos().add(ingreso6);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

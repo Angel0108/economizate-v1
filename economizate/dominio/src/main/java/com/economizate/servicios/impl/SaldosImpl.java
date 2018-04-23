@@ -55,4 +55,15 @@ public class SaldosImpl implements Saldos{
 		conector.cambiarSaldo(importe);
 	}
 
+	@Override
+	public double obtenerTotalMovimientos(List<MovimientoMonetario> movimientos) {
+		
+		double total = 0;
+		
+		for (MovimientoMonetario mov : movimientos) {
+			total += mov.getImporte();
+		}		
+		return total;
+	}
+
 }
