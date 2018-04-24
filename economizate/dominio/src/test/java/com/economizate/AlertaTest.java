@@ -69,4 +69,28 @@ public class AlertaTest {
 		assertFalse(alert.getMensaje().equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
 	
+	@Test
+	public void alertaControlSaldoAnteriorYSaldoActualOK() {
+				
+		saldoAnterior = 100.0;
+		saldoActual = 20.01;
+		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
+		assertTrue("tiene saldo anterior ok", saldoAnterior == alert.getSaldoAnterior());
+		assertTrue("tiene saldo actual ok", saldoActual == alert.getSaldoActual());
+	}
+	
+	@Test
+	public void alertaControlSetsSaldoAnteriorYSaldoActualOK() {
+				
+		saldoAnterior = 100.0;
+		saldoActual = 20.01;
+		Alerta alert = new FactoryAlertas().crearAlerta(saldoAnterior, saldoActual);		
+		
+		alert.setSaldoAnterior(99);
+		assertTrue("tiene saldo anterior ok", alert.getSaldoAnterior() == 99);
+		
+		alert.setSaldoActual(40.01);
+		assertTrue("tiene saldo actual ok", alert.getSaldoActual() == 40.01);
+	}
+	
 }

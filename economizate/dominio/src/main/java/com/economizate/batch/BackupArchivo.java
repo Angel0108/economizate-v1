@@ -11,6 +11,7 @@ public class BackupArchivo implements IBackup{
 
 	Usuarios usuarios = new UsuariosImpl();
 	
+	@Override
 	public void generarBackupMovimientos() {
 		try {
 			new TXTWriter("backup-" + System.currentTimeMillis() + ".txt").write(usuarios
@@ -22,9 +23,4 @@ public class BackupArchivo implements IBackup{
 		}
 	}
 	
-	@Override
-	public void aceptarVisitor(IVisitor visitante) {
-		visitante.visitar(this);
-	}
-
 }

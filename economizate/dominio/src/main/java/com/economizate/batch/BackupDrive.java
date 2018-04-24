@@ -7,13 +7,9 @@ public class BackupDrive implements IBackup{
 	
 	Usuarios usuarios = new UsuariosImpl();
 	
+	@Override
 	public void generarBackupMovimientos() {
 		//TODO implementar
-	}
-
-	@Override
-	public void aceptarVisitor(IVisitor visitante) {
-		visitante.visitar(this);
 	}
 
 }

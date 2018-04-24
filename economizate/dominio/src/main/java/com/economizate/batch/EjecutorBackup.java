@@ -6,20 +6,17 @@ import java.util.Timer;
 
 public class EjecutorBackup {	
 	
-	private IVisitor visitante;
 	private List<IBackup> backups;
 	private BackupTimer frecuencia;
 	private Timer timer;
 	
-	public EjecutorBackup(IVisitor visitante, BackupTimer frecuencia, IBackup... backups) {
-		this.visitante = visitante;
+	public EjecutorBackup(BackupTimer frecuencia, IBackup... backups) {
 		this.frecuencia = frecuencia;
 		this.backups = aLista(backups);
 		this.timer = new Timer();
 	}
 	
-	public EjecutorBackup(IVisitor visitante, BackupTimer frecuencia, List<IBackup> backups) {
-		this.visitante = visitante;
+	public EjecutorBackup(BackupTimer frecuencia, List<IBackup> backups) {
 		this.frecuencia = frecuencia;
 		this.backups = backups;
 		this.timer = new Timer();
@@ -28,13 +25,13 @@ public class EjecutorBackup {
 	public void ejecutar() {
 		switch(this.frecuencia) {
 		case DIARIO:
-			timer.schedule(new ProcesoPeriodico(visitante, backups), 1000, Long.parseLong("5184000000"));
+			timer.schedule(new ProcesoPeriodico(backups), 1000, Long.parseLong("5184000000"));
 			break;
 		case DEFAULT:
-			timer.schedule(new ProcesoPeriodico(visitante, backups), 1000, 5000);
+			timer.schedule(new ProcesoPeriodico(backups), 1000, 5000);
 			break;
 		default:
-			timer.schedule(new ProcesoPeriodico(visitante, backups), 3000, Long.parseLong("5184000000"));
+			timer.schedule(new ProcesoPeriodico(backups), 3000, Long.parseLong("5184000000"));
 			break;
 		}
 		

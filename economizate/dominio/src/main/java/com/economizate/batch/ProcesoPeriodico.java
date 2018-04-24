@@ -6,24 +6,22 @@ import java.util.TimerTask;
 
 public class ProcesoPeriodico extends TimerTask{
 	
-	private IVisitor visitante;
 	List<IBackup> listaBackups;
 	
 	
-	public ProcesoPeriodico(IVisitor visitante, IBackup... backups) {
-		this.visitante = visitante;
+	public ProcesoPeriodico(IBackup... backups) {
 		this.listaBackups = aLista(backups);
 	}
 	
-	public ProcesoPeriodico(IVisitor visitante, List<IBackup> backups) {
-		this.visitante = visitante;
+	public ProcesoPeriodico(List<IBackup> backups) {
 		this.listaBackups = backups;
 	}
 	
 	@Override
 	public void run() {
 		System.out.println("descarga archivo");
-		visitante.visitar(listaBackups);
+		//visitante.visitar(listaBackups);
+		listaBackups.forEach(b -> b.generarBackupMovimientos());
 	}
 	
 	private List<IBackup> aLista(IBackup... backups){

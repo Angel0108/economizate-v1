@@ -51,7 +51,7 @@ public class ReaderTest {
 	}
 	
 	@Test
-	public void readArchivoExcelNoExistente() throws Exception {
+	public void readArchivoExcelVacio() throws Exception{
 		
 		importador = FactoryReader.getParseador("src/test/resources/prueba22.xlsx");
 		assertTrue(importador.read().isEmpty());

@@ -50,7 +50,7 @@ public class ConectorSaldo {
 			observer = o;
 			saldo = new Cuenta(o, obtenerSaldo());
 			agregarMovimientos();
-			saldo.setTotalTest(obtenerSaldo());
+			saldo.setTotalSinObserver(obtenerSaldo());
 		}
 		return saldo;
 	}

@@ -9,10 +9,8 @@ import java.util.logging.Logger;
 import com.economizate.batch.BackupArchivo;
 import com.economizate.batch.BackupDrive;
 import com.economizate.batch.BackupTimer;
-import com.economizate.batch.DescargaBackup;
 import com.economizate.batch.EjecutorBackup;
 import com.economizate.batch.IBackup;
-import com.economizate.batch.IVisitor;
 
 public class BackupListener implements ActionListener {
 	
@@ -21,10 +19,8 @@ public class BackupListener implements ActionListener {
 	IBackup backupArchivo;
 	IBackup backupDrive;
 	List<IBackup> listaBackups;
-	IVisitor visitante;
 
 	public BackupListener() {
-		visitante = new DescargaBackup();
 		
 		backupArchivo = new BackupArchivo();
 		backupDrive = new BackupDrive();
@@ -35,9 +31,11 @@ public class BackupListener implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		logger.info("Inicio Backup historial");
+		
+		//NO necesito Visitor
 		//visitante.visitar(listaBackups); --> antes
 		
-		new EjecutorBackup(visitante, BackupTimer.DEFAULT, listaBackups).ejecutar();;
+		new EjecutorBackup(BackupTimer.DEFAULT, listaBackups).ejecutar();
 	}
 
 }

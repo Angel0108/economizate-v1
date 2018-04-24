@@ -47,4 +47,16 @@ public class UsuarioTest {
 		assertEquals("Buscar saldo en cero: ", usuario!= null ? usuario.getSaldo().getTotal() : null, new Double(0));
 	}
 	
+	@Test
+	public void crearUsuarioVacioLuegoModificarloYObtenerConsultasDeUsuaioOK() {
+		Usuario usuario = new Usuario();
+		usuario.setNombre("seba");
+		usuario.setApellido("sanchaez");
+		usuario.setEmail("sebaSanchez@gmail.com");
+		
+		assertTrue("Usuario tiene nombre ok: ", "seba".equals(usuario.getNombre()));
+		assertTrue("Usuario tiene apellido ok: ", "sanchaez".equals(usuario.getApellido()));
+		assertTrue("Usuario tiene mail ok: ", "sebaSanchez@gmail.com".equals(usuario.getEmail()));
+	}
+	
 }

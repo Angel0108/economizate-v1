@@ -1,5 +1,8 @@
 package com.economizate;
 
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -46,11 +49,15 @@ public class WriterTest {
 		Assert.assertTrue(Files.exists(path));
 	}
 	
-	@Test (expected = FileNotFoundException.class) 
-	public void writeTxtMovimientosRutaInvalida() throws IOException {
+	@Test (expected = NullPointerException.class) 
+	public void writeTxtMovimientosRutaInvalida() throws IOException{
 		
-		String nombreArchivo = "src/test/resourcess/prueba_writer.txt";
-		BaseWriter writer = new TXTWriter(nombreArchivo);
-		writer.write();
+			String nombreArchivo = null;
+			BaseWriter writer = new TXTWriter(nombreArchivo);
+			writer.write();
+			
+			Path path = Paths.get(nombreArchivo);
+			Assert.assertTrue(Files.exists(path));
+		
 	}
 }

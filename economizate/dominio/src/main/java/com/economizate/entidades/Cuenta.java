@@ -17,9 +17,8 @@ public class Cuenta extends java.util.Observable{
 	}
 	
 	public Cuenta (Observer o) {
+		this();
 		this.addObserver(o);
-		this.movimientos = new ArrayList<>();
-		this.total = 0;
 	}
 	
 	public Cuenta (Observer o, double total) {
@@ -45,22 +44,13 @@ public class Cuenta extends java.util.Observable{
 		return total;
 	}
 	
+	public void setTotalSinObserver(double total) {
+		this.total = total;
+	}
+	
 	public void setTotal(double total) {
 		this.total = total;
 		setChanged();
 		notifyObservers(total); //MVC
 	}
-	
-	public void setTotalTest(double total) {
-		this.total = total;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
 }
