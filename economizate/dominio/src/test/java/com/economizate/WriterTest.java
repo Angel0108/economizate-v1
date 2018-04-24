@@ -18,6 +18,8 @@ import com.economizate.servicios.BaseWriter;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.TXTWriter;
+import com.economizate.servicios.impl.Transformador;
+import com.lowagie.text.DocumentException;
 
 public class WriterTest {
 
@@ -60,4 +62,12 @@ public class WriterTest {
 			Assert.assertTrue(Files.exists(path));
 		
 	}
+	
+	@Test
+	public void TransformadorTest() throws IOException, DocumentException {
+		
+		Transformador trans = new Transformador();
+		trans.process();
+	}
+	
 }
