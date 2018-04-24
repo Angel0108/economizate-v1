@@ -6,24 +6,24 @@
             <h1>Company Details</h1>
             <table border="1">
                <tr>
-                  <th>EmpId</th>
-                  <th>EmpName</th>
-                  <th>Age</th>
-                  <th>Salary</th>
+                  <th>Fecha</th>
+                  <th>Descripcion</th>
+                  <th>Observacion</th>
+                  <th>Importe</th>
                </tr>
-               <xsl:for-each select="Company/Info">
+               <xsl:for-each select="list/com.economizate.entidades.MovimientoMonetario">
                   <tr>
                      <td>
-                        <xsl:value-of select="EmpId" />
+                        <xsl:value-of select="substring(fecha,1,10)" />
                      </td>
                      <td>
-                        <xsl:value-of select="EmpName" />
+                        <xsl:value-of select="descripcion" />
                      </td>
                      <td>
-                        <xsl:value-of select="Age" />
+                        <xsl:value-of select="observacion" />
                      </td>
                      <td>
-                        <xsl:value-of select="Salary" />
+                        <xsl:value-of select="importe" />
                      </td>
                   </tr>
                </xsl:for-each>

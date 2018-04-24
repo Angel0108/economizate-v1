@@ -2,6 +2,7 @@ package com.economizate.servicios.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.util.logging.Logger;
 
@@ -16,6 +17,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import com.economizate.datos.ListaMovimientos;
 import com.lowagie.text.DocumentException;
 
 public class Transformador {
@@ -26,9 +28,10 @@ public class Transformador {
             TransformerFactory factory = TransformerFactory.newInstance();
             StreamSource xls = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("Movimientos.xsl"));//new File("Alumnos.xsl"));
             Transformer newTransformer = factory.newTransformer(xls);
-            ;
-            StreamSource xml = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("Movimientos.xml"));//new File("Alumnos.xml"));
-            String salida = "";
+            String str = ConvertObjetoToXML.convert(new ListaMovimientos().getMovimientos());
+            StreamSource xml = new StreamSource(new StringReader(str));
+            		//new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("Movimientos.xml"));//new File("Alumnos.xml"));
+            
             StringWriter writer = new StringWriter();
             //StreamResult result = new StreamResult(writer);
             newTransformer.transform(xml, new StreamResult( writer));
