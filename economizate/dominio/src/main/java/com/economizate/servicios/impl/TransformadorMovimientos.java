@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javax.xml.transform.Transformer;
@@ -18,12 +19,31 @@ import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
 import com.economizate.datos.ListaMovimientos;
+import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.BaseTransformador;
 import com.lowagie.text.DocumentException;
 
-public class Transformador {
+public class TransformadorMovimientos implements BaseTransformador {
 
-	public void process() throws IOException, DocumentException {
-        try {
+	private List<MovimientoMonetario> movimientos;
+	
+	public TransformadorMovimientos(List<MovimientoMonetario> movimientos) {
+        this.movimientos = movimientos;
+    }
+	
+	private byte[] toPdf(String html) throws DocumentException, IOException {
+	    final ITextRenderer renderer = new ITextRenderer();
+	    renderer.setDocumentFromString(html);
+	    renderer.layout();
+	    try (ByteArrayOutputStream fos = new ByteArrayOutputStream(html.length())) {
+	      renderer.createPDF(fos);
+	      return fos.toByteArray();
+	    }
+	  }
+
+	@Override
+	public void procesar() throws IOException, DocumentException {
+		try {
 
             TransformerFactory factory = TransformerFactory.newInstance();
             StreamSource xls = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("Movimientos.xsl"));//new File("Alumnos.xsl"));
@@ -42,15 +62,6 @@ public class Transformador {
         } catch (TransformerException ex) {
             //Logger.getLogger(AlumnosCommand.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-	
-	private byte[] toPdf(String html) throws DocumentException, IOException {
-	    final ITextRenderer renderer = new ITextRenderer();
-	    renderer.setDocumentFromString(html);
-	    renderer.layout();
-	    try (ByteArrayOutputStream fos = new ByteArrayOutputStream(html.length())) {
-	      renderer.createPDF(fos);
-	      return fos.toByteArray();
-	    }
-	  }
+		
+	}
 }

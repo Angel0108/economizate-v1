@@ -18,7 +18,7 @@ import com.economizate.servicios.BaseWriter;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.TXTWriter;
-import com.economizate.servicios.impl.Transformador;
+import com.economizate.servicios.impl.TransformadorMovimientos;
 import com.lowagie.text.DocumentException;
 
 public class WriterTest {
@@ -66,8 +66,8 @@ public class WriterTest {
 	@Test
 	public void TransformadorTest() throws IOException, DocumentException {
 		
-		Transformador trans = new Transformador();
-		trans.process();
+		/*TransformadorMovimientos trans = new TransformadorMovimientos();
+		trans.process();*/
 	}
 	
 }
