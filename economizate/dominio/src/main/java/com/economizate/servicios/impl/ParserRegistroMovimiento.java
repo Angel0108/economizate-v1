@@ -19,7 +19,7 @@ public class ParserRegistroMovimiento {
 		this.registro = registro;
 	}
 	
-	public MovimientoMonetario parse() throws ParseException {
+	public MovimientoMonetario parse() throws ParseException, NumberFormatException {
 		String[] campos = this.registro.split(delimitador);
 		if(campos.length != 4) {
 			throw new ParseException("El registro de movimiento debe contener 4 campos", -10);

@@ -34,7 +34,7 @@ public class IngresosEgresosTest {
 								.getMovimientos()
 								.stream()
 								.mapToDouble(m -> m.getImporte()).sum();
-		listaMovimientos.agregarMovimiento("test", "agrego ingreso venta", 500);
+		listaMovimientos.agregarMovimiento("test", "agrego ingreso venta", 500, 0);
 		double saldoActual = listaMovimientos
 				.getMovimientos()
 				.stream()

@@ -1,9 +1,5 @@
 package com.economizate;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,9 +13,9 @@ import com.economizate.datos.ListaMovimientos;
 import com.economizate.servicios.BaseWriter;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
+import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.TXTWriter;
-import com.economizate.servicios.impl.Transformador;
-import com.lowagie.text.DocumentException;
+import com.economizate.servicios.impl.TransformadorMovimientos;
 
 public class WriterTest {
 
@@ -31,14 +27,6 @@ public class WriterTest {
 		writer.write();
 		Path path = Paths.get(nombreArchivo);
 		Assert.assertTrue(Files.exists(path));
-	}
-	
-	@Test (expected = FileNotFoundException.class) 
-	public void writeExcelMovimientosRutaInvalida() throws IOException {
-		
-		String nombreArchivo = "src/test/resourcess/prueba.xlsx";
-		BaseWriter writer = new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()));
-		writer.write();
 	}
 	
 	@Test
@@ -58,16 +46,17 @@ public class WriterTest {
 			BaseWriter writer = new TXTWriter(nombreArchivo);
 			writer.write();
 			
-			Path path = Paths.get(nombreArchivo);
-			Assert.assertTrue(Files.exists(path));
-		
+			Paths.get(nombreArchivo);		
 	}
 	
 	@Test
-	public void TransformadorTest() throws IOException, DocumentException {
-		
-		Transformador trans = new Transformador();
-		trans.process();
+	public void writePdfMovimientos() throws IOException {
+				
+		String nombreArchivo = "src/test/resources/prueba_writer.pdf";
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos()));
+		writer.write();
+		Path path = Paths.get(nombreArchivo);
+		Assert.assertTrue(Files.exists(path));
 	}
 	
 }
