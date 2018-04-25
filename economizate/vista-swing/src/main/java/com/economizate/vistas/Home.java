@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
+import com.economizate.batch.BackupArchivo;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.BackupListener;
@@ -106,7 +107,7 @@ public class Home implements ActionListener, java.util.Observer{
 	public void iniciarBotonEgresoPeriodico() {
 		botonEgresosPeriodicos =new JButton("Backup");
 		botonEgresosPeriodicos.setBounds(70,200,100, 40); 
-		botonEgresosPeriodicos.addActionListener(new BackupListener());
+		botonEgresosPeriodicos.addActionListener(new BackupListener(new BackupArchivo()));
 	}
 	
 	public void iniciarBotonReportes() {

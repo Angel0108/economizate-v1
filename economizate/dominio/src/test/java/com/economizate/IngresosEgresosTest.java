@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Observable;
 import java.util.Observer;
 import java.util.stream.DoubleStream;
 
@@ -76,6 +77,21 @@ public class IngresosEgresosTest {
 		saldo.setMovimientos(Arrays.asList(new MovimientoMonetario("test", 50)));
 		assertTrue("Saldo nuevo cantidad de movimientos ok: ", 1 ==  saldo.getMovimientos().size());
 		assertTrue("Saldo nuevo con total ok: ", 50 ==  saldo.getMovimientos().get(0).getImporte());
+	}
+	
+	@Test
+	public void crearNuevaCuentaConUnObservadorYVerificarObservadorAñadido() {
+		Cuenta cuentaTest = new Cuenta(new ObservadorTest());
+		assertTrue("Contador de observadores para cuenta igual a 1: ", cuentaTest.countObservers() == 1);
+	}
+	
+	
+	public static class ObservadorTest implements Observer{
+
+		@Override
+		public void update(Observable arg0, Object arg1) {
+		}
+		
 	}
 	
 }

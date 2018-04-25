@@ -28,7 +28,7 @@ public class EjecutorBackup {
 			timer.schedule(new ProcesoPeriodico(backups), 1000, Long.parseLong("5184000000"));
 			break;
 		case DEFAULT:
-			timer.schedule(new ProcesoPeriodico(backups), 1000, 5000);
+			timer.schedule(new ProcesoPeriodico(backups), 1000, 300000l);
 			break;
 		default:
 			timer.schedule(new ProcesoPeriodico(backups), 3000, Long.parseLong("5184000000"));

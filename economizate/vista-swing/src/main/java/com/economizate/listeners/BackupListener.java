@@ -20,21 +20,15 @@ public class BackupListener implements ActionListener {
 	IBackup backupDrive;
 	List<IBackup> listaBackups;
 
-	public BackupListener() {
-		
-		backupArchivo = new BackupArchivo();
-		backupDrive = new BackupDrive();
+	public BackupListener(IBackup backup) {
 		
 		//Agregar backups necesarios
-		listaBackups = Arrays.asList(backupArchivo);
+		listaBackups = Arrays.asList(backup);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		logger.info("Inicio Backup historial");
-		
-		//NO necesito Visitor
-		//visitante.visitar(listaBackups); --> antes
-		
+				
 		new EjecutorBackup(BackupTimer.DEFAULT, listaBackups).ejecutar();
 	}
 

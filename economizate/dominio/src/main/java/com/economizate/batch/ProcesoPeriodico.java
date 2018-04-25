@@ -19,8 +19,6 @@ public class ProcesoPeriodico extends TimerTask{
 	
 	@Override
 	public void run() {
-		System.out.println("descarga archivo");
-		//visitante.visitar(listaBackups);
 		listaBackups.forEach(b -> b.generarBackupMovimientos());
 	}
 	
