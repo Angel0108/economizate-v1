@@ -2,7 +2,11 @@ package com.economizate;
 
 
 import java.io.IOException;
+import java.text.DateFormat;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.xml.bind.ValidationException;
 
@@ -12,24 +16,42 @@ import static org.junit.Assert.assertTrue;
 
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.LoaderFromFile;
+import com.economizate.servicios.Saldos;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.Propiedad;
+import com.economizate.servicios.impl.SaldosImpl;
 
 public class ImportadorArchivoTest {
 
 	private String rutaArchivos = Propiedad.getInstance().getPropiedad("resourcesTesting");
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
+	private Saldos cuenta;
 	
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
 		importador.cargarDatos();
 	}
 	
+	private void agregarMovimientosACuenta() throws ValidationException {
+		for (MovimientoMonetario mov : importador.getDatos()) {
+			cuenta.agregarMovimiento(mov);
+		}
+	}
+	
 	@Test
 	public void cargarMovimientosDesdeArchivoTxt() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_ok.txt");
-		assertTrue(importador.getDatos().size() > 0);
+		cuenta  = new SaldosImpl();
+		agregarMovimientosACuenta();
+		
+		Date date= new Date();		
+		DateFormat dateFormat = new SimpleDateFormat("MM");
+		int mes = Integer.parseInt(dateFormat.format(date));
+		dateFormat = new SimpleDateFormat("yyyy");
+		int anio = Integer.parseInt(dateFormat.format(date));
+		System.out.println(cuenta.obtenerSaldoTotalPorPeriodo(mes, anio));	
+		assertTrue(cuenta.obtenerSaldoTotalPorPeriodo(mes, anio) == 17310.5);
 	}
 
 	@Test (expected=NumberFormatException.class)

@@ -24,4 +24,6 @@ public interface Saldos {
 	public List<MovimientoMonetario> obtenerEgresosPorFecha(Date fecha);
 
 	public double obtenerTotalMovimientos(List<MovimientoMonetario> movimientos);
+	
+	public double obtenerSaldoTotalPorPeriodo(int mes, int anio);
 }

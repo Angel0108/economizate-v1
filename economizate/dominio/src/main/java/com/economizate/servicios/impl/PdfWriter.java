@@ -1,11 +1,12 @@
 package com.economizate.servicios.impl;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import javax.xml.transform.TransformerException;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.xhtmlrenderer.pdf.ITextRenderer;
+
 import com.economizate.servicios.BaseTransformador;
 import com.economizate.servicios.BaseWriter;
 import com.lowagie.text.DocumentException;
@@ -20,12 +21,13 @@ public class PdfWriter extends BaseWriter {
 	}
 
 	@Override
-	public void write() throws IOException, FileNotFoundException {		
+	public void write() throws IOException {		
 		
 		try {
 			FileUtils.writeByteArrayToFile(new File(nombreArchivo), toPdf(trans.procesar().toString()));
 		} catch (DocumentException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
 

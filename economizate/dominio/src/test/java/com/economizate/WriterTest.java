@@ -46,7 +46,7 @@ public class WriterTest {
 			BaseWriter writer = new TXTWriter(nombreArchivo);
 			writer.write();
 			
-			Path path = Paths.get(nombreArchivo);		
+			Paths.get(nombreArchivo);		
 	}
 	
 	@Test

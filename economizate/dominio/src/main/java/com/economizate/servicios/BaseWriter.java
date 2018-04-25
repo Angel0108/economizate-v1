@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 
+import javax.xml.transform.TransformerException;
+
 public abstract class BaseWriter {
 
 	protected String nombreArchivo; 

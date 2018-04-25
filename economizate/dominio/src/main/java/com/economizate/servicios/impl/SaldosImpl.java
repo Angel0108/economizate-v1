@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Observer;
 
 import com.economizate.conector.ConectorSaldo;
+import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.Saldos;
 
@@ -12,7 +13,10 @@ public class SaldosImpl implements Saldos{
 	
 	private ConectorSaldo conector = new ConectorSaldo();
 
+	private Cuenta cuenta;
+	
 	public SaldosImpl() {
+		this.cuenta = new Cuenta();
 	}
 	
 	public SaldosImpl(Observer observer) {
@@ -26,7 +30,8 @@ public class SaldosImpl implements Saldos{
 
 	@Override
 	public double obtenerSaldoTotal() {
-		return conector.obtenerSaldo();
+		//return conector.obtenerSaldo();
+		return cuenta.getTotal();
 	}
 
 	@Override
@@ -67,9 +72,15 @@ public class SaldosImpl implements Saldos{
 	}
 
 	@Override
-	public void agregarMovimiento(MovimientoMonetario egreso) {
-		// TODO Auto-generated method stub
+	public void agregarMovimiento(MovimientoMonetario movimiento) {
+		cuenta.agregarMovimiento(movimiento);
 		
+	}
+
+	@Override
+	public double obtenerSaldoTotalPorPeriodo(int mes, int anio) {
+		// TODO Auto-generated method stub
+		return cuenta.getTotal(mes, anio);
 	}
 
 }
