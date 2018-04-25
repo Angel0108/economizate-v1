@@ -1,7 +1,6 @@
 package com.economizate.datos;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import com.economizate.entidades.MovimientoMonetario;
 
