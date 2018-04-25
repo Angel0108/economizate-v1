@@ -66,4 +66,10 @@ public class SaldosImpl implements Saldos{
 		return total;
 	}
 
+	@Override
+	public void agregarMovimiento(MovimientoMonetario egreso) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

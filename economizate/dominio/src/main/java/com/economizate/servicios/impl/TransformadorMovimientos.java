@@ -42,7 +42,7 @@ public class TransformadorMovimientos implements BaseTransformador {
 	  }
 
 	@Override
-	public void procesar() throws IOException, DocumentException {
+	public StringWriter procesar() throws IOException, DocumentException {
 		try {
 
             TransformerFactory factory = TransformerFactory.newInstance();
@@ -56,11 +56,10 @@ public class TransformadorMovimientos implements BaseTransformador {
             //StreamResult result = new StreamResult(writer);
             newTransformer.transform(xml, new StreamResult( writer));
 
-           
-            FileUtils.writeByteArrayToFile(new File("So4712641.pdf"), toPdf(writer.toString()));
+           return writer;            
 
         } catch (TransformerException ex) {
-            //Logger.getLogger(AlumnosCommand.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
         }
 		
 	}

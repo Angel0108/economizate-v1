@@ -46,14 +46,14 @@ public class ReaderTest {
 	@Test
 	public void readArchivoExcel() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba.xlsx");
+		importador = FactoryReader.getParseador("src/test/resources/movimientos_ok.xlsx");
 		assertFalse(importador.read().isEmpty());
 	}
 	
 	@Test
 	public void readArchivoExcelVacio() throws Exception{
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba22.xlsx");
+		importador = FactoryReader.getParseador("src/test/resources/movimientos_vacio.xlsx");
 		assertTrue(importador.read().isEmpty());
 	}
 }

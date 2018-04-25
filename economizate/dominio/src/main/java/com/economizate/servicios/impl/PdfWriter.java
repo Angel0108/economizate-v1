@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
+import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseTransformador;
 import com.economizate.servicios.BaseWriter;
@@ -18,16 +19,22 @@ import com.lowagie.text.DocumentException;
 
 public class PdfWriter extends BaseWriter {
 
-	private String html;
-
-	public PdfWriter(String nombreArchivo, TransformadorMovimientos tranformador) {
+	private BaseTransformador trans;
+	
+	public PdfWriter(String nombreArchivo, BaseTransformador tranformador) {
 		super(nombreArchivo);
-		this.html = html;
+		trans = tranformador;
 	}
 
 	@Override
-	public void write() throws IOException, FileNotFoundException {
-		//FileUtils.writeByteArrayToFile(new File("So4712641.pdf"), toPdf(writer.toString()));
+	public void write() throws IOException, FileNotFoundException {		
+		
+		try {
+			FileUtils.writeByteArrayToFile(new File(nombreArchivo), toPdf(trans.procesar().toString()));
+		} catch (DocumentException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

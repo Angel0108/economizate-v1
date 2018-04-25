@@ -12,7 +12,7 @@ public class CSVReader extends BaseReader {
 
 	@Override
 	public String read() throws IOException {
-		Delimiter = ",";
+		Delimiter = ";";
 		return super.read();
 	}
 

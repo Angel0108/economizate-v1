@@ -11,6 +11,8 @@ public interface Saldos {
 	
 	public void agregarEgreso(MovimientoMonetario egreso);
 	
+	public void agregarMovimiento(MovimientoMonetario egreso);
+	
 	public List<MovimientoMonetario> obtenerHistorialMovimientos();
 	
 	public double obtenerSaldoTotal();

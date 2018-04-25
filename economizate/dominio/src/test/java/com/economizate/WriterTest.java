@@ -17,9 +17,9 @@ import com.economizate.datos.ListaMovimientos;
 import com.economizate.servicios.BaseWriter;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
+import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.TXTWriter;
 import com.economizate.servicios.impl.TransformadorMovimientos;
-import com.lowagie.text.DocumentException;
 
 public class WriterTest {
 
@@ -54,20 +54,31 @@ public class WriterTest {
 	@Test (expected = NullPointerException.class) 
 	public void writeTxtMovimientosRutaInvalida() throws IOException{
 		
-			String nombreArchivo = null;
+			String nombreArchivo = "src/test/resourcess/prueba.txt";
 			BaseWriter writer = new TXTWriter(nombreArchivo);
-			writer.write();
-			
+			writer.write();			
 			Path path = Paths.get(nombreArchivo);
-			Assert.assertTrue(Files.exists(path));
-		
+			Assert.assertTrue(Files.exists(path));		
 	}
 	
 	@Test
-	public void TransformadorTest() throws IOException, DocumentException {
-		
-		/*TransformadorMovimientos trans = new TransformadorMovimientos();
-		trans.process();*/
+	public void writePdfMovimientos() throws IOException {
+				
+		String nombreArchivo = "src/test/resources/prueba_writer.pdf";
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos()));
+		writer.write();
+		Path path = Paths.get(nombreArchivo);
+		Assert.assertTrue(Files.exists(path));
+	}
+	
+	@Test
+	public void writePdfMovimientosRutaInvalida() throws IOException {
+				
+		String nombreArchivo = "src/test/resourcess/prueba_writer.pdf";
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos()));
+		writer.write();
+		Path path = Paths.get(nombreArchivo);
+		Assert.assertTrue(Files.exists(path));
 	}
 	
 }
