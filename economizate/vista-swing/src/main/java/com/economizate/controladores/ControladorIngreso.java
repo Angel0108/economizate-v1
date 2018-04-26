@@ -48,7 +48,7 @@ public class ControladorIngreso implements ActionListener{
 				+ model.getSaldo().getTotal();
 		
 		//lo cambio en la "base"
-		usuarioService.obtenerSaldoUsuario(model).getMovimientos().add(new MovimientoMonetario(vista.getDescricionTextFieldValue(), nuevoTotal));
+		usuarioService.obtenerSaldoUsuario(model).getMovimientos().agregarMovimiento(new MovimientoMonetario(vista.getDescricionTextFieldValue(), nuevoTotal));
 		usuarioService.obtenerSaldoUsuario(model).setTotal(nuevoTotal);
 		//saldoService.cambiarSaldoTotal(nuevoTotal);
 		usuarioService.cambiarSaldoUsuario(nuevoTotal);

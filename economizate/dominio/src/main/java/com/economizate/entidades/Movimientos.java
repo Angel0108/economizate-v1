@@ -1,5 +1,6 @@
 package com.economizate.entidades;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,5 +35,10 @@ public class Movimientos {
 	
 	public double getTotal() {
 		return total;
+	}
+	
+	@Override
+	public String toString() {
+		return movimientos.toString();
 	}
 }

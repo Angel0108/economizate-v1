@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextPane;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.AndCriterio;
@@ -57,7 +58,7 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 	private Criterio criterioEgreso;
 	private Criterio criterioRangoFechas;
 	private Criterio andCriterio;
-	List<MovimientoMonetario> listaFiltrada;
+	Movimientos listaFiltrada;
 	 
 	
 	private String email;
@@ -129,15 +130,15 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 		filtrar.addActionListener(new ActionListener() {
 			public void actionPerformed( ActionEvent e )  
             {  
-				List<MovimientoMonetario> listaInicial = usuarios.buscarUsuarioPorEmail(email).getSaldo().getMovimientos();
+				Movimientos listaInicial = usuarios.buscarUsuarioPorEmail(email).getSaldo().getMovimientos();
 				 
 				criterioIngreso = new IngresoCriterio();
 				if(dateChooserDesde.getDate() != null && dateChooserHasta.getDate() != null) {
 					criterioRangoFechas = new RangoFechaCriterio(dateChooserDesde.getDate(), dateChooserHasta.getDate());
 					listaFiltrada=  new AndCriterio(criterioIngreso, criterioRangoFechas)
-							.filtrarMovimientos(listaInicial); 
+							.filtrarMovimientos(listaInicial.getTodos()); 
 				}else {
-					listaFiltrada = criterioIngreso.filtrarMovimientos(listaInicial);
+					listaFiltrada = criterioIngreso.filtrarMovimientos(listaInicial.getTodos());
 				}
 					
 				listaMovimientos.setText(listaFiltrada.toString());
@@ -151,10 +152,10 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 			public void actionPerformed( ActionEvent e )  
             {  
 				criterioEgreso = new EgresoCriterio();
-				List<MovimientoMonetario> listaFiltrada = criterioEgreso.filtrarMovimientos(usuarios
+				Movimientos listaFiltrada = criterioEgreso.filtrarMovimientos(usuarios
 						.buscarUsuarioPorEmail(email)
 						.getSaldo()
-						.getMovimientos());
+						.getMovimientos().getTodos());
 				listaMovimientos.setText(listaFiltrada.toString());
             }
 		});
