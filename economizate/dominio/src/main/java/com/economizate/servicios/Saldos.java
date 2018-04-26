@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 
 public interface Saldos {
 	
@@ -13,7 +14,7 @@ public interface Saldos {
 	
 	public void agregarMovimiento(MovimientoMonetario egreso);
 	
-	public List<MovimientoMonetario> obtenerHistorialMovimientos();
+	public Movimientos obtenerHistorialMovimientos();
 	
 	public double obtenerSaldoTotal();
 	

@@ -9,6 +9,7 @@ import java.util.List;
 import org.apache.xmlbeans.impl.regex.RegularExpression;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
 
 public class RangoFechaCriterio implements Criterio {
@@ -38,6 +39,10 @@ public class RangoFechaCriterio implements Criterio {
 			throws ParseException {
 		validarFormatoFecha(fechaDesde);
 		validarFormatoFecha(fechaHasta);
+		if (formater.parse(fechaHasta).before(formater.parse(fechaDesde))) {
+			throw new IllegalArgumentException(
+					"La fecha hasta debe ser posterior a la fecha desde");
+		}
 		this.fechaDesde = formater.parse(fechaDesde);
 		this.fechaHasta = formater.parse(fechaHasta);
 		
@@ -58,15 +63,15 @@ public class RangoFechaCriterio implements Criterio {
 	}
 
 	@Override
-	public List<MovimientoMonetario> filtrarMovimientos(
+	public Movimientos filtrarMovimientos(
 			List<MovimientoMonetario> movimientos) {
 
-		List<MovimientoMonetario> movsFecha = new ArrayList<MovimientoMonetario>();
+		Movimientos movsFecha = new Movimientos();
 
 		for (MovimientoMonetario mov : movimientos) {
 			if (mov.getFecha().after(fechaDesde)
 					&& mov.getFecha().before(fechaHasta)) {
-				movsFecha.add(mov);
+				movsFecha.agregarMovimiento(mov);
 			}
 		}
 		return movsFecha;

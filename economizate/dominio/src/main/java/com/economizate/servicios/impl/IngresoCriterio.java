@@ -4,18 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
 
 public class IngresoCriterio implements Criterio {
 
 	@Override
-	public List<MovimientoMonetario> filtrarMovimientos(
+	public Movimientos filtrarMovimientos(
 			List<MovimientoMonetario> movimientos) {
-		List<MovimientoMonetario> ingresos = new ArrayList<MovimientoMonetario>();
+		Movimientos ingresos = new Movimientos();
 		
 		for(MovimientoMonetario mov : movimientos) {
 			if(mov.getImporte() > 0) {
-				ingresos.add(mov);
+				ingresos.agregarMovimiento(mov);
 			}
 		}
 		return ingresos;		

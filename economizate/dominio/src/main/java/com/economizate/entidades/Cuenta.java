@@ -16,15 +16,18 @@ import org.apache.commons.collections4.map.HashedMap;
 public class Cuenta extends java.util.Observable{
 	
 	private long id;
-	private List<MovimientoMonetario> movimientos;
+	//private List<MovimientoMonetario> movimientos;
+	
+	private Movimientos movimientos;
+	
 	private double total;
 	private HashMap<String, Double> totalPorMes;
-	private HashMap<String, List<MovimientoMonetario>> movimientosPorMes;
+	private HashMap<String, Movimientos> movimientosPorMes;
 	
 	public Cuenta () {
-		movimientosPorMes = new LinkedHashMap<String, List<MovimientoMonetario>>();
+		movimientosPorMes = new LinkedHashMap<String, Movimientos>();
 		totalPorMes = new LinkedHashMap<String, Double>();
-		this.movimientos = new ArrayList<>();
+		this.movimientos = new Movimientos();
 		this.total = 0;
 	}
 	
@@ -35,20 +38,20 @@ public class Cuenta extends java.util.Observable{
 	
 	public Cuenta (Observer o, double total) {
 		this.addObserver(o);
-		this.movimientos = new ArrayList<>();
+		this.movimientos = new Movimientos();
 		this.total = total;
 	}
 	
-	public Cuenta (List<MovimientoMonetario> movimientos, double total) {
+	public Cuenta (Movimientos movimientos, double total) {
 		this.movimientos = movimientos;
 		this.total = total;
 	}
 	
-	public List<MovimientoMonetario> getMovimientos() {
+	public Movimientos getMovimientos() {
 		return movimientos;
 	}
 	
-	public void setMovimientos(List<MovimientoMonetario> movimientos) {
+	public void setMovimientos(Movimientos movimientos) {
 		this.movimientos = movimientos;
 	}
 	
@@ -74,10 +77,10 @@ public class Cuenta extends java.util.Observable{
 		
 		movimientos = movimientosPorMes.get(periodo);
 		if(movimientos == null) {
-			movimientos = new ArrayList<MovimientoMonetario>();
+			movimientos = new Movimientos();
 			movimientosPorMes.put(periodo, movimientos);
 		}
-		this.movimientos.add(movimiento);
+		this.movimientos.agregarMovimiento(movimiento);
 		
 		Double totalMes = totalPorMes.get(periodo);		
 		if(totalMes == null) {			

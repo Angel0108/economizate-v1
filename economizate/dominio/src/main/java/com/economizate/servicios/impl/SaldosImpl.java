@@ -7,6 +7,7 @@ import java.util.Observer;
 import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Saldos;
 
 public class SaldosImpl implements Saldos{
@@ -24,7 +25,7 @@ public class SaldosImpl implements Saldos{
 	}
 	
 	@Override
-	public List<MovimientoMonetario> obtenerHistorialMovimientos() {
+	public Movimientos obtenerHistorialMovimientos() {
 		return conector.obtenerHistorialDeMovimientos();
 	}
 

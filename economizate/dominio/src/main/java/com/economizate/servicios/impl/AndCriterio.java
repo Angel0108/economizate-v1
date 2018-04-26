@@ -1,7 +1,9 @@
 package com.economizate.servicios.impl;
 
 import java.util.List;
+
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
 
 public class AndCriterio implements Criterio {
@@ -15,11 +17,11 @@ public class AndCriterio implements Criterio {
 	}
 	
 	@Override
-	public List<MovimientoMonetario> filtrarMovimientos(
+	public Movimientos filtrarMovimientos(
 			List<MovimientoMonetario> movimientos) {
 		
-		List<MovimientoMonetario> movimientosFinal = criterio1.filtrarMovimientos(movimientos);		
-		return criterio2.filtrarMovimientos(movimientosFinal);
+		Movimientos movimientosFinal = criterio1.filtrarMovimientos(movimientos);		
+		return criterio2.filtrarMovimientos(movimientosFinal.getTodos());
 	}
 
 	

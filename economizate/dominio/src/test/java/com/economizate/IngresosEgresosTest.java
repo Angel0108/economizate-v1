@@ -21,7 +21,7 @@ public class IngresosEgresosTest {
 	
 	ListaMovimientos listaMovimientos;
 	Cuenta saldo;
-	
+	/*
 	@Before
 	public void crearListaConMovimientos() {
 		this.listaMovimientos = new ListaMovimientos();
@@ -92,6 +92,6 @@ public class IngresosEgresosTest {
 		public void update(Observable arg0, Object arg1) {
 		}
 		
-	}
+	}*/
 	
 }
