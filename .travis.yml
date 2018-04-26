@@ -1,6 +1,5 @@
 language: java
-install:
-  - mvn test-compile -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+
 script: 
   - cd economizate 
   - mvn test jacoco:report
