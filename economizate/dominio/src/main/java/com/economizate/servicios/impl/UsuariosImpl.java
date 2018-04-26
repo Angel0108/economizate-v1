@@ -43,4 +43,10 @@ public class UsuariosImpl implements Usuarios{
 		return (MovimientosMonetariosImpl) movimientos;
 	}
 
+	@Override
+	public double validarImporteIgresado(String importe) throws NumberFormatException{
+		return
+			Double.parseDouble(importe);
+	}
+
 }

@@ -17,20 +17,13 @@ public class AlertaAmarilla implements IAlertas {
 
 	@Override
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
-		/*Alerta alert = conector.crearAlerta(saldoAnterior, saldoActual);*/
-		return conector.crearAlertaAmarilla(saldoAnterior, saldoActual);
-	}
-
-	@Override
-	public boolean muestraAlerta() {
-		// TODO Auto-generated method stub
-		return false;
+		return conector.crearAlertaAmarilla(saldoAnterior, saldoActual, 
+				Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"));
 	}
 
 	@Override
 	public String getMensaje() {
-		// TODO Auto-generated method stub
-		return null;
+		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento");
 	}
 	
 }

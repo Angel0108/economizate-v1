@@ -10,20 +10,13 @@ public class AlertaRoja implements IAlertas {
 	
 	@Override
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
-		// TODO Auto-generated method stub
-		return conector.crearAlertaRoja(saldoAnterior, saldoActual);
-	}
-
-	@Override
-	public boolean muestraAlerta() {
-		// TODO Auto-generated method stub
-		return false;
+		return conector.crearAlertaRoja(saldoAnterior, saldoActual, 
+				Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento"));
 	}
 
 	@Override
 	public String getMensaje() {
-		// TODO Auto-generated method stub
-		return null;
+		return Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento");
 	}
 	
 

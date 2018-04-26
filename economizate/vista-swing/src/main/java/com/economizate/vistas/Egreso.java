@@ -33,6 +33,7 @@ public class Egreso extends Home implements java.util.Observer{
 	
 	private JLabel saldoUsuario;
 	private JDialog dialogoOK;
+	private JDialog dialogoException;
 	
 	private JLabel descripcionLabel, observacionLabel, importeLabel;
 	private JTextField descripcion, observacion, importe;
@@ -179,6 +180,20 @@ public class Egreso extends Home implements java.util.Observer{
 		this.ventanaHome = ventanaHome;
 	}
 	
-	
+	public void launchNumberFormatException() {
+		botonOk = new JButton("OK");
+		dialogoException = new JDialog(ventana, "Importe inválido.", true);
+		dialogoException.setLayout( new FlowLayout() );
+		dialogoException.add(botonOk);
+		botonOk.addActionListener(new ActionListener() {
+			public void actionPerformed( ActionEvent e )  
+            {  
+				dialogoException.setVisible(false);  
+            }  
+		});
+		dialogoException.setSize(400,100);    
+		dialogoException.setVisible(true);  
+		importe.setText("0");
+	}
 	
 }

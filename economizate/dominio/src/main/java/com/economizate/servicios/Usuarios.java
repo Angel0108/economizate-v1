@@ -15,5 +15,7 @@ public interface Usuarios {
 	public void cambiarSaldoUsuario(double importe);
 	
 	public MovimientosMonetariosImpl getMovimientos();
+	
+	public double validarImporteIgresado(String importe) throws NumberFormatException;
 
 }

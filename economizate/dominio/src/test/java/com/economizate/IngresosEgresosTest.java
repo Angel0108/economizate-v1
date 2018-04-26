@@ -81,12 +81,12 @@ public class IngresosEgresosTest {
 	
 	@Test
 	public void crearNuevaCuentaConUnObservadorYVerificarObservadorAñadido() {
-		Cuenta cuentaTest = new Cuenta(new ObservadorTest());
+		Cuenta cuentaTest = new Cuenta(new ObservadorVistaTest());
 		assertTrue("Contador de observadores para cuenta igual a 1: ", cuentaTest.countObservers() == 1);
 	}
 	
 	
-	public static class ObservadorTest implements Observer{
+	public static class ObservadorVistaTest implements Observer{
 
 		@Override
 		public void update(Observable arg0, Object arg1) {

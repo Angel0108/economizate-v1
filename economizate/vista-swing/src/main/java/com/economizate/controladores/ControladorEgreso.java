@@ -37,29 +37,27 @@ public class ControladorEgreso implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		//lo cambio en la "base"
-		
-		double saldoActual = usuarioService.obtenerSaldoUsuario(model).getTotal(); 
-		usuarioService.obtenerSaldoUsuario(model).setTotal(- Double.parseDouble(vista.getImporteTextFieldValue()) 
-				+ saldoActual);
-		
-		//actualizo las vistas
-		vista.getSaldoUsuario().setText("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
-		home.setSaldoUsuario("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
-		 
-		//actualizo intancias de usuario en vistas
-		//actualizarInstancias();
-		
-		//volver Home
-		vista.getVentana().setVisible(false);
-		home.getVentana().setVisible(true);
-	}
-	
-	private void actualizarInstancias() {
-		home.botonIngreso.addActionListener(
-				new IngresoListener(home, home.getEmail(), usuarioService.obtenerSaldoUsuario(model).getTotal()));
-		
-		home.botonEgreso.addActionListener(
-				new EgresoListener(home, home.getEmail(), usuarioService.obtenerSaldoUsuario(model).getTotal()));
+		try {
+			usuarioService.validarImporteIgresado(vista.getImporteTextFieldValue());
+			
+			
+			double saldoActual = usuarioService.obtenerSaldoUsuario(model).getTotal(); 
+			usuarioService.obtenerSaldoUsuario(model).setTotal(- Double.parseDouble(vista.getImporteTextFieldValue()) 
+					+ saldoActual);
+			
+			//actualizo las vistas
+			vista.getSaldoUsuario().setText("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
+			home.setSaldoUsuario("Saldo: " + String.valueOf(usuarioService.obtenerSaldoUsuario(model).getTotal()));
+			 
+			//actualizo intancias de usuario en vistas
+			//actualizarInstancias();
+			
+			//volver Home
+			vista.getVentana().setVisible(false);
+			home.getVentana().setVisible(true);
+		}catch(NumberFormatException exception) {
+			vista.launchNumberFormatException();
+		}
 	}
 
 }
