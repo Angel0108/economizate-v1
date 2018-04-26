@@ -1,5 +1,8 @@
 language: java
-
+install:
+  - mvn test-compile -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script: 
   - cd economizate 
-  - mvn clean test org.jacoco:jacoco-maven-plugin:report org.eluder.coveralls:coveralls-maven-plugin:report
+  - mvn test jacoco:report
+after_success:
+  - mvn coveralls:report
