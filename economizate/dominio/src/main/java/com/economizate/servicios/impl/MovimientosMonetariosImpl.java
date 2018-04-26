@@ -41,6 +41,7 @@ public class MovimientosMonetariosImpl implements MovimientosMonetarios {
 	@Override
 	public void agregarEgreso(MovimientoMonetario egreso) {
 		
+		
 	}
 
 }
