@@ -1,7 +1,6 @@
 package com.economizate.conector;
 
 import com.economizate.entidades.Alerta;
-import com.economizate.servicios.impl.Propiedad;
 
 public class ConectorAlerta {
 	
