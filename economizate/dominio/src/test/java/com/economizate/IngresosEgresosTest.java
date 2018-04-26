@@ -12,7 +12,7 @@ import java.util.stream.DoubleStream;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.economizate.conector.ConectorSaldo;
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
@@ -25,7 +25,7 @@ public class IngresosEgresosTest {
 	@Before
 	public void crearListaConMovimientos() {
 		this.listaMovimientos = new ListaMovimientos();
-		this.saldo = new ConectorSaldo().nuevoSaldo();
+		this.saldo = new ConectorCuenta().nuevoSaldo();
 	}
 	
 	@Test

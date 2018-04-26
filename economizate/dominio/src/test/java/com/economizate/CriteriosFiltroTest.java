@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.economizate.conector.ConectorSaldo;
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.Criterio;
 import com.economizate.servicios.impl.AndCriterio;
@@ -21,8 +21,7 @@ import com.economizate.servicios.impl.SaldosImpl;
 
 public class CriteriosFiltroTest {
 	
-
-	private ConectorSaldo conectorSaldo = new ConectorSaldo();
+	private ConectorCuenta conectorSaldo = new ConectorCuenta();
 	SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
 	
 	@Test

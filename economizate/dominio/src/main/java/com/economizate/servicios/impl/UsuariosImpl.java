@@ -2,7 +2,7 @@ package com.economizate.servicios.impl;
 
 import java.util.Observer;
 
-import com.economizate.conector.ConectorSaldo;
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.conector.ConectorUsuario;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
@@ -13,7 +13,7 @@ public class UsuariosImpl implements Usuarios{
 	
 	private MovimientosMonetarios movimientos= new MovimientosMonetariosImpl();
 	private ConectorUsuario conector = new ConectorUsuario();
-	private ConectorSaldo conectorSaldo = new ConectorSaldo();
+	private ConectorCuenta conectorSaldo = new ConectorCuenta();
 	
 	public UsuariosImpl() {
 	}

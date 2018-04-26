@@ -4,14 +4,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Observer;
 
-import com.economizate.conector.ConectorSaldo;
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.Saldos;
 
 public class SaldosImpl implements Saldos{
 	
-	private ConectorSaldo conector = new ConectorSaldo();
+	private ConectorCuenta conector = new ConectorCuenta();
 
 	private Cuenta cuenta;
 	

@@ -50,10 +50,10 @@ public class ConectorUsuario {
 			usuario.setEmail("pepeGonzalez@gmail.com");
 			Cuenta saldo;
 			if(observer != null) {
-				saldo = new ConectorSaldo().nuevoSaldo(observer);
+				saldo = new ConectorCuenta().nuevoSaldo(observer);
 				saldo.addObserver(observer);
 			}else {
-				saldo = new ConectorSaldo().nuevoSaldo();
+				saldo = new ConectorCuenta().nuevoSaldo();
 			}
 			usuario.setSaldo(saldo);
 		}	

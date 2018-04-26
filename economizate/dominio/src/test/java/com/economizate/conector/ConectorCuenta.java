@@ -9,10 +9,10 @@ import java.util.Observer;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Cuenta;
 
-public class ConectorSaldo {
+public class ConectorCuenta {
 	
 	private double total = 100;
-	private Cuenta saldo;
+	private Cuenta cuenta;
 	private Observer observer;
 		
 	
@@ -25,34 +25,34 @@ public class ConectorSaldo {
 			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -325, formater.parse("20180426"));
 			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 25744, formater.parse("20180418"));
 			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -6214, formater.parse("20180423"));
-			saldo.getMovimientos().add(ingreso);
-			saldo.getMovimientos().add(ingreso2);
-			saldo.getMovimientos().add(ingreso3);
-			saldo.getMovimientos().add(ingreso4);
-			saldo.getMovimientos().add(ingreso5);
-			saldo.getMovimientos().add(ingreso6);
+			cuenta.getMovimientos().add(ingreso);
+			cuenta.getMovimientos().add(ingreso2);
+			cuenta.getMovimientos().add(ingreso3);
+			cuenta.getMovimientos().add(ingreso4);
+			cuenta.getMovimientos().add(ingreso5);
+			cuenta.getMovimientos().add(ingreso6);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 	}
 	
 	public Cuenta nuevoSaldo() {
-		if (saldo == null) {
-			saldo = new Cuenta();
+		if (cuenta == null) {
+			cuenta = new Cuenta();
 			agregarMovimientos();						
-			saldo.setTotal(obtenerSaldo());
+			cuenta.setTotal(obtenerSaldo());
 		}
-		return saldo;
+		return cuenta;
 	}
 	
 	public Cuenta nuevoSaldo(Observer o) {
-		if (saldo == null) {
+		if (cuenta == null) {
 			observer = o;
-			saldo = new Cuenta(o, obtenerSaldo());
+			cuenta = new Cuenta(o, obtenerSaldo());
 			agregarMovimientos();
-			saldo.setTotalSinObserver(obtenerSaldo());
+			cuenta.setTotalSinObserver(obtenerSaldo());
 		}
-		return saldo;
+		return cuenta;
 	}
 	
 	public List<MovimientoMonetario> obtenerHistorialDeMovimientos(){
