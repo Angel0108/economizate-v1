@@ -23,11 +23,9 @@ public class AlertaTest {
 	public double saldoActual;
 	private Cuenta cuenta;
 	public Alerta alerta;
-	private Cuenta cuentas;
 	
 	@Before
 	public void generarCuenta() {
-		//cuentas = new SaldosImpl(new ObservadorVistaTest());
 		cuenta = new ConectorCuenta().nuevaCuenta();
 		
 		saldoAnterior = cuenta.getTotal();

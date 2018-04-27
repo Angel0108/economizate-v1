@@ -4,13 +4,10 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 
 import com.economizate.conector.ConectorCuenta;
-import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
 import com.economizate.servicios.impl.AndCriterio;
@@ -18,7 +15,6 @@ import com.economizate.servicios.impl.EgresoCriterio;
 import com.economizate.servicios.impl.IngresoCriterio;
 import com.economizate.servicios.impl.OrCriterio;
 import com.economizate.servicios.impl.RangoFechaCriterio;
-import com.economizate.servicios.impl.CuentaImpl;
 
 public class CriteriosFiltroTest {
 	
