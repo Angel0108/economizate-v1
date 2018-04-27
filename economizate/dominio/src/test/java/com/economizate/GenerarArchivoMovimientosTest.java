@@ -85,7 +85,7 @@ public class GenerarArchivoMovimientosTest {
 	public void generarPdfMovimientos() throws IOException {
 				
 		String nombreArchivo = rutaArchivos + "movimientos.pdf";
-		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "movimientos.xsl"));		
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "Movimientos.xsl"));		
 		Assert.assertTrue(escribirArchivo(nombreArchivo, writer));
 	}
 
