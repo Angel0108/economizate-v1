@@ -23,6 +23,7 @@ public class MovimientosMonetariosImpl implements MovimientosMonetarios {
 	public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha) {
 		// TODO Auto-generated method stub
 		return null;
+		
 	}
 
 	@Override
