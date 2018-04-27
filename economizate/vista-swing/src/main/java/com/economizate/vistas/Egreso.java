@@ -16,7 +16,6 @@ import com.economizate.entidades.Alerta;
 import com.economizate.servicios.FactoryAlertas;
 import com.economizate.servicios.IAlertas;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Egreso extends Home implements java.util.Observer{
 	
@@ -54,10 +53,7 @@ public class Egreso extends Home implements java.util.Observer{
 	public Egreso(Home ventanaHome, String email, double saldo) {
 		this.ventanaHome = ventanaHome;
 		this.email = email;
-		this.saldo = saldo;
-		
-		//instanciasService = new InstanciasService();
-		usuarios = new UsuariosImpl();//instanciasService.getUsuariosObservadorService(this);
+		this.saldo = saldo;		
 		
 		iniciarBotonEgreso();
 		iniciarLabels();

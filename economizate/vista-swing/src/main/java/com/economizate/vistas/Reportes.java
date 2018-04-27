@@ -20,7 +20,6 @@ import com.economizate.servicios.impl.EgresoCriterio;
 import com.economizate.servicios.impl.IngresoCriterio;
 import com.economizate.servicios.impl.RangoFechaCriterio;
 import com.economizate.servicios.impl.TXTWriter;
-import com.economizate.servicios.impl.UsuariosImpl;
 import com.toedter.calendar.JDateChooser;
 
 import javax.swing.JLabel;

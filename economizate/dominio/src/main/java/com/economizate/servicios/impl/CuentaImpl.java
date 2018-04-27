@@ -79,7 +79,6 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 
 	@Override
 	public double obtenerSaldoTotalPorPeriodo(int mes, int anio) {
-		// TODO Auto-generated method stub
 		return cuenta.getTotal(mes, anio);
 	}
 

@@ -5,16 +5,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Ingreso extends Home implements java.util.Observer{
 	
@@ -43,7 +40,7 @@ public class Ingreso extends Home implements java.util.Observer{
 	}
 	
 	public Ingreso(Home ventanaHome, String email, double saldo) {
-		usuarios = new UsuariosImpl(this);
+		
 		this.ventanaHome = ventanaHome;
 		this.email = email;
 		this.saldo = saldo;
