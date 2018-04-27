@@ -12,10 +12,11 @@ public class ParserListRegistrosMovimientos implements ParserListaRegistros<Movi
 
 	private List<MovimientoMonetario> registrosMovs;
 	private String registros;
-	
-	public ParserListRegistrosMovimientos(String registros) {
+	private int cantidadCampos;
+	public ParserListRegistrosMovimientos(String registros, int cantidadCampos) {
 		
-		this.registros  = registros;		
+		this.registros  = registros;
+		this.cantidadCampos = cantidadCampos;
 	}
 	
 	@Override
@@ -24,7 +25,7 @@ public class ParserListRegistrosMovimientos implements ParserListaRegistros<Movi
 		registrosMovs = new ArrayList<MovimientoMonetario>();		
 		Scanner scanner = new Scanner(registros);
 		while (scanner.hasNextLine()) {
-		  ParserRegistroMovimiento parseRegistro = new ParserRegistroMovimiento(scanner.nextLine());
+		  ParserRegistroMovimiento parseRegistro = new ParserRegistroMovimiento(scanner.nextLine(), cantidadCampos);
 		  registrosMovs.add(parseRegistro.parse());
 		}
 		scanner.close();

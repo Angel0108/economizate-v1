@@ -14,7 +14,7 @@ public class ParserMovimientoTest {
 	public void parsearMovimientoPuntoAndComa() throws ParseException {
 		
 		StringMovimientos movsPrueba = new StringMovimientos();		
-		ParserRegistroMovimiento parser = new ParserRegistroMovimiento(movsPrueba.getMovimientos().get(0), ";");
+		ParserRegistroMovimiento parser = new ParserRegistroMovimiento(movsPrueba.getMovimientos().get(0), ";", 4);
 		MovimientoMonetario mov = parser.parse();
 		mov.setValidador(new ConcreteValidadorRegistroStrategy());
 		assertTrue(mov.isValid());

@@ -20,7 +20,7 @@ public class ConectorMovimientoMonetario {
 	}
 	
 	public MovimientoMonetario buscarEgresoPorDescripcion(String descripcion) {
-		return new MovimientoMonetario("joda", -100);
+		return new MovimientoMonetario("joda", "joda", -100);
 	}
 	
 	public void agregarIngreso(MovimientoMonetario ingreso) {

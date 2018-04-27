@@ -10,19 +10,23 @@ public class ParserRegistroMovimiento {
 	
 	private String delimitador = ";";
 	
-	public ParserRegistroMovimiento(String registro) {
+	private int cantidadCampos;
+	
+	public ParserRegistroMovimiento(String registro, int cantidadCampos) {
 		this.registro = registro;
+		this.cantidadCampos = cantidadCampos;
 	}
 	
-	public ParserRegistroMovimiento(String registro, String delimitador) {
+	public ParserRegistroMovimiento(String registro, String delimitador, int cantidadCampos) {
 		this.delimitador = delimitador;
 		this.registro = registro;
+		this.cantidadCampos = cantidadCampos;
 	}
 	
 	public MovimientoMonetario parse() throws ParseException, NumberFormatException {
 		String[] campos = this.registro.split(delimitador);
-		if(campos.length != 4) {
-			throw new ParseException("El registro de movimiento debe contener 4 campos", -10);
+		if(campos.length != cantidadCampos) {
+			throw new ParseException("El registro de movimiento debe contener " + cantidadCampos + " campos", -10);
 		}				
 		MovimientoMonetario reg = ConvertToMovimiento.getObject(registro, delimitador);
 		

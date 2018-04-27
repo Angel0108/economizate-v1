@@ -19,7 +19,7 @@ public class ParserTest {
 		
 		ExcelReader parser = new ExcelReader("C:\\Users\\nidibiase\\Desktop\\prueba.xlsx");
 		String resultado = parser.read();		
-		ParserRegistroMovimiento parser2 = new ParserRegistroMovimiento(resultado, ";");
+		ParserRegistroMovimiento parser2 = new ParserRegistroMovimiento(resultado, ";", 4);
 		MovimientoMonetario mov = parser2.parse();
 		mov.setValidador(new ConcreteValidadorRegistroStrategy());
 		Assert.assertTrue(mov.isValid());

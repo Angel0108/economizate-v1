@@ -27,10 +27,10 @@ public class ImportadorArchivoTest {
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
 	private Saldos cuenta;
-	
+	private int cantidadCampos = 4;
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
-		importador.cargarDatos();
+		importador.cargarDatos(cantidadCampos);
 	}
 	
 	private void agregarMovimientosACuenta() throws ValidationException {

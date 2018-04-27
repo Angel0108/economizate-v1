@@ -33,6 +33,7 @@ public class MovimientosSheet implements BaseSheet {
 			row.createCell(cellIndex++).setCellValue(mov.getDescripcion());
 			row.createCell(cellIndex++).setCellValue(mov.getObservacion());
 			row.createCell(cellIndex++).setCellValue(mov.getImporte());
+			//row.createCell(cellIndex++).setCellValue(mov.getCantidadCuotas());
 
 		}
 		

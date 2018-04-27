@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+import java.util.List;
 
 import javax.xml.bind.ValidationException;
 
@@ -32,35 +33,51 @@ public class GenerarArchivoMovimientosTest {
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
 	
+	private int cantidadCampos = 3;
+	
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
-		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
-		importador.cargarDatos();
+		importador = new LoaderMovimientosFromFile(nombreArchivo);
+		importador.cargarDatos(cantidadCampos);
 	}
 	
-	private void agregarMovimientosACuenta() throws ValidationException {
+	private boolean verificacionMovimientosArchivo(String nombreArchivo) throws ValidationException, IOException, ParseException {
+		importarArchivo(nombreArchivo);
+		if(new ListaMovimientos().getMovimientos().size() != importador.getDatos().size()) 
+			return false;
 		for (MovimientoMonetario mov : importador.getDatos()) {
-			//cuenta.agregarMovimiento(mov);
+			if(!new ListaMovimientos().getMovimientos().contains(mov))
+				return false;
 		}
+		return true;
 	}
 	
-	@Test
-	public void writeExcelMovimientos() throws IOException {
-		
-		String nombreArchivo = "src/test/resources/prueba_writer.xlsx";
-		BaseWriter writer = new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()));
+	private boolean escribirArchivo(String nombreArchivo, BaseWriter writer) throws IOException {
 		writer.write();
 		Path path = Paths.get(nombreArchivo);
-		Assert.assertTrue(Files.exists(path));
+		return Files.exists(path);
 	}
 	
 	@Test
-	public void writeTxtMovimientos() throws IOException {
+	public void generarExcelHistorialMovimientos() throws IOException, ParseException, ValidationException {
 		
-		String nombreArchivo = "src/test/resources/prueba_writer.txt";
+		String nombreArchivo = rutaArchivos + "movimientos.xlsx";
+		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()))));
+		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
+	}
+	
+	@Test
+	public void writeTxtHistorialMovimientos() throws IOException, ValidationException, ParseException {
+		
+		/*String nombreArchivo = rutaArchivos + "movimientos.xlsx";
+		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()))));
+		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
+		*/
+		String nombreArchivo = rutaArchivos + "movimientos.txt";
 		BaseWriter writer = new TXTWriter(nombreArchivo);
 		writer.write("Hola Mundo");
 		Path path = Paths.get(nombreArchivo);
 		Assert.assertTrue(Files.exists(path));
+		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
 	}
 	
 	@Test (expected = NullPointerException.class) 

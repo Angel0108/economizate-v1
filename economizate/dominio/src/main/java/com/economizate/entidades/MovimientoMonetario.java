@@ -29,8 +29,9 @@ public class MovimientoMonetario {
 		fecha = new Date();
 	}
 
-	public MovimientoMonetario(String descripcion, double importe) {
+	public MovimientoMonetario(String descripcion, String observacion, double importe) {
 		this.descripcion = descripcion;
+		this.observacion = observacion;
 		this.importe = importe;
 		fecha = new Date();
 	}
