@@ -8,25 +8,25 @@ import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Movimientos;
-import com.economizate.servicios.Saldos;
 
-public class SaldosImpl implements Saldos{
+public class CuentaImpl implements com.economizate.servicios.Cuenta{
 	
 	private ConectorCuenta conector = new ConectorCuenta();
 
 	private Cuenta cuenta;
 	
-	public SaldosImpl() {
+	public CuentaImpl() {
 		this.cuenta = new Cuenta();
 	}
 	
-	public SaldosImpl(Observer observer) {
-		conector.addObserver(observer);
+	public CuentaImpl(Observer observer) {
+		cuenta.agregarObserver(observer);
 	}
 	
 	@Override
 	public Movimientos obtenerHistorialMovimientos() {
-		return conector.obtenerHistorialDeMovimientos();
+		//return conector.obtenerHistorialDeMovimientos();
+		return null;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class SaldosImpl implements Saldos{
 
 	@Override
 	public void cambiarSaldoTotal(double importe) {
-		conector.cambiarSaldo(importe);
+		//conector.cambiarSaldo(importe);
 	}
 
 	@Override

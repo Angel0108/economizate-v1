@@ -31,17 +31,6 @@ public class Cuenta extends java.util.Observable{
 		this.total = 0;
 	}
 	
-	public Cuenta (Observer o) {
-		this();
-		this.addObserver(o);
-	}
-	
-	public Cuenta (Observer o, double total) {
-		this.addObserver(o);
-		this.movimientos = new Movimientos();
-		this.total = total;
-	}
-	
 	public void agregarObserver(Observer o) {
 		this.addObserver(o);
 	}

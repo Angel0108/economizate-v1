@@ -14,8 +14,15 @@ public class StringMovimientos {
 				"compra;chino;50b;2" );
 	}
 	
-	public List<String> getMovimientos() {
-		return movimientos;
+	public String getMovimientoConCuota() {		
+		return "compra;chino;50;5";
 	}	
 	
+	public String getMovimientosSinCuota() {
+		return "compra;chino;50";
+	}
+	
+	public String getMovimientosFechaSinCuota() {
+		return "14/08/2018;compra;chino;50";
+	}	
 }

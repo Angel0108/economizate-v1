@@ -26,9 +26,9 @@ public class PdfWriter extends BaseWriter {
 		try {
 			FileUtils.writeByteArrayToFile(new File(nombreArchivo), toPdf(trans.procesar().toString()));
 		} catch (DocumentException e) {
-			e.printStackTrace();
+			e.getMessage();
 		} catch (TransformerException e) {
-			e.printStackTrace();
+			e.getMessage();
 		}
 
 	}

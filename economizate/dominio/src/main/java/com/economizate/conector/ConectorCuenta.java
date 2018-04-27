@@ -41,7 +41,7 @@ public class ConectorCuenta {
 		}
 	}
 	
-	public Cuenta nuevoSaldo() {
+	/*public Cuenta nuevoSaldo() {
 		if (cuenta == null) {
 			cuenta = new Cuenta();
 			agregarMovimientos();						
@@ -75,7 +75,7 @@ public class ConectorCuenta {
 	
 	public void addObserver(Observer observer) {
 		this.observer = observer;
-	}
+	}*/
 	
 	public Movimientos getMovimientos() {
 		return cuenta.getMovimientos();

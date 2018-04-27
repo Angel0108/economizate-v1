@@ -5,6 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.xml.transform.TransformerException;
+
 import junit.framework.Assert;
 
 import org.junit.Test;
@@ -49,14 +51,13 @@ public class WriterTest {
 			Paths.get(nombreArchivo);		
 	}
 	
-	@Test
-	public void writePdfMovimientos() throws IOException {
+	@Test 
+	public void writePdfMovimientosExcepcionTransformerCatcheada() throws IOException {
 				
 		String nombreArchivo = "src/test/resources/prueba_writer.pdf";
-		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos()));
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "movimientos2.xsl"));
 		writer.write();
-		Path path = Paths.get(nombreArchivo);
-		Assert.assertTrue(Files.exists(path));
+		
 	}
 	
 }

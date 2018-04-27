@@ -18,7 +18,7 @@ import com.economizate.servicios.impl.EgresoCriterio;
 import com.economizate.servicios.impl.IngresoCriterio;
 import com.economizate.servicios.impl.OrCriterio;
 import com.economizate.servicios.impl.RangoFechaCriterio;
-import com.economizate.servicios.impl.SaldosImpl;
+import com.economizate.servicios.impl.CuentaImpl;
 
 public class CriteriosFiltroTest {
 	
@@ -39,11 +39,9 @@ public class CriteriosFiltroTest {
 	@Test
 	public void filtrarMovimientosFechaDesde01042018FechaHasta30042018Test() throws ParseException {
 			
-
 		Movimientos movimientos = conectorCuenta.getMovimientos().filtrarPorCriterio(crearCriterioMovimientosEntreFecha("01/04/2018", "30/04/2018"));
 		assertTrue(movimientos.getTodos().size() == 4);
-		assertTrue(movimientos.getTotal() == 18463);
-		
+		assertTrue(movimientos.getTotal() == 18463);		
 	}
 	
 	/*
@@ -100,9 +98,7 @@ public class CriteriosFiltroTest {
 		List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(lista);
 		
 		assertTrue("Lista filtrada por ingresos y egresos ", listaFiltrada.size() == cantidadTotal);
-	}
-	*/
-	
+	}*/
 	
 		
 }

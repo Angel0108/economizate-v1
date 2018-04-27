@@ -36,14 +36,6 @@ public class MovimientoMonetario {
 		fecha = new Date();
 	}
 
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
 	public Date getFecha() {
 		return fecha;
 	}
