@@ -34,11 +34,6 @@ public class UsuariosImpl implements Usuarios{
 		return conector.obtenerSaldoUsuario(email);
 	}
 
-	public void cambiarSaldoUsuario(double importe) {
-		//conector.cambiarSaldoUsuario(importe);
-		conectorSaldo.cambiarSaldo(importe);
-	}
-
 	public MovimientosMonetariosImpl getMovimientos() {
 		return (MovimientosMonetariosImpl) movimientos;
 	}
@@ -47,6 +42,12 @@ public class UsuariosImpl implements Usuarios{
 	public double validarImporteIgresado(String importe) throws NumberFormatException{
 		return
 			Double.parseDouble(importe);
+	}
+
+	@Override
+	public void cambiarSaldoUsuario(double importe) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

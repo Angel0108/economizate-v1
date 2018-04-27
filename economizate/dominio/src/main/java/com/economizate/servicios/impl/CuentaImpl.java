@@ -8,23 +8,20 @@ import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Movimientos;
-import com.economizate.servicios.Saldos;
 
-public class SaldosImpl implements Saldos{
+public class CuentaImpl implements com.economizate.servicios.Cuenta{
 	
 	private ConectorCuenta conector = new ConectorCuenta();
 	Observer observer;
 
 	private Cuenta cuenta;
 	
-	public SaldosImpl() {
+	public CuentaImpl() {
 		this.cuenta = new Cuenta();
 	}
 	
-	public SaldosImpl(Observer observer) {
-		this.observer = observer;
-		conector.addObserver(observer);
-		
+	public CuentaImpl(Observer observer) {
+		cuenta.agregarObserver(observer);		
 	}
 	
 	@Override
@@ -55,7 +52,7 @@ public class SaldosImpl implements Saldos{
 
 	@Override
 	public void agregarEgreso(MovimientoMonetario egreso) {
-		conector.nuevoSaldo().agregarMovimiento(egreso);
+		conector.obtenerHistorialDeMovimientos().agregarMovimiento(egreso);
 	}
 
 	@Override

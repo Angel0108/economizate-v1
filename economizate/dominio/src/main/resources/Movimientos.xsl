@@ -3,7 +3,7 @@
 	<xsl:template match="/">
 		<html>
          <body>
-            <h1>Company Details</h1>
+            <h1>Movimientos</h1>
             <table border="1">
                <tr>
                   <th>Fecha</th>

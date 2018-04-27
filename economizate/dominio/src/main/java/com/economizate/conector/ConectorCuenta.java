@@ -56,8 +56,9 @@ public class ConectorCuenta {
 	public Cuenta nuevoSaldo(Observer o) {
 		if (cuenta == null) {
 			observer = o;
-			cuenta = new Cuenta(o, obtenerSaldo());
+			cuenta = new Cuenta();
 			agregarMovimientos();
+			cuenta.agregarObserver(o);
 			cuenta.modificarTotal(obtenerSaldo());
 		}
 		return cuenta;

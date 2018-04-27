@@ -30,12 +30,12 @@ public class BackupTest {
 	
 	@Before
 	public void inicializar() {
-		backupArchivo = new BackupArchivo("./src/test/resources/backup/");
+		backupArchivo = new BackupArchivo("src/test/resources/backup/");
 		listaBackups = Arrays.asList(backupArchivo);
 		borrarArchivosBackup();
 	}
 	
-	@After
+	//@After
 	public void restaturar() {
 		borrarArchivosBackup();
 	}
@@ -51,7 +51,7 @@ public class BackupTest {
 			ejecutor.ejecutar();
 			Thread.sleep(5000);
 		
-			try (Stream<Path> files = Files.list(Paths.get("./src/test/resources/backup/"))) {
+			try (Stream<Path> files = Files.list(Paths.get("src/test/resources/backup/"))) {
 				contador = files.count();
 			}
 			

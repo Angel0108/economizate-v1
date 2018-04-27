@@ -8,7 +8,7 @@ import javax.xml.bind.ValidationException;
 
 public interface LoaderFromFile <T> {
 
-	public void cargarDatos(int cantidadCampos) throws IOException, ParseException;
+	public void cargarDatos(IParserRegistro parser) throws IOException, ParseException;
 	
 	public List<T> getDatos() throws ValidationException;
 	

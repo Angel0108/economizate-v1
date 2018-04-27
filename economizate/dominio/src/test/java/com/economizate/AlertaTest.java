@@ -1,5 +1,6 @@
 package com.economizate;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import com.economizate.entidades.Alerta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.FactoryAlertas;
-import com.economizate.servicios.Saldos;
+import com.economizate.servicios.impl.Propiedad;
 
 public class AlertaTest {
 
@@ -22,7 +23,7 @@ public class AlertaTest {
 	public double saldoActual;
 	private Cuenta cuenta;
 	public Alerta alerta;
-	private Saldos cuentas;
+	private Cuenta cuentas;
 	
 	@Before
 	public void generarCuenta() {
@@ -37,7 +38,7 @@ public class AlertaTest {
 	@Test
 	public void generarAlertaTipoRojaAlRegistrarEgresoSuperiorAl95Porciento() {
 		MovimientoMonetario egreso = 
-				new MovimientoMonetario("Gasto shopping", "Renovar ropa", Double.parseDouble("-18000"), new Date());
+				new MovimientoMonetario("Gasto shopping", "Renovar ropa", Double.parseDouble("-96"), new Date());
 		
 		cuenta.getMovimientos().agregarMovimiento(egreso);
 		cuenta.modificarTotal(cuenta.getMovimientos().getTotal());
@@ -47,7 +48,8 @@ public class AlertaTest {
 		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
 	}
 	
-	/*
+	
+	
 	@Test
 	public void alerta95PorcientoBordeSuperior() {
 				
@@ -127,7 +129,8 @@ public class AlertaTest {
 		alert.setSaldoActual(40.01);
 		assertTrue("tiene saldo actual ok", alert.getSaldoActual() == 40.01);
 	}
-	*/
+	
+	
 	public class ObservadorVistaTest implements Observer{
 		double saldoAnterior;
 		FactoryAlertas creadorAlertas = new FactoryAlertas();

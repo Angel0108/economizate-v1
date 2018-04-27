@@ -5,21 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import com.economizate.controladores.ControladorEgreso;
 import com.economizate.controladores.ControladorIngreso;
 import com.economizate.entidades.Alerta;
 import com.economizate.servicios.FactoryAlertas;
 import com.economizate.servicios.IAlertas;
-import com.economizate.servicios.InstanciasService;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.AlertaRoja;
+import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Egreso extends Home implements java.util.Observer{
 	
@@ -44,7 +41,7 @@ public class Egreso extends Home implements java.util.Observer{
 	Usuarios usuarios;
 	FactoryAlertas factoryAlertas = new FactoryAlertas();
 	IAlertas alertasService;
-	InstanciasService instanciasService;
+	//InstanciasService instanciasService;
 	Alerta alerta;
 	
 	public Egreso() {
@@ -59,8 +56,8 @@ public class Egreso extends Home implements java.util.Observer{
 		this.email = email;
 		this.saldo = saldo;
 		
-		instanciasService = new InstanciasService();
-		usuarios = instanciasService.getUsuariosObservadorService(this);
+		//instanciasService = new InstanciasService();
+		usuarios = new UsuariosImpl();//instanciasService.getUsuariosObservadorService(this);
 		
 		iniciarBotonEgreso();
 		iniciarLabels();

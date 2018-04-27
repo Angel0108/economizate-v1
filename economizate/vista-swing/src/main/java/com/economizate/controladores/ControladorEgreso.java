@@ -7,9 +7,8 @@ import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
-import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.SaldosImpl;
+import com.economizate.servicios.impl.CuentaImpl;
 import com.economizate.servicios.impl.UsuariosImpl;
 import com.economizate.vistas.Egreso;
 import com.economizate.vistas.Home;
@@ -17,7 +16,7 @@ import com.economizate.vistas.Ingreso;
 
 public class ControladorEgreso implements ActionListener{
 	
-	Saldos saldosService;
+	Cuenta saldosService;
 	Usuarios usuarioService;
 	
 	private Usuario  model;

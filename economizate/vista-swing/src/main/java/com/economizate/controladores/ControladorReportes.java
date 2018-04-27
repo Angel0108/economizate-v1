@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import com.economizate.entidades.Usuario;
-import com.economizate.servicios.Saldos;
+import com.economizate.servicios.Cuenta;
 import com.economizate.servicios.Usuarios;
 import com.economizate.vistas.Egreso;
 import com.economizate.vistas.Home;
@@ -12,7 +12,7 @@ import com.economizate.vistas.Reportes;
 
 public class ControladorReportes implements ActionListener {
 	
-	Saldos saldosService;
+	Cuenta saldosService;
 	Usuarios usuarioService;
 	
 	private Usuario  model;

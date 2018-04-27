@@ -1,31 +1,15 @@
 package com.economizate.servicios.impl;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.IParserRegistro;
 
 public class ConvertToMovimiento {
 
 	
-	public static MovimientoMonetario getObject(String LineString, String separator) 
+	public static MovimientoMonetario getObject(String LineString, String separator, IParserRegistro parser) 
     { 
         String[] stringarray = LineString.split(separator);         
-        if(stringarray.length == 4) {
-        	return getObjectConCuotas(stringarray);
-        } else {
-        	return getObjectSinCuotas(stringarray);
-        }
+        return parser.getObjeto(stringarray);
+        
     }
-	
-	private static MovimientoMonetario getObjectConCuotas(String[] stringarray) 
-    {       
-        MovimientoMonetario movimiento = new MovimientoMonetario(stringarray[0], stringarray[1], 
-        		Double.parseDouble(stringarray[2]), (int)Double.parseDouble(stringarray[3])); 
-        return movimiento; 
-    }
-	
-	private static MovimientoMonetario getObjectSinCuotas(String[] stringarray) 
-    {        
-        MovimientoMonetario movimiento = new MovimientoMonetario(stringarray[0], stringarray[1], 
-        		Double.parseDouble(stringarray[2])); 
-        return movimiento; 
-    } 
 }

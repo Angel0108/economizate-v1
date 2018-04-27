@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.ParserListaRegistros;
 
 public class ParserListRegistrosMovimientos implements ParserListaRegistros<MovimientoMonetario> {
 
 	private List<MovimientoMonetario> registrosMovs;
 	private String registros;
-	private int cantidadCampos;
-	public ParserListRegistrosMovimientos(String registros, int cantidadCampos) {
+	private IParserRegistro parser;
+	public ParserListRegistrosMovimientos(String registros, IParserRegistro parser) {
 		
 		this.registros  = registros;
-		this.cantidadCampos = cantidadCampos;
+		this.parser = parser;
 	}
 	
 	@Override
@@ -25,7 +26,7 @@ public class ParserListRegistrosMovimientos implements ParserListaRegistros<Movi
 		registrosMovs = new ArrayList<MovimientoMonetario>();		
 		Scanner scanner = new Scanner(registros);
 		while (scanner.hasNextLine()) {
-		  ParserRegistroMovimiento parseRegistro = new ParserRegistroMovimiento(scanner.nextLine(), cantidadCampos);
+		  ParserRegistroMovimiento parseRegistro = new ParserRegistroMovimiento(scanner.nextLine(), parser);
 		  registrosMovs.add(parseRegistro.parse());
 		}
 		scanner.close();

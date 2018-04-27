@@ -5,32 +5,30 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 import javax.xml.bind.ValidationException;
-
 import org.junit.Test;
-
 import static org.junit.Assert.assertTrue;
-
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
-import com.economizate.servicios.Saldos;
+import com.economizate.servicios.Cuenta;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
+import com.economizate.servicios.impl.ParserRegistroConCuota;
 import com.economizate.servicios.impl.Propiedad;
-import com.economizate.servicios.impl.SaldosImpl;
+import com.economizate.servicios.impl.CuentaImpl;
 
 public class ImportadorArchivoTest {
 
 	private String rutaArchivos = Propiedad.getInstance().getPropiedad("resourcesTesting");
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
-	private Saldos cuenta;
-	private int cantidadCampos = 4;
+	private Cuenta cuenta;
+	private IParserRegistro parser;
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
-		importador.cargarDatos(cantidadCampos);
+		parser = new ParserRegistroConCuota();
+		importador.cargarDatos(parser);
 	}
 	
 	private void agregarMovimientosACuenta() throws ValidationException {
@@ -42,7 +40,7 @@ public class ImportadorArchivoTest {
 	@Test
 	public void cargarMovimientosDesdeArchivoTxt() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_ok.txt");
-		cuenta  = new SaldosImpl();
+		cuenta  = new CuentaImpl();
 		agregarMovimientosACuenta();
 		
 		Date date= new Date();		

@@ -29,7 +29,7 @@ public abstract class BaseReader {
         while ((line = reader.readLine()) != null) {
             out.append(line).append("\r\n");
         }
-        System.out.println(out.toString());   //Prints the string content read from input stream
+        //System.out.println(out.toString());   //Prints the string content read from input stream
         reader.close();
 
 	    return out.toString();

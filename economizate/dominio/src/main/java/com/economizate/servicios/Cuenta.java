@@ -6,7 +6,7 @@ import java.util.List;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Movimientos;
 
-public interface Saldos {
+public interface Cuenta {
 	
 	public void agregarIngreso(MovimientoMonetario ingreso);
 	

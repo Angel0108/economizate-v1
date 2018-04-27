@@ -29,15 +29,9 @@ public class Cuenta extends java.util.Observable{
 		this.total = 0;
 	}
 	
-	public Cuenta (Observer o) {
-		this();
-		this.addObserver(o);
-	}
 	
-	public Cuenta (Observer o, double total) {
+	public void agregarObserver(Observer o) {
 		this.addObserver(o);
-		this.movimientos = new Movimientos();
-		this.total = total;
 	}
 	
 	public Cuenta (Movimientos movimientos, double total) {
@@ -87,9 +81,12 @@ public class Cuenta extends java.util.Observable{
 			totalMes += movimiento.getImporte();
 			totalPorMes.put(periodo, totalMes);
 		}
-		System.out.println("****** esto ya es entidad totalPorMes: " + this.totalPorMes);
-		System.out.println("****** esto ya es entidad movimientosPorMes: " + this.movimientosPorMes);
-		System.out.println("****** esto ya es entidad getTotal: " + this.movimientos.getTotal());
+		
+		if(movimiento.getImporte() < 0) {
+			setChanged();
+			notifyObservers(movimiento.getImporte());
+		}
+		
 	}
 
 	public double getTotal(Integer mes, Integer anio) {

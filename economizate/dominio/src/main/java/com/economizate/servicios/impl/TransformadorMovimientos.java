@@ -18,15 +18,18 @@ public class TransformadorMovimientos implements BaseTransformador {
 
 	private List<MovimientoMonetario> movimientos;
 	
-	public TransformadorMovimientos(List<MovimientoMonetario> movimientos) {
+	private String archivoXSL;
+	
+	public TransformadorMovimientos(List<MovimientoMonetario> movimientos, String archivoXSL) {
         this.movimientos = movimientos;
+        this.archivoXSL = archivoXSL;
     }
 	
 	@Override
 	public StringWriter procesar() throws IOException, DocumentException, TransformerException {
 
         TransformerFactory factory = TransformerFactory.newInstance();
-        StreamSource xls = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream("Movimientos.xsl"));
+        StreamSource xls = new StreamSource(Thread.currentThread().getContextClassLoader().getResourceAsStream(archivoXSL));
         Transformer newTransformer = factory.newTransformer(xls);
         String str = ConvertObjetoToXML.convert(movimientos);
         StreamSource xml = new StreamSource(new StringReader(str));

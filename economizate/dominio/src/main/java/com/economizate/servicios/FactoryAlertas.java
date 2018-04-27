@@ -16,9 +16,7 @@ public class FactoryAlertas {
 	private IAlertas alertaNegra = new AlertaNegra();
 	
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
-		System.out.println("intento calcular porcentaje");
 		double porcentajeRestante = getPorcentajeGasto(saldoAnterior, saldoActual);
-		System.out.println("porcentaje : " + porcentajeRestante);
 		
 		if(  porcentajeRestante >= 101) {
 			System.out.println("creo alerta negra");

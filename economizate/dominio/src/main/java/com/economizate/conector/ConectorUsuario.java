@@ -10,20 +10,20 @@ import com.economizate.entidades.Usuario;
 
 public class ConectorUsuario {
 	
-	private ConectorMysql conector;
+	//private ConectorMysql conector;
 	private Usuario usuario;
 	
 	private Observer observer;
 
 	public ConectorUsuario() {
-		conector = new ConectorMysql();
+		//conector = new ConectorMysql();
 	}
 	
 	public Usuario buscarUsuarioPorEmail(String email) {
 		Usuario usuario = new Usuario();
-		PreparedStatement ps;
+		/*PreparedStatement ps;
 		try {
-			ps = conector.conectar().prepareStatement("select * from usuarios where email = ?");
+			//ps = conector.conectar().prepareStatement("select * from usuarios where email = ?");
 		
 			ps.setString(1, email);
 			try {
@@ -38,7 +38,7 @@ public class ConectorUsuario {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+		}*/
 		return usuario;
 	}
 	
@@ -49,13 +49,13 @@ public class ConectorUsuario {
 			usuario.setApellido("gonzalez");
 			usuario.setEmail("pepeGonzalez@gmail.com");
 			Cuenta saldo;
-			if(observer != null) {
+			/*if(observer != null) {
 				saldo = new ConectorCuenta().nuevoSaldo(observer);
 				saldo.addObserver(observer);
 			}else {
 				saldo = new ConectorCuenta().nuevoSaldo();
 			}
-			usuario.setSaldo(saldo);
+			usuario.setSaldo(saldo);*/
 		}	
 		return usuario;
 	}
