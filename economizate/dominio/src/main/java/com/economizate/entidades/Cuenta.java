@@ -3,6 +3,7 @@ package com.economizate.entidades;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -54,25 +55,16 @@ public class Cuenta extends java.util.Observable{
 	}
 	
 	public void agregarMovimiento(MovimientoMonetario movimiento) {
-		
+				
 		DateFormat df = new SimpleDateFormat("yyyyMM");
 		
 		String periodo = df.format(movimiento.getFecha());
 		
-		movimientos = movimientosPorMes.get(periodo);
-		if(movimientos == null) {
-			movimientos = new Movimientos();
-			movimientosPorMes.put(periodo, movimientos);
-		}
-		this.movimientos.agregarMovimiento(movimiento);
+		agregarMovimientoAMes(movimiento, periodo);
 		
-		Double totalMes = totalPorMes.get(periodo);		
-		if(totalMes == null) {			
-			totalPorMes.put(periodo, movimiento.getImporte());
-		} else {
-			totalMes += movimiento.getImporte();
-			totalPorMes.put(periodo, totalMes);
-		}
+		sumarImporteATotalMes(movimiento, periodo);
+		
+		agregarCuotas(movimiento);
 		
 		if(movimiento.getImporte() < 0) {
 			setChanged();
@@ -80,6 +72,49 @@ public class Cuenta extends java.util.Observable{
 		}
 		
 	}
+	
+
+	private void agregarCuotas(MovimientoMonetario movimiento) {
+		
+		Calendar cal = Calendar.getInstance(); 
+		cal.setTime(movimiento.getFecha());
+		
+		DateFormat df = new SimpleDateFormat("yyyyMM");
+
+		
+		for (int i = 1; i <= movimiento.getCantidadCuotas(); i++) {
+			cal.add(Calendar.MONTH, i);
+			String periodo = df.format(cal.getTime());
+			agregarMovimientoAMes(movimiento, periodo);
+			
+			sumarImporteATotalMes(movimiento, periodo);
+		}
+		
+	}
+
+
+	private void sumarImporteATotalMes(MovimientoMonetario movimiento,
+			String periodo) {
+		Double totalMes = totalPorMes.get(periodo);		
+		if(totalMes == null) {			
+			totalPorMes.put(periodo, movimiento.getImporte());
+		} else {
+			totalMes += movimiento.getImporte();
+			totalPorMes.put(periodo, totalMes);
+		}
+	}
+
+
+	private void agregarMovimientoAMes(MovimientoMonetario movimiento,
+			String periodo) {
+		Movimientos movimientos = movimientosPorMes.get(periodo);
+		if(movimientos == null) {
+			movimientos = new Movimientos();
+			movimientosPorMes.put(periodo, movimientos);
+		}
+		this.movimientos.agregarMovimiento(movimiento);
+	}
+
 
 	public Double getTotal(Integer mes, Integer anio) {
 		
