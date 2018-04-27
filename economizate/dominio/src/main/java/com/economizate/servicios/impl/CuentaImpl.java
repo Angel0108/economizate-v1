@@ -43,12 +43,12 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 
 	@Override
 	public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha) {
-		return new MovimientosMonetariosImpl().obtenerIngresosPorFecha(fecha);
+		return null;
 	}
 
 	@Override
 	public List<MovimientoMonetario> obtenerEgresosPorFecha(Date fecha) {
-		return new MovimientosMonetariosImpl().obtenerEgresosPorFecha(fecha);
+		return null;
 	}
 
 	@Override
