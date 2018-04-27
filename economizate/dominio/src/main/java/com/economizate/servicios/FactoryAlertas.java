@@ -5,7 +5,6 @@ import com.economizate.servicios.impl.AlertaAmarilla;
 import com.economizate.servicios.impl.AlertaNegra;
 import com.economizate.servicios.impl.AlertaRoja;
 import com.economizate.servicios.impl.AlertaVerde;
-import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.IAlertas;
 
 public class FactoryAlertas {
@@ -18,8 +17,7 @@ public class FactoryAlertas {
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
 		double porcentajeRestante = getPorcentajeGasto(saldoAnterior, saldoActual);
 		
-		if(  porcentajeRestante >= 101) {
-			System.out.println("creo alerta negra");
+		if(  porcentajeRestante > 100) {
 			return alertaNegra.crearAlerta(saldoAnterior, saldoActual);}
 		else if(  porcentajeRestante >= 95)
 			return alertaRoja.crearAlerta(saldoAnterior, saldoActual);

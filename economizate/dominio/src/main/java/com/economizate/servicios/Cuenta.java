@@ -16,6 +16,8 @@ public interface Cuenta {
 	
 	public Movimientos obtenerHistorialMovimientos();
 	
+	public Movimientos obtenerMovimientos();
+	
 	public double obtenerSaldoTotal();
 	
 	//public void cambiarSaldoTotal(double importe);

@@ -29,6 +29,12 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 		return conector.obtenerHistorialDeMovimientos();
 	}
 
+	
+	@Override
+	public Movimientos obtenerMovimientos() {
+		return cuenta.getMovimientos();
+	}
+	
 	@Override
 	public double obtenerSaldoTotal() {
 		//return conector.obtenerSaldo();

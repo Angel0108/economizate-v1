@@ -34,17 +34,9 @@ public class Cuenta extends java.util.Observable{
 		this.addObserver(o);
 	}
 	
-	public Cuenta (Movimientos movimientos, double total) {
-		this.movimientos = movimientos;
-		this.total = total;
-	}
 	
 	public Movimientos getMovimientos() {
 		return movimientos;
-	}
-	
-	public void setMovimientos(Movimientos movimientos) {
-		this.movimientos = movimientos;
 	}
 	
 	public double getTotal() {
@@ -89,10 +81,10 @@ public class Cuenta extends java.util.Observable{
 		
 	}
 
-	public double getTotal(Integer mes, Integer anio) {
+	public Double getTotal(Integer mes, Integer anio) {
 		
 		String mesString = mes.toString().length() == 1 ? "0" + mes.toString() : mes.toString(); 
 		String anioString = anio.toString();
-		return totalPorMes.get(anioString + mesString);
+		return totalPorMes.get(anioString + mesString) != null ? totalPorMes.get(anioString + mesString) : 0;
 	}
 }
