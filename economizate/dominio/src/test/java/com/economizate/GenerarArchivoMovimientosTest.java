@@ -22,7 +22,6 @@ import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.ParserRegistroFechaSinCuota;
-import com.economizate.servicios.impl.ParserRegistroSinCuota;
 import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.TXTWriter;
