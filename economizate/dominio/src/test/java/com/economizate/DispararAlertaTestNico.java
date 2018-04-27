@@ -56,6 +56,6 @@ public class DispararAlertaTestNico {
 		subject.agregarMovimiento(new MovimientoMonetario("Luz", "Abril", -79.0, 0));
 
 		assertEquals(((CuentaObserver) observer).getAlerta().getMensaje(),
-				Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"));		
+				Propiedad.getInstance().getPropiedad("mensajeAlertaVerde"));		
 	}
 }
