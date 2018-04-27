@@ -8,11 +8,6 @@ public class AlertaVerde implements IAlertas {
 
 	ConectorAlerta conector = new ConectorAlerta();
 	
-	@Override
-	public String getMensaje() {
-		return "Transacción OK";//Propiedad.getInstance().getPropiedad("mensajeAlertaVerde");
-	}
-
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
 		return conector.crearAlertaVerde(saldoAnterior, saldoActual, 
 				//Propiedad.getInstance().getPropiedad("mensajeAlertaVerde"));

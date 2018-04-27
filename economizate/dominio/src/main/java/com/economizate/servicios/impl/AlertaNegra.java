@@ -15,9 +15,4 @@ public class AlertaNegra implements IAlertas {
 				"Supera el saldo total");
 	}
 
-	@Override
-	public String getMensaje() {
-		return "Supera el saldo total";//Propiedad.getInstance().getPropiedad("mensajeAlerta100Porciento");
-	}
-	
 }

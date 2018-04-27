@@ -13,12 +13,5 @@ public class AlertaRoja implements IAlertas {
 		return conector.crearAlertaRoja(saldoAnterior, saldoActual, 
 				Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento"));
 	}
-
-	@Override
-	public String getMensaje() {
-		return Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento");
-	}
-	
-
 	
 }

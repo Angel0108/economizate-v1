@@ -37,12 +37,12 @@ public class CriteriosFiltroTest {
 		return criterio;
 	}
 	
-	//@Test
+	@Test
 	public void filtrarMovimientosFechaDesde01042018FechaHasta30042018Test() throws ParseException {
 			
 		Movimientos movimientos = conectorCuenta.getMovimientos().filtrarPorCriterio(crearCriterioMovimientosEntreFecha("01/04/2018", "30/04/2018"));
 		assertTrue(movimientos.getTodos().size() == 4);
-		assertTrue(movimientos.getTotal() == 18463);		
+		assertTrue(movimientos.getTotal() == -5);		
 	}
 	
 	/*
