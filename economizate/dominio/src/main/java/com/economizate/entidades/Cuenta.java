@@ -16,8 +16,6 @@ import org.apache.commons.collections4.map.HashedMap;
 public class Cuenta extends java.util.Observable{
 	
 	private long id;
-	//private List<MovimientoMonetario> movimientos;
-	
 	private Movimientos movimientos;
 	
 	private double total;
@@ -59,7 +57,7 @@ public class Cuenta extends java.util.Observable{
 		return total;
 	}
 	
-	public void setTotalSinObserver(double total) {
+	public void modificarTotal(double total) {
 		this.total = total;
 	}
 	
@@ -89,7 +87,9 @@ public class Cuenta extends java.util.Observable{
 			totalMes += movimiento.getImporte();
 			totalPorMes.put(periodo, totalMes);
 		}
-		
+		System.out.println("****** esto ya es entidad totalPorMes: " + this.totalPorMes);
+		System.out.println("****** esto ya es entidad movimientosPorMes: " + this.movimientosPorMes);
+		System.out.println("****** esto ya es entidad getTotal: " + this.movimientos.getTotal());
 	}
 
 	public double getTotal(Integer mes, Integer anio) {

@@ -10,11 +10,16 @@ import com.economizate.servicios.impl.UsuariosImpl;
 public class BackupArchivo implements IBackup{
 
 	Usuarios usuarios = new UsuariosImpl();
+	private String path;
+	
+	public BackupArchivo(String path) {
+		this.path = path;
+	}
 	
 	@Override
 	public void generarBackupMovimientos() {
 		try {
-			new TXTWriter("backup-" + System.currentTimeMillis() + ".txt").write(usuarios
+			new TXTWriter(path + "backup-" + System.currentTimeMillis() + ".txt").write(usuarios
 					.buscarUsuarioPorEmail(Propiedad.getInstance().getPropiedad("email"))
 					.getSaldo()
 					.getMovimientos().toString());

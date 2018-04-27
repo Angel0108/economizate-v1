@@ -26,16 +26,18 @@ public class ConectorCuenta {
 		try {
 			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", "ninguna", 95, formater.parse("20180315"));
 			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", "ninguna", 10, formater.parse("20180331"));
-			MovimientoMonetario ingreso3 = new MovimientoMonetario("Luz", "Servicio", -742, formater.parse("20180413"));
-			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -325, formater.parse("20180426"));
-			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 25744, formater.parse("20180418"));
-			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -6214, formater.parse("20180423"));
+			MovimientoMonetario ingreso3 = new MovimientoMonetario("Luz", "Servicio", -15, formater.parse("20180413"));
+			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -15, formater.parse("20180426"));
+			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 95, formater.parse("20180418"));
+			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -70, formater.parse("20180423"));
 			cuenta.getMovimientos().agregarMovimiento(ingreso);
 			cuenta.getMovimientos().agregarMovimiento(ingreso2);
 			cuenta.getMovimientos().agregarMovimiento(ingreso3);
 			cuenta.getMovimientos().agregarMovimiento(ingreso4);
 			cuenta.getMovimientos().agregarMovimiento(ingreso5);
 			cuenta.getMovimientos().agregarMovimiento(ingreso6);
+			
+			cuenta.setTotal(cuenta.getMovimientos().getTotal());
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -46,6 +48,7 @@ public class ConectorCuenta {
 			cuenta = new Cuenta();
 			agregarMovimientos();						
 			cuenta.setTotal(obtenerSaldo());
+			total = cuenta.getMovimientos().getTotal();
 		}
 		return cuenta;
 	}
@@ -55,7 +58,7 @@ public class ConectorCuenta {
 			observer = o;
 			cuenta = new Cuenta(o, obtenerSaldo());
 			agregarMovimientos();
-			cuenta.setTotalSinObserver(obtenerSaldo());
+			cuenta.modificarTotal(obtenerSaldo());
 		}
 		return cuenta;
 	}

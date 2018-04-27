@@ -1,17 +1,52 @@
 package com.economizate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
+import java.util.Date;
+import java.util.Observable;
+import java.util.Observer;
+
+import org.junit.Before;
 import org.junit.Test;
 
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Alerta;
+import com.economizate.entidades.Cuenta;
+import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.FactoryAlertas;
-import com.economizate.servicios.impl.Propiedad;
+import com.economizate.servicios.Saldos;
 
 public class AlertaTest {
 
-	double saldoAnterior;
-	double saldoActual;
+	public double saldoAnterior;
+	public double saldoActual;
+	private Cuenta cuenta;
+	public Alerta alerta;
+	private Saldos cuentas;
+	
+	@Before
+	public void generarCuenta() {
+		//cuentas = new SaldosImpl(new ObservadorVistaTest());
+		cuenta = new ConectorCuenta().nuevoSaldo();
+		
+		saldoAnterior = cuenta.getTotal();
+		
+		cuenta.addObserver(new ObservadorVistaTest(saldoAnterior));
+	}
+	
+	@Test
+	public void generarAlertaTipoRojaAlRegistrarEgresoSuperiorAl95Porciento() {
+		MovimientoMonetario egreso = 
+				new MovimientoMonetario("Gasto shopping", "Renovar ropa", Double.parseDouble("-18000"), new Date());
+		
+		cuenta.getMovimientos().agregarMovimiento(egreso);
+		cuenta.modificarTotal(cuenta.getMovimientos().getTotal());
+		
+		cuenta.setTotal(cuenta.getTotal());
+		
+		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
+	}
+	
 	/*
 	@Test
 	public void alerta95PorcientoBordeSuperior() {
@@ -93,4 +128,17 @@ public class AlertaTest {
 		assertTrue("tiene saldo actual ok", alert.getSaldoActual() == 40.01);
 	}
 	*/
+	public class ObservadorVistaTest implements Observer{
+		double saldoAnterior;
+		FactoryAlertas creadorAlertas = new FactoryAlertas();
+		
+		public ObservadorVistaTest(double saldoAnterior) {
+			this.saldoAnterior = saldoAnterior;
+		};
+
+		@Override
+		public void update(Observable arg0, Object arg1) {
+			alerta = creadorAlertas.crearAlerta(saldoAnterior, (Double) arg1);
+		}
+	}
 }

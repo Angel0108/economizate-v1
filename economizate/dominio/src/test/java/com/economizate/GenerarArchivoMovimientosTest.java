@@ -68,15 +68,8 @@ public class GenerarArchivoMovimientosTest {
 	@Test
 	public void writeTxtHistorialMovimientos() throws IOException, ValidationException, ParseException {
 		
-		/*String nombreArchivo = rutaArchivos + "movimientos.xlsx";
+		String nombreArchivo = rutaArchivos + "movimientos.xlsx";
 		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()))));
-		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
-		*/
-		String nombreArchivo = rutaArchivos + "movimientos.txt";
-		BaseWriter writer = new TXTWriter(nombreArchivo);
-		writer.write("Hola Mundo");
-		Path path = Paths.get(nombreArchivo);
-		Assert.assertTrue(Files.exists(path));
 		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
 	}
 	

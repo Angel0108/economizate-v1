@@ -2,6 +2,6 @@ package com.economizate.batch;
 
 public enum BackupTimer {
 
-	DIARIO, SEMANAL, MESUAL, ANUAL, DEFAULT
+	TRESSEGUNDOS, CINCOMINUTOS, DIARIO, SEMANAL, MENSUAL, ANUAL, DEFAULT
 	
 }

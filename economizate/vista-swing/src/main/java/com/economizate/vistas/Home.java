@@ -107,7 +107,7 @@ public class Home implements ActionListener, java.util.Observer{
 	public void iniciarBotonEgresoPeriodico() {
 		botonEgresosPeriodicos =new JButton("Backup");
 		botonEgresosPeriodicos.setBounds(70,200,100, 40); 
-		botonEgresosPeriodicos.addActionListener(new BackupListener(new BackupArchivo()));
+		botonEgresosPeriodicos.addActionListener(new BackupListener(new BackupArchivo("src/test/java/com/economizate/")));
 	}
 	
 	public void iniciarBotonReportes() {

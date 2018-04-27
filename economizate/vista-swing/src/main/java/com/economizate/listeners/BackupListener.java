@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import com.economizate.batch.BackupArchivo;
-import com.economizate.batch.BackupDrive;
 import com.economizate.batch.BackupTimer;
 import com.economizate.batch.EjecutorBackup;
 import com.economizate.batch.IBackup;
@@ -29,7 +28,7 @@ public class BackupListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		logger.info("Inicio Backup historial");
 				
-		new EjecutorBackup(BackupTimer.DEFAULT, listaBackups).ejecutar();
+		new EjecutorBackup(BackupTimer.TRESSEGUNDOS, listaBackups).ejecutar();
 	}
 
 }

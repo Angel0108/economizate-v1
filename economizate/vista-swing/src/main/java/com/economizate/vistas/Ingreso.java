@@ -151,6 +151,10 @@ public class Ingreso extends Home implements java.util.Observer{
 	public String getDescricionTextFieldValue() {
 		return descripcion.getText();
 	}
+	
+	public String getObservacionTextFieldValue() {
+		return observacion.getText();
+	}
 
 
 	public JLabel getSaldoUsuario() {

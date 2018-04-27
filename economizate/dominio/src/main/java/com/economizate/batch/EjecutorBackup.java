@@ -24,14 +24,29 @@ public class EjecutorBackup {
 	
 	public void ejecutar() {
 		switch(this.frecuencia) {
+		case TRESSEGUNDOS:
+			timer.schedule(new ProcesoPeriodico(backups), 0, Long.parseLong("3000"));
+			break;
+		case CINCOMINUTOS:
+			timer.schedule(new ProcesoPeriodico(backups), 0, Long.parseLong("300000"));
+			break;
 		case DIARIO:
-			timer.schedule(new ProcesoPeriodico(backups), 1000, Long.parseLong("5184000000"));
+			timer.schedule(new ProcesoPeriodico(backups), 0, 86400000l);
+			break;
+		case SEMANAL:
+			timer.schedule(new ProcesoPeriodico(backups), 0, 604800000l);
+			break;
+		case MENSUAL:
+			timer.schedule(new ProcesoPeriodico(backups), 0, 2419200000l);
+			break;
+		case ANUAL:
+			timer.schedule(new ProcesoPeriodico(backups), 0, 29030400000l);
 			break;
 		case DEFAULT:
-			timer.schedule(new ProcesoPeriodico(backups), 1000, 300000l);
+			timer.schedule(new ProcesoPeriodico(backups), 0, 86400000l);
 			break;
 		default:
-			timer.schedule(new ProcesoPeriodico(backups), 3000, Long.parseLong("5184000000"));
+			timer.schedule(new ProcesoPeriodico(backups), 0, 86400000l);
 			break;
 		}
 		

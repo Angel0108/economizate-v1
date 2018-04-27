@@ -10,10 +10,12 @@ public class AlertaVerde implements IAlertas {
 	
 	@Override
 	public String getMensaje() {
-		return Propiedad.getInstance().getPropiedad("mensajeAlertaVerde");
+		return "Transacción OK";//Propiedad.getInstance().getPropiedad("mensajeAlertaVerde");
 	}
 
 	public Alerta crearAlerta(double saldoAnterior, double saldoActual) {
-		return conector.crearAlertaVerde(saldoAnterior, saldoActual, Propiedad.getInstance().getPropiedad("mensajeAlertaVerde"));
+		return conector.crearAlertaVerde(saldoAnterior, saldoActual, 
+				//Propiedad.getInstance().getPropiedad("mensajeAlertaVerde"));
+				"Transacción OK");
 	}
 }

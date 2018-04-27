@@ -13,6 +13,7 @@ import com.economizate.servicios.Saldos;
 public class SaldosImpl implements Saldos{
 	
 	private ConectorCuenta conector = new ConectorCuenta();
+	Observer observer;
 
 	private Cuenta cuenta;
 	
@@ -21,7 +22,9 @@ public class SaldosImpl implements Saldos{
 	}
 	
 	public SaldosImpl(Observer observer) {
+		this.observer = observer;
 		conector.addObserver(observer);
+		
 	}
 	
 	@Override
@@ -52,8 +55,7 @@ public class SaldosImpl implements Saldos{
 
 	@Override
 	public void agregarEgreso(MovimientoMonetario egreso) {
-		// TODO Auto-generated method stub
-		
+		conector.nuevoSaldo().agregarMovimiento(egreso);
 	}
 
 	@Override
@@ -75,7 +77,6 @@ public class SaldosImpl implements Saldos{
 	@Override
 	public void agregarMovimiento(MovimientoMonetario movimiento) {
 		cuenta.agregarMovimiento(movimiento);
-		
 	}
 
 	@Override
