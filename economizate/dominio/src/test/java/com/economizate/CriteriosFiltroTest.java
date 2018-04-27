@@ -41,6 +41,12 @@ public class CriteriosFiltroTest {
 		assertTrue(movimientos.getTotal() == -5);		
 	}
 	
+	@Test (expected=ParseException.class)
+	public void filtrarMovimientosFechaDesdeVaciaFechaHasta30042018Test() throws ParseException {
+		
+		conectorCuenta.getMovimientos().filtrarPorCriterio(crearCriterioMovimientosEntreFecha(null, "30/04/2018"));
+	}
+	
 	/*
 	@Test
 	public void filtrarMovimientosPorFechaYObtenerListaOK() throws ParseException {

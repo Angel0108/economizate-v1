@@ -2,14 +2,20 @@ package com.economizate;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
+
 import javax.xml.bind.ValidationException;
+
 import junit.framework.Assert;
+
 import org.junit.Test;
+
+import com.economizate.conector.ConectorCuenta;
 import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseWriter;
@@ -35,6 +41,8 @@ public class GenerarArchivoMovimientosTest {
 	
 	private IParserRegistro parser;
 	
+	private ConectorCuenta conector = new ConectorCuenta();
+	
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(nombreArchivo);
 		parser = new ParserRegistroFechaSinCuota();
@@ -43,10 +51,10 @@ public class GenerarArchivoMovimientosTest {
 	
 	private boolean verificacionMovimientosArchivo(String nombreArchivo) throws ValidationException, IOException, ParseException {
 		importarArchivo(nombreArchivo);
-		if(new ListaMovimientos().getMovimientos().size() != importador.getDatos().size()) 
+		if(conector.getMovimientos().getTodos().size() != importador.getDatos().size()) 
 			return false;
 		for (MovimientoMonetario mov : importador.getDatos()) {
-			if(!new ListaMovimientos().getMovimientos().contains(mov))
+			if(!conector.getMovimientos().getTodos().contains(mov))
 				return false;
 		}
 		return true;
@@ -62,35 +70,48 @@ public class GenerarArchivoMovimientosTest {
 		return existeArchivo(nombreArchivo);
 	}
 	
+	private void eliminarArchivo(String nombreArchivo) {
+		File file = new File(nombreArchivo);
+		if(existeArchivo(nombreArchivo)) {
+			file.delete();
+		}       
+	}
+	
+	//Corresponde caso 1 de criterios de aceptación US 4
+	@Test
+	public void generarTxtHistorialMovimientos() throws IOException, ValidationException, ParseException {
+		String nombreArchivo = rutaArchivos + "movimientos.txt";
+		eliminarArchivo(nombreArchivo);
+		assertFalse(existeArchivo(nombreArchivo));
+		BaseWriter writer = new TXTWriter(nombreArchivo);
+		IConversorMovimiento conversor = new ConversorMovimientoSinCuota(";");
+		writer.write(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), conversor));
+		assertTrue(existeArchivo(nombreArchivo));
+		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
+		
+	}	
+	
+	//Corresponde caso 2 de criterios de aceptación US 4
 	@Test
 	public void generarExcelHistorialMovimientos() throws IOException, ParseException, ValidationException {
 		
 		String nombreArchivo = rutaArchivos + "movimientos.xlsx";
-		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()))));
+		eliminarArchivo(nombreArchivo);
+		assertFalse(existeArchivo(nombreArchivo));
+		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(conector.getMovimientos().getTodos()))));
 		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
 	}
-	
-	//@Test
-	public void generarTxtHistorialMovimientos() throws IOException, ValidationException, ParseException {
-		/*String nombreArchivo = rutaArchivos + "movimientos.xlsx";
-		String nombreArchivo = rutaArchivos + "movimientos.xlsx";
-		 		assertTrue(escribirArchivo(nombreArchivo, new ExcelWriter(nombreArchivo, new MovimientosSheet(new ListaMovimientos().getMovimientos()))));
-		 		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
-		*/
-		String nombreArchivo = rutaArchivos + "movimientos.txt";
-		BaseWriter writer = new TXTWriter(nombreArchivo);
-		writer.write("20180414;chino;12;0");
-		Path path = Paths.get(nombreArchivo);
-		Assert.assertTrue(Files.exists(path));
-		assertTrue(verificacionMovimientosArchivo(nombreArchivo));
-	}	
-	
+
+	//Corresponde caso 3 de criterios de aceptación US 4
 	@Test
-	public void generarPdfMovimientos() throws IOException {
+	public void generarPdfHistorialMovimientos() throws IOException {
 				
 		String nombreArchivo = rutaArchivos + "movimientos.pdf";
+		eliminarArchivo(nombreArchivo);
+		assertFalse(existeArchivo(nombreArchivo));
 		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "Movimientos.xsl"));		
 		Assert.assertTrue(escribirArchivo(nombreArchivo, writer));
 	}
-
+	
+	
 }

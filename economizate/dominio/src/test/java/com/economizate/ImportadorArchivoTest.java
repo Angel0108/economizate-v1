@@ -33,16 +33,25 @@ public class ImportadorArchivoTest {
 	private Cuenta cuenta = new CuentaImpl();
 	private IParserRegistro parser;
 	
-	private ConvertToMovimiento convert = new ConvertToMovimiento();
+	private ConvertToMovimiento convert = new ConvertToMovimiento();	
 	
 	private Movimientos cargarMovimientos() {		
 		Movimientos movimientos = new Movimientos();
-		movimientos.agregarMovimiento(new MovimientoMonetario("Luz", "Servicio", -742.0, 0));
+		movimientos.agregarMovimiento(new MovimientoMonetario("Luz", "Servicio", -742.0, 2));
 		movimientos.agregarMovimiento(new MovimientoMonetario("Gas", "Servicio", -325.0, 0));
 		movimientos.agregarMovimiento(new MovimientoMonetario("Sueldo", "Sueldo", 25744.0, 0));
 		movimientos.agregarMovimiento(new MovimientoMonetario("Tarjeta", "Gastos Generales", -6214.0, 0));
 		movimientos.agregarMovimiento(new MovimientoMonetario("Viaje Brasil", "Vacaciones", -1152.5, 5));
 		return movimientos;
+	}
+	
+	
+	private int getCantidadCuotas() {
+		int cuotas = 0;
+		for(MovimientoMonetario mov : cargarMovimientos().getTodos()) {
+			cuotas += mov.getCantidadCuotas();
+		}
+		return cuotas;
 	}
 	
 	private void importarArchivo(String nombreArchivo, IParserRegistro parser) throws IOException, ParseException {
@@ -80,7 +89,7 @@ public class ImportadorArchivoTest {
 		agregarMovimientosACuenta();		
 		assertTrue(cuenta.obtenerSaldoTotalPorPeriodo(getFechaActual("MM"), getFechaActual("yyyy")) == 17310.5);
 		assertTrue(verificarMovimientosArchivo());
-		assertTrue(cuenta.obtenerMovimientos().getTodos().size() == cargarMovimientos().getTodos().size());
+		assertTrue(cuenta.obtenerMovimientos().getTodos().size() == cargarMovimientos().getTodos().size() + getCantidadCuotas());
 	}
 
 	//Corresponde caso 2 de criterios de aceptación US 2 
@@ -117,37 +126,43 @@ public class ImportadorArchivoTest {
 		agregarMovimientosACuenta();		
 		assertTrue(cuenta.obtenerSaldoTotalPorPeriodo(getFechaActual("MM"), getFechaActual("yyyy")) == 17310.5);
 		assertTrue(verificarMovimientosArchivo());
-		assertTrue(cuenta.obtenerMovimientos().getTodos().size() == cargarMovimientos().getTodos().size());
+		assertTrue(cuenta.obtenerMovimientos().getTodos().size() == cargarMovimientos().getTodos().size() + getCantidadCuotas());
 	}
 	
+	//Corresponde caso 7 de criterios de aceptación US 2 
 	@Test (expected=NumberFormatException.class)
 	public void cargarMovimientosImporteInvalidoDesdeArchivoExcel() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_formatoImporteInvalido.xlsx", new ParserRegistroConCuota());
 	}
 	
+	//Corresponde caso 8 de criterios de aceptación US 2
 	@Test (expected=NumberFormatException.class)
 	public void cargarMovimientosCuotaInvalidoDesdeArchivoExcel() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_formatoCuotaInvalido.xlsx", new ParserRegistroConCuota());
 	}
 	
+	//Corresponde caso 9 de criterios de aceptación US 2
 	@Test (expected=ParseException.class)
 	public void cargarMovimientosCantCamposInvalidaDesdeArchivoExcel() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_cantidadCamposInvalida.xlsx", new ParserRegistroConCuota());
 	}
 	
+	//Corresponde caso 10 de criterios de aceptación US 2
 	@Test
 	public void cargarMovimientosDesdeArchivoExcelVacio() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_vacio.xlsx", new ParserRegistroConCuota());
 		
-		assertTrue(importador.getDatos().size() == 0);
+		assertTrue(cuenta.obtenerSaldoTotalPorPeriodo(getFechaActual("MM"), getFechaActual("yyyy")) == 0);
 	}
 	
+	//Corresponde caso 11 de criterios de aceptación US 2
 	@Test (expected=ValidationException.class)
 	public void cargarMovimientosDesdeArchivoTxtDescripcionVacia() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_descripcionVacia.txt", new ParserRegistroConCuota());
 		assertTrue(importador.getDatos().size() == 0);
 	}
 	
+	//Corresponde caso 12 de criterios de aceptación US 2
 	@Test (expected=ParseException.class)
 	public void cargarMovimientosDesdeArchivoTxtFechaInvalida() throws IOException, ParseException, ValidationException {		
 		importarArchivo("movimientos_fechaInvalida.txt", new ParserRegistroFechaSinCuota());
