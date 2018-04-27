@@ -2,4 +2,8 @@ language: java
 
 script: 
   - cd economizate 
-  - mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
+  - mvn clean install
+
+after_success:
+  - cd economizate
+  - mvn clean test org.jacoco:jacoco-maven-plugin:report org.eluder.coveralls:coveralls-maven-plugin:report
