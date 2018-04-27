@@ -2,4 +2,4 @@ language: java
 
 script: 
   - cd economizate 
-  - mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID cobertura:cobertura coveralls:report
+  - mvn clean -DTRAVIS_JOB_ID=$TRAVIS_JOB_ID cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report
