@@ -37,6 +37,12 @@ public class RangoFechaCriterio implements Criterio {
 	 */
 	public RangoFechaCriterio(String fechaDesde, String fechaHasta)
 			throws ParseException {
+		
+		if(fechaDesde == null|| fechaHasta == null) {
+			throw new ParseException(
+					"La fecha no puede ser nula", -10);
+		}
+		
 		validarFormatoFecha(fechaDesde);
 		validarFormatoFecha(fechaHasta);
 		if (formater.parse(fechaHasta).before(formater.parse(fechaDesde))) {

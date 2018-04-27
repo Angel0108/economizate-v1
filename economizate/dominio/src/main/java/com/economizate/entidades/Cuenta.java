@@ -85,6 +85,6 @@ public class Cuenta extends java.util.Observable{
 		
 		String mesString = mes.toString().length() == 1 ? "0" + mes.toString() : mes.toString(); 
 		String anioString = anio.toString();
-		return totalPorMes.get(anioString + mesString) != null ? totalPorMes.get(anioString + mesString) : 0;
+		return totalPorMes.get(anioString + mesString) != null ? totalPorMes.get(anioString + mesString) : 0.0;
 	}
 }
