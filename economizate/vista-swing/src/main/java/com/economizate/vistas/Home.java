@@ -3,13 +3,10 @@ package com.economizate.vistas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
-import java.util.Properties;
 import java.util.logging.Logger;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import com.economizate.batch.BackupArchivo;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
@@ -17,11 +14,8 @@ import com.economizate.listeners.BackupListener;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.listeners.ReportesListener;
-import com.economizate.servicios.InstanciasService;
-import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.Propiedad;
-import com.economizate.servicios.impl.UsuariosImpl;
 
 public class Home implements ActionListener, java.util.Observer{
 	
@@ -36,9 +30,9 @@ public class Home implements ActionListener, java.util.Observer{
 	private JLabel nombreUsuario;
 	private JLabel saldoUsuario = new JLabel();
 	
-	private InstanciasService instancias = new InstanciasService();
+	//private InstanciasService instancias = new InstanciasService();
 	private Usuarios usuarios;
-	public Saldos saldos;
+	public Cuenta saldos;
 	private Usuario usuario;
 	private String email;
 	
@@ -46,8 +40,8 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	public Home() {
 		this.email = Propiedad.getInstance().getPropiedad("email");
-		usuarios = instancias.getUsuariosObservadorService(this);
-		saldos = instancias.getSaldosService();
+		//usuarios = new ConectorUsuario(). instancias.getUsuariosObservadorService(this);
+		//saldos = instancias.getSaldosService();
 		usuario = usuarios.buscarUsuarioPorEmail(email);
 		iniciarComponentes();
 		

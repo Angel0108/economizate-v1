@@ -9,9 +9,8 @@ import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
-import com.economizate.servicios.Saldos;
 import com.economizate.servicios.Usuarios;
-import com.economizate.servicios.impl.SaldosImpl;
+import com.economizate.servicios.impl.CuentaImpl;
 import com.economizate.vistas.Home;
 import com.economizate.vistas.Ingreso;
 
@@ -20,7 +19,7 @@ public class ControladorIngreso implements ActionListener{
 	private static Logger logger = Logger.getLogger(ControladorIngreso.class.getName());
 	
 	Usuarios usuarioService;
-	Saldos saldoService;
+	Cuenta saldoService;
 	
 	private Usuario  model;
 	private Ingreso vista;
@@ -29,7 +28,7 @@ public class ControladorIngreso implements ActionListener{
 	public ControladorIngreso() {
 	}
 	
-	public ControladorIngreso(Usuario usuario, Ingreso vista, Home home, Usuarios usuarios, Saldos saldos) {
+	public ControladorIngreso(Usuario usuario, Ingreso vista, Home home, Usuarios usuarios, Cuenta saldos) {
 		this.vista = vista;
 		this.model = usuario;
 		this.home = home;
