@@ -45,7 +45,7 @@ public class GenerarListaMovimientos {
 
 		Movimientos movimientos = conectorCuenta.getMovimientos().filtrarPorCriterio(crearCriterioMovimientosEntreFecha("01/04/2018", "30/04/2018"));
 		assertTrue(movimientos.getTodos().size() == 4);
-		assertTrue(movimientos.getTotal() == 18463);
+		assertTrue(movimientos.getTotal() == -5);
 		
 	}
 	

@@ -25,7 +25,7 @@ public class DispararAlertaTest {
 	
 	@Before
 	public void generarCuenta() {
-		cuenta = new ConectorCuenta().nuevoSaldo();
+		cuenta = new ConectorCuenta().nuevaCuenta();
 		
 		saldoAnterior = cuenta.getTotal();
 		
