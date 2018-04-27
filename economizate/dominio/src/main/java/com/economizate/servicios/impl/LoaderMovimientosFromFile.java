@@ -10,6 +10,7 @@ import javax.xml.bind.ValidationException;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseReader;
 import com.economizate.servicios.FactoryReader;
+import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
 import com.economizate.servicios.ParserListaRegistros;
 
@@ -37,9 +38,9 @@ public class LoaderMovimientosFromFile implements LoaderFromFile<MovimientoMonet
 	}
 
 	@Override
-	public void cargarDatos(int cantidadCampos) throws IOException, ParseException {
+	public void cargarDatos(IParserRegistro parserRegistro) throws IOException, ParseException {
 		BaseReader importador = FactoryReader.getParseador(nombreArchivo);
-		ParserListaRegistros<MovimientoMonetario> parser = new ParserListRegistrosMovimientos(importador.read(), cantidadCampos);
+		ParserListaRegistros<MovimientoMonetario> parser = new ParserListRegistrosMovimientos(importador.read(), parserRegistro);
 		registrosMovimientos = parser.parse();		
 	}
 

@@ -5,19 +5,16 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 import javax.xml.bind.ValidationException;
-
 import org.junit.Test;
-
 import static org.junit.Assert.assertTrue;
-
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
 import com.economizate.servicios.Saldos;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
+import com.economizate.servicios.impl.ParserRegistroConCuota;
 import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.SaldosImpl;
 
@@ -27,10 +24,11 @@ public class ImportadorArchivoTest {
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
 	private Saldos cuenta;
-	private int cantidadCampos = 4;
+	private IParserRegistro parser;
 	private void importarArchivo(String nombreArchivo) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
-		importador.cargarDatos(cantidadCampos);
+		parser = new ParserRegistroConCuota();
+		importador.cargarDatos(parser);
 	}
 	
 	private void agregarMovimientosACuenta() throws ValidationException {
