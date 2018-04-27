@@ -18,18 +18,12 @@ int cantidadCampos;
 	SimpleDateFormat formater = new SimpleDateFormat("dd/MM/yyyy");
 	
 	@Override
-	public MovimientoMonetario getObjeto(String[] stringarray) {
+	public MovimientoMonetario getObjeto(String[] stringarray) throws NumberFormatException, ParseException {
 		MovimientoMonetario movimiento = null;
-		try {
+		
 			movimiento = new MovimientoMonetario(stringarray[1], stringarray[2], 
 					Double.parseDouble(stringarray[3]), formater.parse(stringarray[0]));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+		
         return movimiento; 
 	}
 

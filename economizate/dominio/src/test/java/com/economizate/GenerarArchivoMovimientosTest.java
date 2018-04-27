@@ -22,7 +22,6 @@ import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.ParserRegistroFechaSinCuota;
-import com.economizate.servicios.impl.ParserRegistroSinCuota;
 import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.TXTWriter;
@@ -90,7 +89,7 @@ public class GenerarArchivoMovimientosTest {
 	public void generarPdfMovimientos() throws IOException {
 				
 		String nombreArchivo = rutaArchivos + "movimientos.pdf";
-		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "movimientos.xsl"));		
+		BaseWriter writer = new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "Movimientos.xsl"));		
 		Assert.assertTrue(escribirArchivo(nombreArchivo, writer));
 	}
 
