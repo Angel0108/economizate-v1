@@ -38,7 +38,6 @@ public class ExcelReader extends BaseReader {
 		        }
 		    } catch ( Exception e )
 		    {
-		        System.out.println( "exception" );
 		        e.printStackTrace();
 		    }
 		return resultado.toString();

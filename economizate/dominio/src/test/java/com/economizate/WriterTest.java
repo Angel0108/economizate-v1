@@ -62,11 +62,22 @@ public class WriterTest {
 	}
 	
 	@Test
-	public void writeTxtMovimientos() throws IOException, ValidationException, ParseException {
+	public void writeTxtMovimientosConCuota() throws IOException, ValidationException, ParseException {
 		
 		String nombreArchivo = rutaArchivos + "prueba_writer.txt";
 		BaseWriter writer = new TXTWriter(nombreArchivo);
 		IConversorMovimiento conversor = new ConversorMovimientoConCuota(";");
+		writer.write(ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));
+		assertTrue(existeArchivo(nombreArchivo));
+				
+	}
+	
+	@Test
+	public void writeTxtMovimientosSinCuota() throws IOException, ValidationException, ParseException {
+		
+		String nombreArchivo = rutaArchivos + "prueba_writer.txt";
+		BaseWriter writer = new TXTWriter(nombreArchivo);
+		IConversorMovimiento conversor = new ConversorMovimientoSinCuota(";");
 		writer.write(ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));
 		assertTrue(existeArchivo(nombreArchivo));
 				

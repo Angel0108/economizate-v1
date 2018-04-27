@@ -18,7 +18,7 @@ public interface Cuenta {
 	
 	public double obtenerSaldoTotal();
 	
-	public void cambiarSaldoTotal(double importe);
+	//public void cambiarSaldoTotal(double importe);
 	
 	public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha);
 	

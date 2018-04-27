@@ -24,12 +24,12 @@ public class ConectorCuenta {
 	private void agregarMovimientos() {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
 		try {
-			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", "ninguna", 95, formater.parse("20180315"));
-			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", "ninguna", 10, formater.parse("20180331"));
-			MovimientoMonetario ingreso3 = new MovimientoMonetario("Luz", "Servicio", -15, formater.parse("20180413"));
-			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -15, formater.parse("20180426"));
-			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 95, formater.parse("20180418"));
-			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -70, formater.parse("20180423"));
+			MovimientoMonetario ingreso = new MovimientoMonetario("cuenta sueldo", "ninguna", 95.0, formater.parse("20180315"));
+			MovimientoMonetario ingreso2 = new MovimientoMonetario("horas extras", "ninguna", 10.0, formater.parse("20180331"));
+			MovimientoMonetario ingreso3 = new MovimientoMonetario("Luz", "Servicio", -15.0, formater.parse("20180413"));
+			MovimientoMonetario ingreso4 = new MovimientoMonetario("Gas", "Servicio", -15.0, formater.parse("20180426"));
+			MovimientoMonetario ingreso5 = new MovimientoMonetario("Sueldo", "Sueldo", 95.0, formater.parse("20180418"));
+			MovimientoMonetario ingreso6 = new MovimientoMonetario("Tarjeta", "Gastos Generales", -70.0, formater.parse("20180423"));
 			cuenta.getMovimientos().agregarMovimiento(ingreso);
 			cuenta.getMovimientos().agregarMovimiento(ingreso2);
 			cuenta.getMovimientos().agregarMovimiento(ingreso3);
@@ -44,23 +44,23 @@ public class ConectorCuenta {
 	}
 	
 	public Cuenta nuevaCuenta() {
-		if (cuenta == null) {
+		/*if (cuenta == null) {
 			cuenta = new Cuenta();
 			agregarMovimientos();						
-			cuenta.setTotal(obtenerSaldo());
+			//cuenta.setTotal(obtenerSaldo());
 			total = cuenta.getMovimientos().getTotal();
-		}
+		}*/
 		return cuenta;
 	}
 	
 	public Cuenta nuevaCuenta(Observer o) {
-		if (cuenta == null) {
+		/*if (cuenta == null) {
 			observer = o;
 			cuenta = new Cuenta();
 			agregarMovimientos();
 			cuenta.agregarObserver(o);
 			cuenta.modificarTotal(obtenerSaldo());
-		}
+		}*/
 		return cuenta;
 	}
 	
@@ -68,7 +68,7 @@ public class ConectorCuenta {
 		return nuevaCuenta().getMovimientos();
 	}
 	
-	public double obtenerSaldo() {
+	/*public double obtenerSaldo() {
 		return total;
 	}
 	
@@ -79,7 +79,7 @@ public class ConectorCuenta {
 	
 	public void addObserver(Observer observer) {
 		this.observer = observer;
-	}
+	}*/
 	
 	public Movimientos getMovimientos() {
 		return cuenta.getMovimientos();

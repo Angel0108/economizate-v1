@@ -7,10 +7,6 @@ import com.economizate.servicios.IAlertas;
 public class AlertaAmarilla implements IAlertas {
 	
 	ConectorAlerta conector = new ConectorAlerta();
-		
-	public AlertaAmarilla(double saldoAnterior, double saldoActual) {
-		
-	}
 	
 	public AlertaAmarilla() {
 	}

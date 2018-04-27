@@ -14,14 +14,14 @@ public class MovimientoMonetario {
 	private Double importe;
 	private int cantidadCuotas;
 	
-	public MovimientoMonetario(String descripcion, String observacion, double importe, Date fecha) {
+	public MovimientoMonetario(String descripcion, String observacion, Double importe, Date fecha) {
 		this.descripcion = descripcion;
 		this.observacion = observacion;
 		this.importe = importe;
 		this.fecha = fecha;
 	}
 	
-	public MovimientoMonetario(String descripcion, String observacion, double importe, int cantidadCuotas) {
+	public MovimientoMonetario(String descripcion, String observacion, Double importe, int cantidadCuotas) {
 		this.descripcion = descripcion;
 		this.observacion = observacion;
 		this.importe = importe;
@@ -29,7 +29,7 @@ public class MovimientoMonetario {
 		fecha = new Date();
 	}
 
-	public MovimientoMonetario(String descripcion, String observacion, double importe) {
+	public MovimientoMonetario(String descripcion, String observacion, Double importe) {
 		this.descripcion = descripcion;
 		this.observacion = observacion;
 		this.importe = importe;
@@ -48,32 +48,17 @@ public class MovimientoMonetario {
 		return descripcion;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
 	public String getObservacion() {
 		return observacion;
-	}
-
-	public void setObservacion(String observacion) {
-		this.observacion = observacion;
 	}
 
 	public Double getImporte() {
 		return importe;
 	}
 
-	public void setImporte(double importe) {
-		this.importe = importe;
-	}
 	
 	public int getCantidadCuotas() {
 		return cantidadCuotas;
-	}
-
-	public void setCantidadCuotas(int cantidadCuotas) {
-		this.cantidadCuotas = cantidadCuotas;
 	}
 
 	@Override

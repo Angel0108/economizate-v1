@@ -13,7 +13,7 @@ public class ConcreteValidadorRegistroStrategy implements ValidadorRegistroStrat
 			return false;
 		} else if(mov.getObservacion().isEmpty()) {
 			return false;
-		} else if(mov.getImporte() == null || mov.getImporte().equals(0)) {
+		} else if(mov.getImporte() == null || mov.getImporte().equals(0.0)) {
 			return false;
 		}
 				

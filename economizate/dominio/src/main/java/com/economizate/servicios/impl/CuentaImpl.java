@@ -56,11 +56,6 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 	}
 
 	@Override
-	public void cambiarSaldoTotal(double importe) {
-		conector.cambiarSaldo(importe);
-	}
-
-	@Override
 	public double obtenerTotalMovimientos(List<MovimientoMonetario> movimientos) {
 		
 		double total = 0;
