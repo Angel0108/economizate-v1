@@ -42,6 +42,10 @@ public class Cuenta extends java.util.Observable{
 		this.total = total;
 	}
 	
+	public void agregarObserver(Observer o) {
+		this.addObserver(o);
+	}
+	
 	public Cuenta (Movimientos movimientos, double total) {
 		this.movimientos = movimientos;
 		this.total = total;
@@ -88,6 +92,11 @@ public class Cuenta extends java.util.Observable{
 		} else {
 			totalMes += movimiento.getImporte();
 			totalPorMes.put(periodo, totalMes);
+		}
+		
+		if(movimiento.getImporte() < 0) {
+			setChanged();
+			notifyObservers(movimiento.getImporte());
 		}
 		
 	}
