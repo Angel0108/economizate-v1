@@ -12,7 +12,7 @@ public class AlertaTest {
 
 	double saldoAnterior;
 	double saldoActual;
-	/*
+	
 	@Test
 	public void alerta95PorcientoBordeSuperior() {
 				
@@ -92,5 +92,5 @@ public class AlertaTest {
 		alert.setSaldoActual(40.01);
 		assertTrue("tiene saldo actual ok", alert.getSaldoActual() == 40.01);
 	}
-	*/
+	
 }
