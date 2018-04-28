@@ -15,6 +15,7 @@ import com.economizate.listeners.EgresoListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.listeners.ReportesListener;
 import com.economizate.servicios.Usuarios;
+import com.economizate.servicios.impl.CuentaImpl;
 import com.economizate.servicios.impl.Propiedad;
 
 public class Home implements ActionListener, java.util.Observer{
@@ -41,22 +42,22 @@ public class Home implements ActionListener, java.util.Observer{
 	public Home() {
 		this.email = Propiedad.getInstance().getPropiedad("email");
 		//usuarios = new ConectorUsuario(). instancias.getUsuariosObservadorService(this);
-		//saldos = instancias.getSaldosService();
-		usuario = usuarios.buscarUsuarioPorEmail(email);
+		saldos = new Cuenta();
+		//usuario = usuarios.buscarUsuarioPorEmail(email);
 		iniciarComponentes();
 		
 	}
 	
 	public void iniciarListeners() {
-		ingresoListener = new IngresoListener(this, email, usuarios.obtenerSaldoUsuario(email).getTotal());
+		ingresoListener = new IngresoListener(this, email, saldos.getTotal());
 		botonIngreso.addActionListener(ingresoListener);
 	}
 	
 	public void actionPerformed(ActionEvent evento) {
 		logger.info("Iniciando Acción Vista Home");
 		
-		nombreUsuario.setText("Bienvenido: " +  usuario.getEmail());
-		saldoUsuario.setText("Saldo: " + usuario.getSaldo().getTotal());
+		nombreUsuario.setText("Bienvenido: " +  this.email);
+		saldoUsuario.setText("Saldo: " + saldos.getTotal());
 		nombreUsuario.setVisible(true);
 		saldoUsuario.setVisible(true);
 		botonLogin.setVisible(false);
@@ -94,7 +95,7 @@ public class Home implements ActionListener, java.util.Observer{
 		botonEgreso =new JButton("Egreso");
 		botonEgreso.setBounds(250,100,100, 40); 
 		botonEgreso.addActionListener(
-				new EgresoListener(this, email, usuarios.buscarUsuarioPorEmail(email).getSaldo().getTotal()));
+				new EgresoListener(this, email, saldos.getTotal()));
 		
 	}
 	

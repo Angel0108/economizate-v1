@@ -40,7 +40,7 @@ public class ControladorEgreso implements ActionListener{
 			usuarioService.validarImporteIgresado(vista.getImporteTextFieldValue());
 			
 			
-			double saldoActual = usuarioService.obtenerSaldoUsuario(model).getTotal(); 
+			double saldoActual = saldosService.getTotal(); 
 			usuarioService.obtenerSaldoUsuario(model).setTotal(- Double.parseDouble(vista.getImporteTextFieldValue()) 
 					+ saldoActual);
 			

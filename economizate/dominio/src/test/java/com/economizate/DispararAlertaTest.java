@@ -14,6 +14,7 @@ import com.economizate.entidades.Alerta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.FactoryAlertas;
+import com.economizate.servicios.impl.Propiedad;
 
 
 public class DispararAlertaTest {
@@ -40,7 +41,8 @@ public class DispararAlertaTest {
 		
 		actualizarSaldo(egreso);
 		
-		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
+		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje()
+				.equals(Propiedad.getInstance().getPropiedad("mensajeAlerta95Porciento")));
 	}
 	
 	//Corresponde caso 2 de criterios de aceptación US 1 
@@ -51,7 +53,8 @@ public class DispararAlertaTest {
 		
 		actualizarSaldo(egreso);
 		
-		assertTrue("La alerta generada es de tipo amarilla: ", alerta.getMensaje().equals("Ha superado el 80%"));
+		assertTrue("La alerta generada es de tipo amarilla: ", alerta.getMensaje()
+				.equals(Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento")));
 	}
 		
 	//Corresponde caso 3 de criterios de aceptación US 1 
@@ -61,8 +64,8 @@ public class DispararAlertaTest {
 				new MovimientoMonetario("Gasto shopping", "Renovar ropa", Double.parseDouble("-101"), new Date());
 		
 		actualizarSaldo(egreso);
-		
-		assertTrue("La alerta generada es de tipo negra: ", alerta.getMensaje().equals("Supera el saldo total"));
+		assertTrue("La alerta generada es de tipo negra: ", alerta.getMensaje()
+				.equals(Propiedad.getInstance().getPropiedad("mensajeAlerta100Porciento")));
 	}
 		
 	//Corresponde caso 4 de criterios de aceptación US 1 
@@ -73,7 +76,8 @@ public class DispararAlertaTest {
 		
 		actualizarSaldo(egreso);
 		
-		assertTrue("La alerta generada es de tipo verde: ", alerta.getMensaje().equals("Transacción OK"));
+		assertTrue("La alerta generada es de tipo verde: ", alerta.getMensaje()
+				.equals(Propiedad.getInstance().getPropiedad("mensajeAlertaVerde")));
 	}
 	
 	private void actualizarSaldo(MovimientoMonetario egreso) {
