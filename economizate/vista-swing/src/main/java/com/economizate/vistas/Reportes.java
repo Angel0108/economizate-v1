@@ -107,16 +107,16 @@ private static Logger logger = Logger.getLogger(Reportes.class.getName());
 			public void actionPerformed(ActionEvent e) {
 				if(listaFiltrada == null) {
 					try {
-						new TXTWriter("Movimientos.txt").write(usuarios
+						new TXTWriter("Movimientos.txt", usuarios
 								.buscarUsuarioPorEmail(email)
 								.getSaldo()
-								.getMovimientos().toString());
+								.getMovimientos().toString()).write();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
 				}else {
 					try {
-						new TXTWriter("MovimientosFiltrados.txt").write(listaFiltrada.toString());
+						new TXTWriter("MovimientosFiltrados.txt",listaFiltrada.toString()).write();
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
