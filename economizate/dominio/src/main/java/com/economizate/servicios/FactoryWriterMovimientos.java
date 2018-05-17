@@ -3,7 +3,6 @@ package com.economizate.servicios;
 import java.io.IOException;
 import java.util.List;
 
-import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.impl.ConvertListaMovimientosToString;
 import com.economizate.servicios.impl.ExcelWriter;
@@ -22,7 +21,7 @@ public class FactoryWriterMovimientos {
 		if(separador.length == 1) {
 			throw new IOException("No es un tipo de archivo válido para generar.");
 		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.PDF.toString())) {
-			return new PdfWriter(nombreArchivo, new TransformadorMovimientos(new ListaMovimientos().getMovimientos(), "Movimientos.xsl"));
+			return new PdfWriter(nombreArchivo, new TransformadorMovimientos(movimientos, "Movimientos.xsl"));
 		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.TXT.toString())) {
 			return new TXTWriter(nombreArchivo, ConvertListaMovimientosToString.getRegistros(movimientos, conversor));
 		} else if(separador[separador.length - 1].toUpperCase().equals(ParserType.XLSX.toString())) {
