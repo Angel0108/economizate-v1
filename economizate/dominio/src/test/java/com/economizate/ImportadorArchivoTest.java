@@ -18,7 +18,6 @@ import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
 import com.economizate.servicios.Cuenta;
-import com.economizate.servicios.impl.ConvertToMovimiento;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.ParserRegistroConCuota;
 import com.economizate.servicios.impl.ParserRegistroFechaSinCuota;
@@ -32,8 +31,7 @@ public class ImportadorArchivoTest {
 	private LoaderFromFile<MovimientoMonetario> importador;
 	private Cuenta cuenta = new CuentaImpl();
 	private IParserRegistro parser;
-	
-	private ConvertToMovimiento convert = new ConvertToMovimiento();	
+		
 	
 	private Movimientos cargarMovimientos() {		
 		Movimientos movimientos = new Movimientos();

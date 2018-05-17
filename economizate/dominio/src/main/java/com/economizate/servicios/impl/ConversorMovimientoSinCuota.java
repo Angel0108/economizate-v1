@@ -3,9 +3,9 @@ package com.economizate.servicios.impl;
 import java.text.SimpleDateFormat;
 
 import com.economizate.entidades.MovimientoMonetario;
-import com.economizate.servicios.IConversorMovimiento;
+import com.economizate.servicios.IConversor;
 
-public class ConversorMovimientoSinCuota implements IConversorMovimiento {
+public class ConversorMovimientoSinCuota implements IConversor<MovimientoMonetario> {
 
 private String delimitador;
 	

@@ -18,6 +18,7 @@ import org.junit.Test;
 import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseWriter;
+import com.economizate.servicios.IConversor;
 import com.economizate.servicios.IConversorMovimiento;
 import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
@@ -65,9 +66,10 @@ public class WriterTest {
 	public void writeTxtMovimientosConCuota() throws IOException, ValidationException, ParseException {
 		
 		String nombreArchivo = rutaArchivos + "prueba_writer.txt";
-		BaseWriter writer = new TXTWriter(nombreArchivo);
-		IConversorMovimiento conversor = new ConversorMovimientoConCuota(";");
-		writer.write(ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));
+		IConversor<MovimientoMonetario> conversor = new ConversorMovimientoConCuota(";");
+		BaseWriter writer = new TXTWriter(nombreArchivo, ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));
+		
+		writer.write();
 		assertTrue(existeArchivo(nombreArchivo));
 				
 	}
@@ -76,8 +78,8 @@ public class WriterTest {
 	public void writeTxtMovimientosSinCuota() throws IOException, ValidationException, ParseException {
 		
 		String nombreArchivo = rutaArchivos + "prueba_writer.txt";
-		BaseWriter writer = new TXTWriter(nombreArchivo);
-		IConversorMovimiento conversor = new ConversorMovimientoSinCuota(";");
+		IConversor<MovimientoMonetario> conversor = new ConversorMovimientoSinCuota(";");
+		BaseWriter writer = new TXTWriter(nombreArchivo, ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));		
 		writer.write(ConvertListaMovimientosToString.getRegistros(new ListaMovimientos().getMovimientos(), conversor));
 		assertTrue(existeArchivo(nombreArchivo));
 				
@@ -87,7 +89,7 @@ public class WriterTest {
 	public void writeTxtMovimientosRutaInvalida() throws IOException{
 		
 			String nombreArchivo = null;
-			BaseWriter writer = new TXTWriter(nombreArchivo);
+			BaseWriter writer = new TXTWriter(nombreArchivo, "");
 			writer.write();
 			
 			Paths.get(nombreArchivo);		

@@ -2,21 +2,15 @@ package com.economizate.entidades;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Observer;
-import java.util.Properties;
-import java.util.logging.Logger;
 
-import org.apache.commons.collections4.map.HashedMap;
 
 public class Cuenta extends java.util.Observable{
 	
-	private long id;
+	//private long id;
 	private Movimientos movimientos;
 	
 	private double total;

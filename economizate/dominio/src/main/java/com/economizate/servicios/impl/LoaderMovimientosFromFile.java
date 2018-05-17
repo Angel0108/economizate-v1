@@ -39,7 +39,7 @@ public class LoaderMovimientosFromFile implements LoaderFromFile<MovimientoMonet
 
 	@Override
 	public void cargarDatos(IParserRegistro parserRegistro) throws IOException, ParseException {
-		BaseReader importador = FactoryReader.getParseador(nombreArchivo);
+		BaseReader importador = FactoryReader.getReader(nombreArchivo);
 		ParserListaRegistros<MovimientoMonetario> parser = new ParserListRegistrosMovimientos(importador.read(), parserRegistro);
 		registrosMovimientos = parser.parse();		
 	}

@@ -20,40 +20,40 @@ public class ReaderTest {
 		
 		FactoryReader reader = new FactoryReader();		
 		reader.toString();
-		importador = FactoryReader.getParseador("src/test/resources/prueba.doc");
+		importador = FactoryReader.getReader("src/test/resources/prueba.doc");
 	}
 	
 	@Test (expected = IOException.class)
 	public void readArchivoInvalidoSinExtension() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba");
+		importador = FactoryReader.getReader("src/test/resources/prueba");
 	}
 	
 	@Test
 	public void readArchivoCSV() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba.CSV");
+		importador = FactoryReader.getReader("src/test/resources/prueba.CSV");
 		assertFalse(importador.read().isEmpty());
 	}
 	
 	@Test
 	public void readArchivoTXT() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/prueba.txt");
+		importador = FactoryReader.getReader("src/test/resources/prueba.txt");
 		assertFalse(importador.read().isEmpty());
 	}
 	
 	@Test
 	public void readArchivoExcel() throws IOException {
 		
-		importador = FactoryReader.getParseador("src/test/resources/movimientos_ok.xlsx");
+		importador = FactoryReader.getReader("src/test/resources/movimientos_ok.xlsx");
 		assertFalse(importador.read().isEmpty());
 	}
 	
 	@Test
 	public void readArchivoExcelVacio() throws Exception{
 		
-		importador = FactoryReader.getParseador("src/test/resources/movimientos_vacio.xlsx");
+		importador = FactoryReader.getReader("src/test/resources/movimientos_vacio.xlsx");
 		assertTrue(importador.read().isEmpty());
 	}
 }

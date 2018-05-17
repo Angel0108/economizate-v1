@@ -1,9 +1,10 @@
 package com.economizate.servicios.impl;
 
 import com.economizate.entidades.MovimientoMonetario;
+import com.economizate.servicios.IConversor;
 import com.economizate.servicios.IConversorMovimiento;
 
-public class ConversorMovimientoConCuota implements IConversorMovimiento {
+public class ConversorMovimientoConCuota implements IConversor <MovimientoMonetario>, IConversorMovimiento {
 
 	private String delimitador;
 	

@@ -1,11 +1,9 @@
 package com.economizate.entidades;
 
-import java.util.Date;
-
 
 public class Alerta {
 	
-	private Date fecha;
+	//private Date fecha;
 	private double saldoAnterior;
 	private double saldoActual;
 	private String mensaje;

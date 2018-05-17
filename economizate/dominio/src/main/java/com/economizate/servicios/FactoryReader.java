@@ -9,7 +9,7 @@ import com.economizate.servicios.impl.PipeReader;
 
 public class FactoryReader {
 	
-	public static BaseReader getParseador(String nombreArchivo) throws IOException {
+	public static BaseReader getReader(String nombreArchivo) throws IOException {
 		
 		String[] separador = nombreArchivo.split("\\.");
 		
