@@ -9,13 +9,6 @@ public class FrontController {
 	private static FrontController frontController;
 	
 	
-	public static FrontController getInstance() {
-		if(frontController == null) {
-			frontController = new FrontController();	
-		}
-		return frontController;
-	}
-	
 	public static FrontController getInstance(Idioma idioma) {
 		if(frontController == null) {
 			frontController = new FrontController();	
@@ -29,11 +22,7 @@ public class FrontController {
 		 
 		this.locale = new Locale("es", "ES");
 	}
-	
-	private FrontController(Locale locale) {
-		this.locale = locale;
-	}
-	
+
 	public void setLocale(Idioma idioma) {
 		if(idioma == Idioma.ESPANIOL) {
 			this.locale = new Locale("es", "ES");

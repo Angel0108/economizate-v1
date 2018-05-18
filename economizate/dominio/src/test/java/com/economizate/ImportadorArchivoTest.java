@@ -30,7 +30,7 @@ public class ImportadorArchivoTest {
 	
 	private LoaderFromFile<MovimientoMonetario> importador;
 	private Cuenta cuenta = new CuentaImpl();
-	private IParserRegistro parser;
+	//private IParserRegistro parser;
 		
 	
 	private Movimientos cargarMovimientos() {		
@@ -54,7 +54,7 @@ public class ImportadorArchivoTest {
 	
 	private void importarArchivo(String nombreArchivo, IParserRegistro parser) throws IOException, ParseException {
 		importador = new LoaderMovimientosFromFile(rutaArchivos + nombreArchivo);
-		this.parser = parser;
+		//this.parser = parser;
 		importador.cargarDatos(parser);
 	}
 	

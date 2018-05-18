@@ -8,9 +8,9 @@ import com.economizate.entidades.Movimientos;
 
 public interface Cuenta {
 	
-	public void agregarIngreso(MovimientoMonetario ingreso);
+	//public void agregarIngreso(MovimientoMonetario ingreso);
 	
-	public void agregarEgreso(MovimientoMonetario egreso);
+	//public void agregarEgreso(MovimientoMonetario egreso);
 	
 	public void agregarMovimiento(MovimientoMonetario egreso);
 	
@@ -22,11 +22,11 @@ public interface Cuenta {
 	
 	//public void cambiarSaldoTotal(double importe);
 	
-	public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha);
+	//public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha);
 	
-	public List<MovimientoMonetario> obtenerEgresosPorFecha(Date fecha);
+	//public List<MovimientoMonetario> obtenerEgresosPorFecha(Date fecha);
 
-	public double obtenerTotalMovimientos(List<MovimientoMonetario> movimientos);
+	//public double obtenerTotalMovimientos(List<MovimientoMonetario> movimientos);
 	
 	public double obtenerSaldoTotalPorPeriodo(int mes, int anio);
 }

@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.economizate.batch.BackupArchivo;
@@ -60,7 +61,7 @@ public class BackupTest {
 	}
 	
 	//Corresponde a criterio de aceptación 2
-	@Test
+	@Ignore@Test
 	public void generarDescargaDeArchivoTxtConFrecuencia5Minutos() throws IOException {
 		backupArchivo = new BackupArchivo("src/test/resources/backup/criterio2/");
 		listaBackups = Arrays.asList(backupArchivo);

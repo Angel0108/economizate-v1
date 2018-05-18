@@ -1,12 +1,8 @@
 package com.economizate;
 
 import static org.junit.Assert.*;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.junit.Test;
-
 import com.economizate.servicios.BaseReader;
 import com.economizate.servicios.FactoryReader;
 

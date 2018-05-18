@@ -8,14 +8,6 @@ public class ManejadorEtiqueta {
 	
 	private static ManejadorEtiqueta instancia;
 	
-	public static ManejadorEtiqueta getInstance() {
-		if(instancia == null) {			
-			instancia = new ManejadorEtiqueta();
-			instancia.setIdioma(Idioma.ESPANIOL);
-		}
-		return instancia;
-	}
-	
 	public static ManejadorEtiqueta getInstance(Idioma idioma) {
 		if(instancia == null) {
 			instancia = new ManejadorEtiqueta();	
