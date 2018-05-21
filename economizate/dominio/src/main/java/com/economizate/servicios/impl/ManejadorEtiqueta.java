@@ -1,5 +1,6 @@
 package com.economizate.servicios.impl;
 
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class ManejadorEtiqueta {
@@ -25,7 +26,7 @@ public class ManejadorEtiqueta {
 		return instancia;
 	}
 	
-	public String getMensaje(String key) {		
+	public String getMensaje(String key) throws MissingResourceException {		
 		ResourceBundle labels = ResourceBundle.getBundle("etiquetas", FrontController.getInstance(idioma).getLocale());
 		return labels.getString(key);
 	}
