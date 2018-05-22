@@ -27,13 +27,14 @@ public class MultiIdiomaTest {
 
 	@Test (expected=MissingResourceException.class)
 	public void InglesEtiquetaInexistenteTest() {
+
 	
 		ManejadorEtiqueta.getInstance(Idioma.INGLES).getMensaje("etiquetaInexistente").equals("Welcome");
 	}
 	
+
 	@Test (expected=MissingResourceException.class)
 	public void EspaniolEtiquetaInexistenteTest() {
-		
-		ManejadorEtiqueta.getInstance(Idioma.ESPANIOL).getMensaje("etiquetaInexistente");
+		ManejadorEtiqueta.getInstance(Idioma.ESPANIOL).getMensaje("etiquetaInexistente");		
 	}
 }
