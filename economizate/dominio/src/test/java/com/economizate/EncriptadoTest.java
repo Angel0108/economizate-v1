@@ -13,10 +13,6 @@ import com.economizate.servicios.impl.Propiedad;
 
 public class EncriptadoTest {
 
-	@Test
-	public void test() {
-		fail("Not yet implemented");
-	}
 
 	@Test
 	public void encriptarTest() throws FileNotFoundException {

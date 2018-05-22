@@ -12,7 +12,7 @@ import com.economizate.servicios.DataSource;
 
 public class EncryptionDecorator extends DataSourceDecorator {
 
-	public EncryptionDecorator(DataSource source) {
+	private EncryptionDecorator(DataSource source) {
         super(source);
     }
 
