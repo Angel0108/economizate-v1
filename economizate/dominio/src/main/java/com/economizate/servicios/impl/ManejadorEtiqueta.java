@@ -9,17 +9,17 @@ public class ManejadorEtiqueta {
 	
 	private static ManejadorEtiqueta instancia;
 	
-	public static ManejadorEtiqueta getInstance(Idioma idioma) {
+	public static ManejadorEtiqueta getInstance() {
 		if(instancia == null) {
 			instancia = new ManejadorEtiqueta();	
 			
 		}
-		instancia.setIdioma(idioma);
+		//instancia.setIdioma(idioma);
 		return instancia;
 	}
 	
 	public String getMensaje(String key) throws MissingResourceException {		
-		ResourceBundle labels = ResourceBundle.getBundle("etiquetas", FrontController.getInstance(idioma).getLocale());
+		ResourceBundle labels = ResourceBundle.getBundle("etiquetas", ManejadorIdioma.getInstance().getLocale());
 		return labels.getString(key);
 	}
 	

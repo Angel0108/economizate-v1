@@ -4,19 +4,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Observable;
 import java.util.logging.Logger;
+
+import javax.imageio.ImageIO;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+
 import com.economizate.batch.BackupArchivo;
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.Usuario;
 import com.economizate.listeners.BackupListener;
 import com.economizate.listeners.EgresoListener;
+import com.economizate.listeners.IdiomaListener;
 import com.economizate.listeners.IngresoListener;
 import com.economizate.listeners.ReportesListener;
 import com.economizate.servicios.Usuarios;
 import com.economizate.servicios.impl.CuentaImpl;
+import com.economizate.servicios.impl.Idioma;
+import com.economizate.servicios.impl.ManejadorEtiqueta;
+import com.economizate.servicios.impl.ManejadorIdioma;
 import com.economizate.servicios.impl.Propiedad;
+import com.lowagie.text.Image;
+import java.awt.BorderLayout;
 
 public class Home implements ActionListener, java.util.Observer{
 	
@@ -42,10 +53,13 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	public IngresoListener ingresoListener;
 	
+	private ManejadorEtiqueta etiquetas;
+	
 	public Home() {
 		this.email = Propiedad.getInstance().getPropiedad("email");
 		//usuarios = new ConectorUsuario(). instancias.getUsuariosObservadorService(this);
 		saldos = new Cuenta();
+		etiquetas = ManejadorEtiqueta.getInstance();
 		//usuario = usuarios.buscarUsuarioPorEmail(email);
 		iniciarComponentes();
 		
@@ -64,11 +78,15 @@ public class Home implements ActionListener, java.util.Observer{
 		nombreUsuario.setVisible(true);
 		saldoUsuario.setVisible(true);
 		botonLogin.setVisible(false);
+		botonCastellano.setVisible(false);
+		botonIngles.setVisible(false);
 		setVisibilidadBotones(true);
+		iniciarEtiquetas();
 	}
 	
 	public void iniciarComponentes() {
 		ventana = new JFrame();
+		
 		iniciarBotones();
 		iniciarJLabels();
 		iniciarListeners();
@@ -84,26 +102,47 @@ public class Home implements ActionListener, java.util.Observer{
 		iniciarBotonReportes();
 	}
 	
+	public void iniciarEtiquetas() {
+		botonIngreso.setText(etiquetas.getMensaje("etiquetaIngreso"));
+		botonEgreso.setText(etiquetas.getMensaje("etiquetaEgreso"));
+		botonReportes.setText(etiquetas.getMensaje("etiquetaReporte"));
+	}
+	
 	public void iniciarBotonCastellano() {
-		botonCastellano =new JButton("Español");
+		botonCastellano =new JButton();
 		botonCastellano.setBounds(200,50,50, 40); 
-		botonCastellano.addActionListener(this);
+		try {
+			ImageIcon warnIcon = new ImageIcon(this.getClass().getResource("/imagenes/if_flag-spain_748120.png"));
+			
+			botonCastellano.setIcon(warnIcon);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		botonCastellano.addActionListener(new IdiomaListener(Idioma.ESPANIOL));
 	}
 	
 	public void iniciarBotonIngles() {
-		botonIngles =new JButton("Inglés");
+		botonIngles =new JButton();
 		botonIngles.setBounds(260,50,50, 40); 
-		botonIngles.addActionListener(this);
+		try {
+			ImageIcon warnIcon = new ImageIcon(this.getClass().getResource("/imagenes/if_flag-united-kingdom_748024.png"));
+			
+			botonIngles.setIcon(warnIcon);	
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		botonIngles.addActionListener(new IdiomaListener(Idioma.INGLES));
 	}
 	
 	public void iniciarBotonLogin() {
-		botonLogin =new JButton("Login");
+		botonLogin =new JButton(etiquetas.getMensaje("etiquetaLogin"));
 		botonLogin.setBounds(130,100,100, 40); 
 		botonLogin.addActionListener(this);
 	}
 	
 	public void iniciarBotonIngreso() {
-		botonIngreso =new JButton("Ingreso");
+		botonIngreso =new JButton(etiquetas.getMensaje("etiquetaBienvenido"));
 		botonIngreso.setBounds(70,100,100, 40); 
 		botonIngreso.addActionListener(ingresoListener);
 	}
@@ -142,24 +181,27 @@ public class Home implements ActionListener, java.util.Observer{
 	public void iniciarVista() {
 		logger.info("Iniciando Vista Home");
 		
-		setVisibilidadBotones(false);
-		    		
-		ventana.add(botonCastellano);
-		ventana.add(botonIngles);
-		ventana.add(botonLogin); 
-		ventana.add(botonIngreso); 
-		ventana.add(botonEgreso); 
-		ventana.add(botonEgresosPeriodicos); 
-		ventana.add(botonReportes); 
 		
-		ventana.add(nombreUsuario);
-		ventana.add(saldoUsuario);
+		setVisibilidadBotones(false);
+		ventana.repaint();
+		ventana.validate();
+		ventana.getContentPane().add(botonCastellano);
+		ventana.getContentPane().add(botonIngles);
+		ventana.getContentPane().add(botonLogin); 
+		ventana.getContentPane().add(botonIngreso); 
+		ventana.getContentPane().add(botonEgreso); 
+		ventana.getContentPane().add(botonEgresosPeriodicos); 
+		ventana.getContentPane().add(botonReportes); 
+		
+		ventana.getContentPane().add(nombreUsuario);
+		ventana.getContentPane().add(saldoUsuario);
 		
 		ventana.setTitle("Home");
 		ventana.setSize(400,500);
-		ventana.setLayout(null); 
+		ventana.getContentPane().setLayout(null); 
 		ventana.setVisible(true);
 		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		
 	}
 	
 	public void setVisibilidadBotones(boolean visible) {

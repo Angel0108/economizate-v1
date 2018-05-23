@@ -8,6 +8,7 @@ import org.junit.Test;
 
 import com.economizate.servicios.impl.Idioma;
 import com.economizate.servicios.impl.ManejadorEtiqueta;
+import com.economizate.servicios.impl.ManejadorIdioma;
 
 public class MultiIdiomaTest {
 
@@ -15,26 +16,27 @@ public class MultiIdiomaTest {
 	
 	@Test
 	public void InglesTest() {
-	
-		assertTrue(ManejadorEtiqueta.getInstance(Idioma.INGLES).getMensaje("etiquetaBienvenido").equals("Welcome"));
+		ManejadorIdioma.getInstance(Idioma.INGLES);
+		assertTrue(ManejadorEtiqueta.getInstance().getMensaje("etiquetaBienvenido").equals("Welcome"));
 	}
 	
 	@Test
 	public void EspaniolTest() {
-		
-		assertTrue(ManejadorEtiqueta.getInstance(Idioma.ESPANIOL).getMensaje("etiquetaBienvenido").equals("Bienvenido"));
+		ManejadorIdioma.getInstance(Idioma.ESPANIOL);
+		assertTrue(ManejadorEtiqueta.getInstance().getMensaje("etiquetaBienvenido").equals("Bienvenido"));
 	}
 
 	@Test (expected=MissingResourceException.class)
 	public void InglesEtiquetaInexistenteTest() {
 
-	
-		ManejadorEtiqueta.getInstance(Idioma.INGLES).getMensaje("etiquetaInexistente").equals("Welcome");
+		ManejadorIdioma.getInstance(Idioma.INGLES);
+		ManejadorEtiqueta.getInstance().getMensaje("etiquetaInexistente").equals("Welcome");
 	}
 	
 
 	@Test (expected=MissingResourceException.class)
 	public void EspaniolEtiquetaInexistenteTest() {
-		ManejadorEtiqueta.getInstance(Idioma.ESPANIOL).getMensaje("etiquetaInexistente");		
+		ManejadorIdioma.getInstance(Idioma.ESPANIOL);
+		ManejadorEtiqueta.getInstance().getMensaje("etiquetaInexistente");		
 	}
 }
