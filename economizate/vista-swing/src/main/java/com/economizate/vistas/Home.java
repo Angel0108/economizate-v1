@@ -31,6 +31,9 @@ public class Home implements ActionListener, java.util.Observer{
 	private JLabel nombreUsuario;
 	private JLabel saldoUsuario = new JLabel();
 	
+	private JButton botonCastellano;
+	private JButton botonIngles;
+	
 	//private InstanciasService instancias = new InstanciasService();
 	private Usuarios usuarios;
 	public Cuenta saldos;
@@ -72,11 +75,25 @@ public class Home implements ActionListener, java.util.Observer{
 	}
 	
 	public void iniciarBotones() {
+		iniciarBotonCastellano();
+		iniciarBotonIngles();
 		iniciarBotonLogin();
 		iniciarBotonIngreso();
 		iniciarBotonEgreso();
 		iniciarBotonEgresoPeriodico();
 		iniciarBotonReportes();
+	}
+	
+	public void iniciarBotonCastellano() {
+		botonCastellano =new JButton("Español");
+		botonCastellano.setBounds(200,50,50, 40); 
+		botonCastellano.addActionListener(this);
+	}
+	
+	public void iniciarBotonIngles() {
+		botonIngles =new JButton("Inglés");
+		botonIngles.setBounds(260,50,50, 40); 
+		botonIngles.addActionListener(this);
 	}
 	
 	public void iniciarBotonLogin() {
@@ -126,7 +143,9 @@ public class Home implements ActionListener, java.util.Observer{
 		logger.info("Iniciando Vista Home");
 		
 		setVisibilidadBotones(false);
-		    
+		    		
+		ventana.add(botonCastellano);
+		ventana.add(botonIngles);
 		ventana.add(botonLogin); 
 		ventana.add(botonIngreso); 
 		ventana.add(botonEgreso); 
