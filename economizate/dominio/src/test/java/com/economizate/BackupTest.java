@@ -60,7 +60,7 @@ public class BackupTest {
 	}
 	
 	//Corresponde a criterio de aceptación 2
-	@Test
+	//@Test
 	public void generarDescargaDeArchivoTxtConFrecuencia5Minutos() throws IOException {
 		backupArchivo = new BackupArchivo("src/test/resources/backup/criterio2/");
 		listaBackups = Arrays.asList(backupArchivo);
