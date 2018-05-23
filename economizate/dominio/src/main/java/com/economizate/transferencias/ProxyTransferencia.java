@@ -1,25 +1,24 @@
 package com.economizate.transferencias;
 
-import com.mashape.unirest.http.HttpResponse;
-import com.mashape.unirest.http.JsonNode;
+import com.economizate.entidades.Cuenta;
 
 public class ProxyTransferencia implements ITransferencia{
 
 	private GeneradorTransferencia transferencia;
 	
-	public ProxyTransferencia() {
+	public ProxyTransferencia(Cuenta cuenta) {
 		super();
-		this.transferencia = new GeneradorTransferencia();
+		this.transferencia = new GeneradorTransferencia(cuenta);
 	}
 
 	@Override
-	public boolean transferir(double monto) {
-		return transferencia.transferir(monto);
+	public boolean transferir(double monto, String destinatario) {
+		return transferencia.transferir(monto, destinatario);
 	}
 	
 	@Override
-	public int ejecutar(double monto) {
-		return transferencia.ejecutar(monto);
+	public int ejecutar(double monto, String destinatario) {
+		return transferencia.ejecutar(monto, destinatario);
 	}
 
 }

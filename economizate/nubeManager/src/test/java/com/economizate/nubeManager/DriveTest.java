@@ -11,9 +11,11 @@ import com.google.api.services.drive.model.File;
 
 public class DriveTest {
 	
+	private static final String UBICACION_INGRESO_MENSUAL= "src/main/java/com/economizate/nubeManager/reporte/";
+	
 	//@Test
 	public void conectaConGoogleDriveYSubirArchivo() {
-		ConnectorDrive drive = new ConnectorDrive("src/main/java/com/economizate/nubeManager/reporte/reporte-test.csv");
+		ConnectorDrive drive = new ConnectorDrive(UBICACION_INGRESO_MENSUAL + "ingreso-mensual.csv");
 		
 		//subo archivo
 		boolean resultado = drive.upload();
@@ -23,14 +25,14 @@ public class DriveTest {
 	
 	//@Test
 	public void conectarConDriveYSubirArchivoOkConChequeoDeIdArchivo() throws IOException {
-		ConnectorDrive drive = new ConnectorDrive("src/main/java/com/economizate/nubeManager/reporte/reporte-test.csv");
+		ConnectorDrive drive = new ConnectorDrive(UBICACION_INGRESO_MENSUAL + "ingreso-mensual.csv");
 		
 		//Subo archivo
 		String id = drive.uploadId();
 		
 		//Lo busco en el Drive
 		File nuevo = null;
-		List<File> archivos = drive.authorize().files().list().execute().getFiles();
+		List<File> archivos = ReaderDrive.leerArchivosDrive(drive);
 		for(File f : archivos) {
 			if (f.getId().equals(id))
 				nuevo = f;
