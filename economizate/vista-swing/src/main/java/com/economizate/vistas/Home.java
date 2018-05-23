@@ -78,8 +78,7 @@ public class Home implements ActionListener, java.util.Observer{
 		nombreUsuario.setVisible(true);
 		saldoUsuario.setVisible(true);
 		botonLogin.setVisible(false);
-		botonCastellano.setVisible(false);
-		botonIngles.setVisible(false);
+		
 		setVisibilidadBotones(true);
 		iniciarEtiquetas();
 	}
@@ -103,6 +102,7 @@ public class Home implements ActionListener, java.util.Observer{
 	}
 	
 	public void iniciarEtiquetas() {
+		botonLogin.setText(etiquetas.getMensaje("etiquetaLogin"));
 		botonIngreso.setText(etiquetas.getMensaje("etiquetaIngreso"));
 		botonEgreso.setText(etiquetas.getMensaje("etiquetaEgreso"));
 		botonReportes.setText(etiquetas.getMensaje("etiquetaReporte"));
@@ -110,7 +110,7 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	public void iniciarBotonCastellano() {
 		botonCastellano =new JButton();
-		botonCastellano.setBounds(200,50,50, 40); 
+		botonCastellano.setBounds(200,10,50, 40); 
 		try {
 			ImageIcon warnIcon = new ImageIcon(this.getClass().getResource("/imagenes/if_flag-spain_748120.png"));
 			
@@ -124,7 +124,7 @@ public class Home implements ActionListener, java.util.Observer{
 	
 	public void iniciarBotonIngles() {
 		botonIngles =new JButton();
-		botonIngles.setBounds(260,50,50, 40); 
+		botonIngles.setBounds(260,10,50, 40); 
 		try {
 			ImageIcon warnIcon = new ImageIcon(this.getClass().getResource("/imagenes/if_flag-united-kingdom_748024.png"));
 			
@@ -181,27 +181,29 @@ public class Home implements ActionListener, java.util.Observer{
 	public void iniciarVista() {
 		logger.info("Iniciando Vista Home");
 		
+		if(botonLogin.isVisible()) {
+			setVisibilidadBotones(false);
+			ventana.repaint();
+			ventana.validate();
+			ventana.getContentPane().add(botonCastellano);
+			ventana.getContentPane().add(botonIngles);
+			ventana.getContentPane().add(botonLogin); 
+			ventana.getContentPane().add(botonIngreso); 
+			ventana.getContentPane().add(botonEgreso); 
+			ventana.getContentPane().add(botonEgresosPeriodicos); 
+			ventana.getContentPane().add(botonReportes); 
+			
+			ventana.getContentPane().add(nombreUsuario);
+			ventana.getContentPane().add(saldoUsuario);
+			
+			ventana.setTitle("Home");
+			ventana.setSize(400,500);
+			ventana.getContentPane().setLayout(null); 
+			ventana.setVisible(true);
+			ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
+		}
 		
-		setVisibilidadBotones(false);
-		ventana.repaint();
-		ventana.validate();
-		ventana.getContentPane().add(botonCastellano);
-		ventana.getContentPane().add(botonIngles);
-		ventana.getContentPane().add(botonLogin); 
-		ventana.getContentPane().add(botonIngreso); 
-		ventana.getContentPane().add(botonEgreso); 
-		ventana.getContentPane().add(botonEgresosPeriodicos); 
-		ventana.getContentPane().add(botonReportes); 
-		
-		ventana.getContentPane().add(nombreUsuario);
-		ventana.getContentPane().add(saldoUsuario);
-		
-		ventana.setTitle("Home");
-		ventana.setSize(400,500);
-		ventana.getContentPane().setLayout(null); 
-		ventana.setVisible(true);
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  
-		
+		iniciarEtiquetas();
 	}
 	
 	public void setVisibilidadBotones(boolean visible) {
