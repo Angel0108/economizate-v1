@@ -34,7 +34,7 @@ public class AESEncrypt implements IEncryption {
 	}
 	
 	@Override
-	public String encrypt(String texto) {
+	public byte[] encrypt(String texto) {
 		String encryptedVal = null;
 
 	    try {
@@ -46,11 +46,11 @@ public class AESEncrypt implements IEncryption {
 	        System.out.println("The Exception is=" + ex);
 	    }
 
-	    return encryptedVal;
+	    return encryptedVal.getBytes();
 	}
 
 	@Override
-	public String decrypt(String texto) {
+	public String decrypt(byte[] texto) {
 		String decryptedValue = null;
 
 	    try {

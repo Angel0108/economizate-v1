@@ -31,7 +31,7 @@ public class DESEncrypt implements IEncryption {
 };
 	
 	@Override
-	public String encrypt(String texto) {
+	public byte[] encrypt(String texto) {
 		String key = "squirrel123";
 		byte[] textEncrypted = null;
 		byte[] utf8 = null;
@@ -55,12 +55,12 @@ public class DESEncrypt implements IEncryption {
 		}
 		
 		
-		return new String(textEncrypted);
+		return textEncrypted;
         //return new String(textEncrypted);
 	}
 
 	@Override
-	public String decrypt(String texto) {
+	public String decrypt(byte[] texto) {
 		String decryptedValue = null;
 		byte[] textDecrypted = null;
 		byte[] utf8 = null;
@@ -70,7 +70,7 @@ public class DESEncrypt implements IEncryption {
 		    SecretKey myDesKey = keygenerator.generateKey();
 			Cipher desCipher = Cipher.getInstance("DES");
 			desCipher.init(Cipher.DECRYPT_MODE, myDesKey);
-			textDecrypted = Base64.getDecoder().decode(texto.getBytes());
+			textDecrypted = Base64.getDecoder().decode(texto);
 			final byte[] encValue = desCipher.doFinal(textDecrypted);
 			
 			

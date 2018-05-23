@@ -2,7 +2,7 @@ package com.economizate.servicios;
 
 public interface IEncryption {
 
-	public String encrypt(String texto);
+	public byte[] encrypt(String texto);
 	
-	public String decrypt(String texto);
+	public String decrypt(byte[] texto);
 }
