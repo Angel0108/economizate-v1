@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 
 public class ManejadorEtiqueta {
 	
-	private static Idioma idioma;
 	
 	private static ManejadorEtiqueta instancia;
 	
@@ -14,7 +13,6 @@ public class ManejadorEtiqueta {
 			instancia = new ManejadorEtiqueta();	
 			
 		}
-		//instancia.setIdioma(idioma);
 		return instancia;
 	}
 	
@@ -22,8 +20,5 @@ public class ManejadorEtiqueta {
 		ResourceBundle labels = ResourceBundle.getBundle("etiquetas", ManejadorIdioma.getInstance().getLocale());
 		return labels.getString(key);
 	}
-	
-	public void setIdioma(Idioma idioma) {
-		this.idioma = idioma; 
-	}
+
 }
