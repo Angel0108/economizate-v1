@@ -41,7 +41,7 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 		return cuenta.getTotal();
 	}
 
-	@Override
+	/*@Override
 	public List<MovimientoMonetario> obtenerIngresosPorFecha(Date fecha) {
 		return null;
 	}
@@ -70,7 +70,7 @@ public class CuentaImpl implements com.economizate.servicios.Cuenta{
 			total += mov.getImporte();
 		}		
 		return total;
-	}
+	}*/
 
 	@Override
 	public void agregarMovimiento(MovimientoMonetario movimiento) {

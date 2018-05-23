@@ -4,9 +4,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.Date;
 import org.junit.Test;
-
 import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Movimientos;
 import com.economizate.servicios.Criterio;
@@ -60,9 +59,9 @@ public class CriteriosFiltroTest {
 	
 	@Test
 	public void filtrarMovimientosPorIngresoYObtenerListaIngresosOK() throws ParseException {
-		List<MovimientoMonetario> lista = conectorCuenta.getMovimientos();
+		
 		Criterio criterio = new IngresoCriterio();
-		List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(lista);
+		Movimientos movimientos = conectorCuenta.getMovimientos().filtrarPorCriterio(criterio);
 		assertTrue("Lista filtrada por ingresos ", listaFiltrada.get(0).getImporte() > 0);
 	}
 	
@@ -73,21 +72,6 @@ public class CriteriosFiltroTest {
 		List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(lista);
 		
 		assertTrue("Lista filtrada por egresos ", listaFiltrada.get(0).getImporte() < 0);
-	}
-
-	@Test
-	public void filtrarMovimientosPorFechaEIngresosYObtenerListaOK() throws ParseException {
-		List<MovimientoMonetario> lista = conectorCuenta.getMovimientos();
-		
-		Date desde = formater.parse("20180301");
-		Date hasta = formater.parse("20180501");
-		Criterio criterioFechas = new RangoFechaCriterio(desde, hasta);
-		Criterio criterioIngresos = new IngresoCriterio();
-		Criterio criterio = new AndCriterio(criterioIngresos, criterioFechas);
-		List<MovimientoMonetario> listaFiltrada = criterio.filtrarMovimientos(lista);
-		 
-		assertTrue("Lista filtrada por ingresos y fecha ", listaFiltrada.get(0).getFecha().before(hasta) &&
-				listaFiltrada.get(0).getFecha().after(desde) && listaFiltrada.get(0).getImporte() > 0);
 	}
 	
 	@Test
@@ -102,6 +86,34 @@ public class CriteriosFiltroTest {
 		
 		assertTrue("Lista filtrada por ingresos y egresos ", listaFiltrada.size() == cantidadTotal);
 	}*/
+
+	@Test
+	public void filtrarMovimientosPorFechaEIngresosYObtenerListaOK() throws ParseException {
+		
+		
+		Date desde = formater.parse("20180301");
+		Date hasta = formater.parse("20180501");
+		Criterio criterioFechas = new RangoFechaCriterio(desde, hasta);
+		Criterio criterioIngresos = new IngresoCriterio();
+		Criterio criterio = new AndCriterio(criterioIngresos, criterioFechas);
+		Movimientos listaFiltrada = conectorCuenta.getMovimientos().filtrarPorCriterio(criterio);
+		 
+		assertTrue("Lista filtrada por ingresos y fecha ", listaFiltrada.getTodos().get(0).getFecha().before(hasta) &&
+				listaFiltrada.getTodos().get(0).getFecha().after(desde) && listaFiltrada.getTodos().get(0).getImporte() > 0);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void filtrarMovimientosPorFechaInvalidaEIngresosYObtenerListaOK() throws ParseException {
+		
+		
+		Date desde = formater.parse("20180501");
+		Date hasta = formater.parse("20180301");
+		Criterio criterioFechas = new RangoFechaCriterio(desde, hasta);
+		Criterio criterioIngresos = new IngresoCriterio();
+		Criterio criterio = new AndCriterio(criterioIngresos, criterioFechas);
+		conectorCuenta.getMovimientos().filtrarPorCriterio(criterio);
+
+	}
 	
 		
 }

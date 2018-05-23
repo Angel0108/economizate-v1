@@ -9,28 +9,20 @@ import java.nio.file.Paths;
 import java.text.ParseException;
 
 import javax.xml.bind.ValidationException;
-import javax.xml.transform.TransformerException;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
 import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseWriter;
+import com.economizate.servicios.FactoryReader;
+import com.economizate.servicios.FactoryWriterMovimientos;
 import com.economizate.servicios.IConversor;
-import com.economizate.servicios.IConversorMovimiento;
-import com.economizate.servicios.IParserRegistro;
-import com.economizate.servicios.LoaderFromFile;
 import com.economizate.servicios.impl.ConversorMovimientoConCuota;
 import com.economizate.servicios.impl.ConversorMovimientoSinCuota;
 import com.economizate.servicios.impl.ConvertListaMovimientosToString;
-import com.economizate.servicios.impl.ConvertObjetoToXML;
 import com.economizate.servicios.impl.ExcelWriter;
-import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.MovimientosSheet;
-import com.economizate.servicios.impl.ParserRegistroConCuota;
-import com.economizate.servicios.impl.ParserRegistroFechaSinCuota;
 import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.TXTWriter;
@@ -40,13 +32,6 @@ public class WriterTest {
 
 	private String rutaArchivos = Propiedad.getInstance().getPropiedad("resourcesTesting");
 	
-	private LoaderFromFile<MovimientoMonetario> importador;
-	
-	private IParserRegistro parser;
-	
-	private ConvertObjetoToXML convert = new ConvertObjetoToXML();
-	
-	private ConvertListaMovimientosToString convert2 = new ConvertListaMovimientosToString();
 	
 	private boolean existeArchivo(String nombreArchivo) {
 		Path path = Paths.get(nombreArchivo);
@@ -104,4 +89,15 @@ public class WriterTest {
 		
 	}
 	
+	@Test (expected = IOException.class)
+	public void writeArchivoInvalidoSinExtension() throws IOException {
+		IConversor<MovimientoMonetario> conversor = new ConversorMovimientoSinCuota(";");
+		FactoryWriterMovimientos.getWriter("src/test/resources/prueba", new ListaMovimientos().getMovimientos(), conversor);
+	}
+	
+	@Test (expected = IOException.class)
+	public void writeArchivoInvalidoConExtensionInvalida() throws IOException {
+		IConversor<MovimientoMonetario> conversor = new ConversorMovimientoSinCuota(";");
+		FactoryWriterMovimientos.getWriter("src/test/resources/prueba.csv", new ListaMovimientos().getMovimientos(), conversor);
+	}
 }

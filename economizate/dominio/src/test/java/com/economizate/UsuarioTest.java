@@ -1,15 +1,12 @@
 package com.economizate;
 
 import static org.junit.Assert.*;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-
 import com.economizate.datos.ListaUsuarios;
 import com.economizate.entidades.Usuario;
 
-import junit.framework.AssertionFailedError;
 
 public class UsuarioTest {
 	
@@ -34,7 +31,7 @@ public class UsuarioTest {
 	@Test
 	public void buscarUnUsuarioQueNoEstaEnLaListaYObtenerExcepcion() {
 		try{
-			Usuario usuario = usuarios.buscarUsuarioPorEmail("pepu@gmail.com");
+			usuarios.buscarUsuarioPorEmail("pepu@gmail.com");
 			Assert.fail("Test fallido");
 		}catch(Exception e) {
 			assertEquals("Excepción no encuentro usuario", e.getMessage(), "No se encontró el usuario");

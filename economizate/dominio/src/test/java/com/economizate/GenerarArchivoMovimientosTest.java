@@ -8,33 +8,19 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.ParseException;
-
 import javax.xml.bind.ValidationException;
-
 import junit.framework.Assert;
-
 import org.junit.Test;
-
 import com.economizate.conector.ConectorCuenta;
-import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
-import com.economizate.servicios.BaseWriter;
-import com.economizate.servicios.IConversor;
-import com.economizate.servicios.IConversorMovimiento;
 import com.economizate.servicios.IParserRegistro;
 import com.economizate.servicios.LoaderFromFile;
 import com.economizate.servicios.LoaderToFile;
 import com.economizate.servicios.impl.ConversorMovimientoSinCuota;
-import com.economizate.servicios.impl.ConvertListaMovimientosToString;
-import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.LoaderMovimientosFromFile;
 import com.economizate.servicios.impl.LoaderMovimientosToFile;
-import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.ParserRegistroFechaSinCuota;
-import com.economizate.servicios.impl.PdfWriter;
 import com.economizate.servicios.impl.Propiedad;
-import com.economizate.servicios.impl.TXTWriter;
-import com.economizate.servicios.impl.TransformadorMovimientos;
 
 public class GenerarArchivoMovimientosTest {
 
