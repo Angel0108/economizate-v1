@@ -11,7 +11,7 @@ public class ConnectorDropBox implements INube{
 	}
 
 	@Override
-	public boolean upload() {
+	public boolean upload(String pathFile) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.GeneralSecurityException;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 import com.economizate.servicios.INube;
@@ -25,10 +26,10 @@ import com.google.api.services.drive.model.File;
 
 public class ConnectorDrive implements INube{
 	
+	//cambiar path
 	private String pathFile;
 	
-	public ConnectorDrive(String pathFile) {
-		this.pathFile = pathFile;
+	public ConnectorDrive() {
 	}
 	
 	private static final String APPLICATION_NAME =  NubePropiedades.getInstance().getPropiedad("APPLICATION_NAME");
@@ -64,6 +65,21 @@ public class ConnectorDrive implements INube{
         return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
     }
     
+    public static Credential getCredentials(String pathCredentials) throws IOException, GeneralSecurityException {
+    	NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
+    	// Load client secrets.
+        InputStream in = ConnectorDrive.class.getResourceAsStream(pathCredentials);
+        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
+
+        // Build flow and trigger user authorization request.
+        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(
+                HTTP_TRANSPORT, JSON_FACTORY, clientSecrets, SCOPES)
+                .setDataStoreFactory(new FileDataStoreFactory(new java.io.File(CREDENTIALS_FOLDER)))
+                .setAccessType("offline")
+                .build();
+        return new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
+    }
+    
 
     @Override
 	public boolean conectar() {
@@ -74,13 +90,14 @@ public class ConnectorDrive implements INube{
 	}
     
     @Override
-    public boolean upload(){
+    public boolean upload(String pathFile){
+    	this.pathFile = pathFile;
     	boolean result = false;
     	
     	Drive service = authorize();
     	
     	File fileMetadata = new File();
-    	fileMetadata.setName(NubePropiedades.getInstance().getPropiedad("FILE_TO_UPLOAD"));//+ new Date().getTime() );
+    	fileMetadata.setName(NubePropiedades.getInstance().getPropiedad("FILE_TO_UPLOAD") + new Date().getTime());
     	fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
 
     	java.io.File filePath = new java.io.File(pathFile);
@@ -92,8 +109,8 @@ public class ConnectorDrive implements INube{
 			.execute();
 			
 	    	System.out.println("File ID: " + file.getId());
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException f) {
+			f.printStackTrace();
 		}
     	result = true;
     	return result;
@@ -126,12 +143,13 @@ public class ConnectorDrive implements INube{
      * 
      * @return id del archivo subido
      */
-    public String uploadId(){
+    public String uploadId(String pathFile){
+    	this.pathFile = pathFile;
     	String id ="";
     	Drive service = authorize();
     	
     	File fileMetadata = new File();
-    	fileMetadata.setName("historial-movimientos");//+ new Date().getTime() );
+    	fileMetadata.setName("historial-movimientos"+ new Date().getTime() );
     	fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
 
     	java.io.File filePath = new java.io.File(pathFile);
@@ -152,8 +170,8 @@ public class ConnectorDrive implements INube{
     public static void main(String... args) throws IOException, GeneralSecurityException {
         // Build a new authorized API client service.
     	
-        new ConnectorDrive("src/main/java/com/economizate/nubeManager/reporte/reporte-test.csv").upload();
-        
+        new ConnectorDrive().upload("src/main/resources/reporte-test.csv");
+    	
         // Print the names and IDs for up to 10 files.
         /*FileList result = service.files().list()
                 .setPageSize(10)

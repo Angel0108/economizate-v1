@@ -6,6 +6,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.economizate.AlertaTest.ObservadorVistaTest;
@@ -32,7 +33,7 @@ public class RestTest {
 		cuenta.addObserver(new ObservadorVistaTest(saldoAnterior));
 	}
 	
-	@Test
+	@Ignore@Test
 	public void generarTransferenciaConMonto100YConExito(){
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
@@ -43,7 +44,7 @@ public class RestTest {
 		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
 	}
 	
-	@Test
+	@Ignore@Test
 	public void generarTransferenciaConMonto100YRecibirStatus201(){
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		

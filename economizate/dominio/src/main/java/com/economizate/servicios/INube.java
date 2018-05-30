@@ -1,5 +1,8 @@
 package com.economizate.servicios;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
+
 public interface INube {
 	
 	/**
@@ -11,8 +14,10 @@ public interface INube {
 	/**
 	 * Sube archivos a la nube, historial de movimientos en ese caso 
 	 * @return
+	 * @throws UnknownHostException 
+	 * @throws IOException 
 	 */
-	public boolean upload();
+	public boolean upload(String pathFile);
 	
 	
 	/**
