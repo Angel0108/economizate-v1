@@ -15,7 +15,6 @@ import org.junit.Test;
 import com.economizate.datos.ListaMovimientos;
 import com.economizate.entidades.MovimientoMonetario;
 import com.economizate.servicios.BaseWriter;
-import com.economizate.servicios.FactoryReader;
 import com.economizate.servicios.FactoryWriterMovimientos;
 import com.economizate.servicios.IConversor;
 import com.economizate.servicios.impl.ConversorMovimientoConCuota;
