@@ -1,6 +1,9 @@
 package com.economizate.transferencias;
 
+import java.io.IOException;
 import java.util.Date;
+
+import org.json.JSONObject;
 
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
@@ -10,6 +13,7 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.HttpRequest;
+import com.mashape.unirest.request.HttpRequestWithBody;
 
 public class GeneradorTransferencia implements ITransferencia{
 	
@@ -25,19 +29,22 @@ public class GeneradorTransferencia implements ITransferencia{
 		boolean result = false;
 		
 		try {
-			
+			//genero url rest
 			HttpRequest request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
 			  .header("accept", "application/json")
-			  .routeParam("monto", String.valueOf(monto));
+			  .queryString("destinatario", "pepaGonzalez@gmail.com")
+			  .queryString("monto", String.valueOf(monto));
+			  
 			
 			HttpResponse<JsonNode> response = request.asJson();
 			System.out.println(request.getUrl());
+			
 			
 			result = true;
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
-		generarEgreso();
+		generarEgreso(monto);
 		return result;
 	}
 	
@@ -46,10 +53,10 @@ public class GeneradorTransferencia implements ITransferencia{
 		HttpResponse<JsonNode> response = null;
 		
 		try {
-			
-			HttpRequest request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
-			  .header("accept", "application/json")
-			  .routeParam("monto", String.valueOf(monto));
+			//genero url rest
+			HttpRequestWithBody request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
+					.queryString("destinatario", destinatario)
+					  .queryString("monto", String.valueOf(monto));
 			
 			response = request.asJson();
 			System.out.println(request.getUrl());
@@ -57,7 +64,7 @@ public class GeneradorTransferencia implements ITransferencia{
 		} catch (UnirestException e) {
 			e.printStackTrace();
 		}
-		generarEgreso();
+		generarEgreso(monto);
 		return response.getStatus();
 	}
 
@@ -65,10 +72,10 @@ public class GeneradorTransferencia implements ITransferencia{
 		this.cuenta = cuenta;
 	}
 	
-	public void generarEgreso() {
+	public void generarEgreso(double monto) {
 		
 		MovimientoMonetario egreso = 
-				new MovimientoMonetario("Gasto shopping", "Renovar ropa", Double.parseDouble("-96"), new Date());
+				new MovimientoMonetario("Transferencia", "Terceros", -monto, new Date());
 		
 		cuenta.getMovimientos().agregarMovimiento(egreso);
 		cuenta.modificarTotal(cuenta.getMovimientos().getTotal());

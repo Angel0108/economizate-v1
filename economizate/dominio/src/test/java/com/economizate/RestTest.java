@@ -34,7 +34,7 @@ public class RestTest {
 	}
 	
 	@Ignore@Test
-	public void generarTransferenciaConMonto100YConExito(){
+	public void generarTransferenciaConMonto100YConExitoConAlarmaRoja(){
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
 		//transferir returna true si el servicio responde ok
@@ -45,7 +45,7 @@ public class RestTest {
 	}
 	
 	@Ignore@Test
-	public void generarTransferenciaConMonto100YRecibirStatus201(){
+	public void generarTransferenciaConMonto100YRecibirStatus201ConAlarmaRoja(){
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
 		//ejecutar retorna http status 
@@ -53,6 +53,28 @@ public class RestTest {
 		
 		assertTrue("Transferencia realizada con status: ", result == 201);
 		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
+	}
+	
+	@Ignore@Test
+	public void generarTransferenciaConMonto50YRecibirStatus201ConAlarmaVerde(){
+		ITransferencia transferencia = new ProxyTransferencia(cuenta);
+		
+		//ejecutar retorna http status 
+		int result = transferencia.ejecutar(Double.valueOf(50), "pepaGonzalez@gmail.com");
+		
+		assertTrue("Transferencia realizada con status: ", result == 201);
+		assertTrue("La alerta generada es de tipo verde: ", alerta.getMensaje().equals("Transacción OK"));
+	}
+	
+	@Ignore@Test
+	public void generarTransferenciaConMonto150YRecibirStatus201ConAlarmaNegra(){
+		ITransferencia transferencia = new ProxyTransferencia(cuenta);
+		
+		//ejecutar retorna http status 
+		int result = transferencia.ejecutar(Double.valueOf(150), "pepaGonzalez@gmail.com");
+		
+		assertTrue("Transferencia realizada con status: ", result == 201);
+		assertTrue("La alerta generada es de tipo negra: ", alerta.getMensaje().equals("Supera el saldo total"));
 	}
 	
 	
