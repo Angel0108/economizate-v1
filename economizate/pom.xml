@@ -29,9 +29,8 @@
     <module>nubeManager</module>
     <module>rest</module>
   </modules>
-  
-  <reporting>
-        <plugins>
+  <build>
+		<plugins>
 		
 
 
@@ -57,6 +56,9 @@
     </executions>
 </plugin>
 		</plugins>
+	</build>
+  <reporting>
+        
 </reporting>
   
 </project>
