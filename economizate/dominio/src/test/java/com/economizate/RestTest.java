@@ -14,6 +14,7 @@ import com.economizate.conector.ConectorCuenta;
 import com.economizate.entidades.Alerta;
 import com.economizate.entidades.Cuenta;
 import com.economizate.servicios.FactoryAlertas;
+import com.economizate.servicios.impl.UsuariosImpl;
 import com.economizate.transferencias.ITransferencia;
 import com.economizate.transferencias.ProxyTransferencia;
 
@@ -38,7 +39,7 @@ public class RestTest {
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
 		//transferir returna true si el servicio responde ok
-		boolean result = transferencia.transferir(Double.valueOf(100), "pepaGonzalez@gmail.com");
+		boolean result = transferencia.transferir(Double.valueOf(100), "pepa@gmail.com");
 		
 		assertTrue("Transferencia realizada: ", result);
 		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
@@ -49,7 +50,7 @@ public class RestTest {
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
 		//ejecutar retorna http status 
-		int result = transferencia.ejecutar(Double.valueOf(100), "pepaGonzalez@gmail.com");
+		int result = transferencia.ejecutar(Double.valueOf(100), "pepa@gmail.com");
 		
 		assertTrue("Transferencia realizada con status: ", result == 201);
 		assertTrue("La alerta generada es de tipo roja: ", alerta.getMensaje().equals("Ha superado el 95%"));
@@ -71,10 +72,30 @@ public class RestTest {
 		ITransferencia transferencia = new ProxyTransferencia(cuenta);
 		
 		//ejecutar retorna http status 
-		int result = transferencia.ejecutar(Double.valueOf(150), "pepaGonzalez@gmail.com");
+		int result = transferencia.ejecutar(Double.valueOf(150), "pepa@gmail.com");
 		
 		assertTrue("Transferencia realizada con status: ", result == 201);
 		assertTrue("La alerta generada es de tipo negra: ", alerta.getMensaje().equals("Supera el saldo total"));
+	}
+	
+	@Test
+	public void generarTransferenciaConMailNoexisteYRecibirErrorArgumentoIlegal(){
+		ITransferencia transferencia = new ProxyTransferencia(cuenta);
+		
+		try {
+			//valido mail
+			String mailDestinatario = new UsuariosImpl().buscarUsuarioPorEmail("pepa@Gmail.com").getEmail();
+			
+			//ejecutar retorna http status 
+			int result = transferencia.ejecutar(Double.valueOf(150), mailDestinatario);
+			assertTrue("Mail existente: ", mailDestinatario != null);
+			assertTrue("Transferencia realizada con status: ", result == 201);
+		}catch(IllegalArgumentException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+			assertTrue("Mail INexistente: ", e.getMessage().equals("Email no coincidente: " + "pepa@Gmail.com"));
+		}
+		
 	}
 	
 	

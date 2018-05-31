@@ -32,7 +32,7 @@ public class GeneradorTransferencia implements ITransferencia{
 			//genero url rest
 			HttpRequest request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
 			  .header("accept", "application/json")
-			  .queryString("destinatario", "pepaGonzalez@gmail.com")
+			  .queryString("destinatario", destinatario)
 			  .queryString("monto", String.valueOf(monto));
 			  
 			

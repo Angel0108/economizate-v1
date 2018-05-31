@@ -15,7 +15,7 @@ public class DriveTest {
 	
 	private static final String UBICACION_INGRESO_MENSUAL= "src/main/resources/";
 	
-	@Test
+	//@Test
 	public void conectarConGoogleDriveYSubirArchivo() {
 		ConnectorDrive drive = new ConnectorDrive();
 		

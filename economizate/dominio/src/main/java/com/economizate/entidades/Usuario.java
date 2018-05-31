@@ -52,7 +52,4 @@ public class Usuario extends java.util.Observable{
 	public void setSaldo(Cuenta saldo) {
 		this.saldo = saldo;
 	}
-	
-	
-
 }
