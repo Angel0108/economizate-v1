@@ -66,7 +66,7 @@ public class Loader {
 	      Enumeration<URL> e = ldr.getResources("META-INF/services/" + "ConnectorDrive.class");*/
 	      ClassLoader parentClassLoader = MyClassLoader.class.getClassLoader();
 	      MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
-	      Class myObjectClass = classLoader.loadClass("ConnectorOneDrive");
+	      Class myObjectClass = classLoader.loadClass("ConnectorDrive");
 	      classLoader.loadClass("NubeEnum");
 	      classLoader.loadClass("NubePropiedades");
 	      //classLoader.loadClass("ConnectorDrive");
