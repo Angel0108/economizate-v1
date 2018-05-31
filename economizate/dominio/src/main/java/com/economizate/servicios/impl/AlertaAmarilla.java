@@ -16,5 +16,14 @@ public class AlertaAmarilla implements IAlertas {
 		return conector.crearAlertaAmarilla(saldoAnterior, saldoActual, 
 				Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"));
 	}
+	
+	public String getMensaje() {
+		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"); 
+	}
+	
+	@Override
+	public String toString() {
+		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"); 
+	}
 
 }
