@@ -9,14 +9,25 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 
 import com.economizate.servicios.DataSource;
+import com.economizate.servicios.IEncryption;
 
 public class EncryptionDecorator extends DataSourceDecorator {
 
-	private EncryptionDecorator(DataSource source) {
-        super(source);
-    }
+	IEncryption encriptador;
+	
+	byte[] data;
+	
+	public EncryptionDecorator(DataSource source) {
+		super(source);
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
+	public EncryptionDecorator(DataSource source, IEncryption encriptacion) {
+		super(source);
+		this.encriptador = encriptacion;
+	}
+
+	@Override
     public void writeData(String data) {
         super.writeData(encode(data));
     }
@@ -27,18 +38,12 @@ public class EncryptionDecorator extends DataSourceDecorator {
     }
 
     public String encode(String data) {
-        byte[] result = data.getBytes();
-        for (int i = 0; i < result.length; i++) {
-            result[i] += (byte) 1;
-        }
-        return Base64.getEncoder().encodeToString(result);
+    	this.data = this.encriptador.encrypt(data);
+    	return new String(this.data);
     }
 
     public String decode(String data) {
-        byte[] result = Base64.getDecoder().decode(data);
-        for (int i = 0; i < result.length; i++) {
-            result[i] -= (byte) 1;
-        }
-        return new String(result);
+        
+        return this.encriptador.decrypt(this.data);
     }
 }

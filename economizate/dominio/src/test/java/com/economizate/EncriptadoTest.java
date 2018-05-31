@@ -6,13 +6,8 @@ import java.io.FileNotFoundException;
 
 import org.junit.Test;
 
-import com.economizate.servicios.DataSource;
 import com.economizate.servicios.IEncryption;
 import com.economizate.servicios.impl.AESEncrypt;
-import com.economizate.servicios.impl.DESEncrypt;
-import com.economizate.servicios.impl.EncyptionDecorator;
-import com.economizate.servicios.impl.FileDataSource;
-import com.economizate.servicios.impl.Propiedad;
 import com.economizate.servicios.impl.RSAEncrypt;
 
 public class EncriptadoTest {
