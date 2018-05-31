@@ -11,7 +11,7 @@ import com.economizate.servicios.impl.Propiedad;
 
 public class ComprimirTest {
 
-	//@Test
+	@Test
 	public void comprimirTest() {
 		
 		DataSourceDecorator encoded = new CompressionDecorator(
