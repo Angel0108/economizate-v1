@@ -70,7 +70,7 @@ public class ConnectorDrive implements INube{
     public static Credential getCredentials(String pathCredentials) throws IOException, GeneralSecurityException {
     	NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
     	// Load client secrets.
-        InputStream in = ConnectorDrive.class.getResourceAsStream(pathCredentials);
+        InputStream in = Thread.currentThread().getContextClassLoader().getResourceAsStream(pathCredentials);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
         // Build flow and trigger user authorization request.
