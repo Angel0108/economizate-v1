@@ -1,6 +1,6 @@
 package com.economizate;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,12 +9,10 @@ import java.io.IOException;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import com.economizate.loader.Loader;
 import com.economizate.loader.MyClassLoader;
 import com.economizate.servicios.IEncryption;
 import com.economizate.servicios.INube;
 import com.economizate.servicios.impl.AESEncrypt;
-import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.RSAEncrypt;
 import com.economizate.servicios.impl.TXTWriter;
 

@@ -22,9 +22,7 @@ public class MyClassLoader extends ClassLoader{
         		&& !Propiedad.getInstance().getPropiedad("nubes").equals(name)
         		&& !Propiedad.getInstance().getPropiedad("propiedadesExtra").equals(name))
                 return super.loadClass(name);
-        
-        System.out.println(Propiedad.getInstance().getPropiedad(name));
-        
+       
         try {
             String url = "file:./src/test/resources/META-INF/services/" + name + ".class";
             URL myUrl = new URL(url);
