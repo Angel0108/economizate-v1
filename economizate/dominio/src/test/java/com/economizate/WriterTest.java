@@ -20,6 +20,8 @@ import com.economizate.servicios.IConversor;
 import com.economizate.servicios.impl.ConversorMovimientoConCuota;
 import com.economizate.servicios.impl.ConversorMovimientoSinCuota;
 import com.economizate.servicios.impl.ConvertListaMovimientosToString;
+import com.economizate.servicios.impl.ConvertObjetoToXML;
+import com.economizate.servicios.impl.ConvertToMovimiento;
 import com.economizate.servicios.impl.ExcelWriter;
 import com.economizate.servicios.impl.MovimientosSheet;
 import com.economizate.servicios.impl.PdfWriter;
@@ -31,6 +33,11 @@ public class WriterTest {
 
 	private String rutaArchivos = Propiedad.getInstance().getPropiedad("resourcesTesting");
 	
+	ConvertObjetoToXML coToXml = new ConvertObjetoToXML();
+	
+	ConvertToMovimiento ctm = new ConvertToMovimiento();
+	
+	ConvertListaMovimientosToString clmToString = new ConvertListaMovimientosToString();
 	
 	private boolean existeArchivo(String nombreArchivo) {
 		Path path = Paths.get(nombreArchivo);

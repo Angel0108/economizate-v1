@@ -23,6 +23,10 @@ public class ListaNubes {
 		for (String s: nubes) {
 			if("GOOGLEDRIVE".equals(s))
 				connectors.put(s,new ConnectorDrive());
+			else if("DROPBOX".equals(s))
+				connectors.put(s,new ConnectorDropBox());
+			else if("ONEDRIVE".equals(s))
+				connectors.put(s,new ConnectorOneDrive());
 		}
 		return connectors;
 	}

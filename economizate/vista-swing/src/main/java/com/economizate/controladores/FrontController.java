@@ -25,14 +25,11 @@ public class FrontController {
 		dispatch = new Dispatcher();
 	}
 	
-	public void setLocale(Idioma idioma) {
+	private void setLocale(Idioma idioma) {
 		
 		this.idioma = ManejadorIdioma.getInstance(idioma);		
 	}
 	
-	public Locale getLocale() {
-		return this.idioma.getLocale();
-	}
 	
 	public void manejarRequest(String request) {
 		

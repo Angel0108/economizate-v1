@@ -6,24 +6,24 @@ public class ManejadorIdioma {
 
 	private Locale locale;
 	
-	private static ManejadorIdioma frontController;
+	private static ManejadorIdioma controllerIdioma;
 	
 	
 	public static ManejadorIdioma getInstance(Idioma idioma) {
-		if(frontController == null) {
-			frontController = new ManejadorIdioma();	
+		if(controllerIdioma == null) {
+			controllerIdioma = new ManejadorIdioma();	
 			
 		}
-		frontController.setLocale(idioma);
-		return frontController;
+		controllerIdioma.setLocale(idioma);
+		return controllerIdioma;
 	}
 	
 	public static ManejadorIdioma getInstance() {
-		if(frontController == null) {
-			frontController = new ManejadorIdioma();	
+		if(controllerIdioma == null) {
+			controllerIdioma = new ManejadorIdioma();	
 			
 		}
-		return frontController;
+		return controllerIdioma;
 	}
 	
 	private ManejadorIdioma() {
@@ -43,7 +43,4 @@ public class ManejadorIdioma {
 		return this.locale;
 	}
 	
-	public void manejarRequest(String request) {
-		
-	}
 }
