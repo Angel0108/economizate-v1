@@ -1,9 +1,6 @@
 package com.economizate.transferencias;
 
-import java.io.IOException;
 import java.util.Date;
-
-import org.json.JSONObject;
 
 import com.economizate.entidades.Cuenta;
 import com.economizate.entidades.MovimientoMonetario;
@@ -25,45 +22,34 @@ public class GeneradorTransferencia implements ITransferencia{
 	}
 
 	@Override
-	public boolean transferir(double monto, String destinatario) {
+	public boolean transferir(double monto, String destinatario) throws UnirestException {
 		boolean result = false;
 		
-		try {
-			//genero url rest
-			HttpRequest request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
-			  .header("accept", "application/json")
-			  .queryString("destinatario", destinatario)
-			  .queryString("monto", String.valueOf(monto));
-			  
-			
-			HttpResponse<JsonNode> response = request.asJson();
-			System.out.println(request.getUrl());
-			
-			
-			result = true;
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
+		//genero url rest
+		HttpRequest request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
+		  .header("accept", "application/json")
+		  .queryString("destinatario", destinatario)
+		  .queryString("monto", String.valueOf(monto));
+		  
+		
+		HttpResponse<JsonNode> response = request.asJson();
+		result = true;
+		
 		generarEgreso(monto);
 		return result;
 	}
 	
 	@Override
-	public int ejecutar(double monto, String destinatario) {
+	public int ejecutar(double monto, String destinatario) throws UnirestException {
 		HttpResponse<JsonNode> response = null;
 		
-		try {
-			//genero url rest
-			HttpRequestWithBody request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
-					.queryString("destinatario", destinatario)
-					  .queryString("monto", String.valueOf(monto));
-			
-			response = request.asJson();
-			System.out.println(request.getUrl());
-			
-		} catch (UnirestException e) {
-			e.printStackTrace();
-		}
+		//genero url rest
+		HttpRequestWithBody request = Unirest.post(Propiedad.getInstance().getPropiedad("endpoint"))
+				.queryString("destinatario", destinatario)
+				  .queryString("monto", String.valueOf(monto));
+		
+		response = request.asJson();
+		
 		generarEgreso(monto);
 		return response.getStatus();
 	}

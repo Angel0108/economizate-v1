@@ -19,7 +19,7 @@ public class MyClassLoader extends ClassLoader{
                 return super.loadClass(name);
 
         try {
-            String url = "file:C:/Users/nidibiase/git/economizate-v1/economizate/dominio/src/main/resources/META-INF/services/" + name + ".class";
+            String url = "file:C:/Users/Angel/Desktop/Angel/Ungs/economizate-v1/economizate-v1/economizate/dominio/src/main/resources/META-INF/services/" + name + ".class";
             URL myUrl = new URL(url);
             URLConnection connection = myUrl.openConnection();
             InputStream input = connection.getInputStream();

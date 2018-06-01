@@ -76,7 +76,7 @@ public class Loader {
 	              (INube) myObjectClass.newInstance();
 
 
-
+	      System.out.println(object1.getTipo());
 	      //create new class loader so classes can be reloaded.
 	      /*classLoader = new MyClassLoader(parentClassLoader);
 	      myObjectClass = classLoader.loadClass("ConnectorDrive");*/
