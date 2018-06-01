@@ -7,6 +7,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
+import com.economizate.servicios.impl.Propiedad;
+
 public class MyClassLoader extends ClassLoader{
 
     public MyClassLoader(ClassLoader parent) {
@@ -14,10 +16,15 @@ public class MyClassLoader extends ClassLoader{
     }
 
     public Class loadClass(String name) throws ClassNotFoundException {
-        if(!"ConnectorDrive".equals(name) && !"NubeEnum".equals(name) && !"ConnectorOneDrive".equals(name) && 
-        		!"NubeEnum".equals(name) && !"NubePropiedades".equals(name))
+    	
+    	
+        if(!Propiedad.getInstance().getPropiedad("nubeSeleccionada").equals(name) 
+        		&& !Propiedad.getInstance().getPropiedad("nubes").equals(name)
+        		&& !Propiedad.getInstance().getPropiedad("propiedadesExtra").equals(name))
                 return super.loadClass(name);
-
+        
+        System.out.println(Propiedad.getInstance().getPropiedad(name));
+        
         try {
             String url = "file:C:/Users/Angel/Desktop/Angel/Ungs/economizate-v1/economizate-v1/economizate/dominio/src/main/resources/META-INF/services/" + name + ".class";
             URL myUrl = new URL(url);

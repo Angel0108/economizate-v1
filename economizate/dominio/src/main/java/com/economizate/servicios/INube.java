@@ -17,7 +17,7 @@ public interface INube {
 	 * @throws UnknownHostException 
 	 * @throws IOException 
 	 */
-	public boolean upload(String pathFile);
+	public boolean upload(String pathFile) throws IOException;
 	
 	
 	/**
