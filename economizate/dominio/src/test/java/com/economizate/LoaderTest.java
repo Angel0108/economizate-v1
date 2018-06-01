@@ -4,7 +4,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import com.economizate.loader.MyClassLoader;
+import com.economizate.loader.LoaderClase;
 import com.economizate.servicios.INube;
 import com.economizate.servicios.impl.Propiedad;
 
@@ -12,8 +12,8 @@ public class LoaderTest {
 	
 	@Test
 	public void cargarClasesDeNubeManagerConExito() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
-		ClassLoader loaderGenerico = MyClassLoader.class.getClassLoader();
-		MyClassLoader loader = new MyClassLoader(loaderGenerico);
+		ClassLoader loaderGenerico = LoaderClase.class.getClassLoader();
+		LoaderClase loader = new LoaderClase(loaderGenerico);
 		
 		Class nube = loader.loadClass("ConnectorDrive");
 		loader.loadClass(Propiedad.getInstance().getPropiedad("nubes"));

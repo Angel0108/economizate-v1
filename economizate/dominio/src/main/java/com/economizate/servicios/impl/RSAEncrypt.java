@@ -28,7 +28,7 @@ public class RSAEncrypt implements IEncryption {
 	    pubkey = keyPair.getPublic();
 	  }
 	  catch (Exception e) {
-	    System.out.println("Exception: " + e.getMessage());
+	    e.getMessage();
 	  }
 	}
 	 
@@ -40,7 +40,6 @@ public class RSAEncrypt implements IEncryption {
 	    return cipher.doFinal(data.getBytes());
 	  }
 	  catch (Exception e) {
-	    System.out.println("encrypt exception: " + e.getMessage());
 	    return new byte[0];
 	  }
 	}
@@ -52,7 +51,6 @@ public class RSAEncrypt implements IEncryption {
 	    return new String(cipher.doFinal(data));
 	  }
 	  catch (Exception e) {
-	  System.out.println("decrypt exception: " + e.getMessage());
 	  return new String(new byte[0]);
 	  }
 	}

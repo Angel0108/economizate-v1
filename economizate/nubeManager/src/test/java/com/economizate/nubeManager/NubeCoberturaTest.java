@@ -16,6 +16,8 @@ public class NubeCoberturaTest {
 
 	private ListaNubes nubes = new ListaNubes();
 	
+	private NubeManagerFactory factory = new NubeManagerFactory();
+	
 	@Test
 	public void conectarDropBox() {
 		ConnectorDropBox drive = new ConnectorDropBox();

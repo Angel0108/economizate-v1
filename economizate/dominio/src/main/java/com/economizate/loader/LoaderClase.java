@@ -9,9 +9,9 @@ import java.net.URLConnection;
 
 import com.economizate.servicios.impl.Propiedad;
 
-public class MyClassLoader extends ClassLoader{
+public class LoaderClase extends ClassLoader{
 
-    public MyClassLoader(ClassLoader parent) {
+    public LoaderClase(ClassLoader parent) {
         super(parent);
     }
 
@@ -40,10 +40,10 @@ public class MyClassLoader extends ClassLoader{
 
             byte[] classData = buffer.toByteArray();
 
-            if(name.equals("com.economizate.servicios.INube")) {
+            /*if(name.equals("com.economizate.servicios.INube")) {
             	return defineClass(name,
                         classData, 0, classData.length);
-            }
+            }*/
             
             return defineClass("com.economizate.nubeManager." + name,
                     classData, 0, classData.length);

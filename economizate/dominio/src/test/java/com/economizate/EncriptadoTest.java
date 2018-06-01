@@ -11,7 +11,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import com.economizate.conector.ConectorCuenta;
-import com.economizate.loader.MyClassLoader;
+import com.economizate.loader.LoaderClase;
 import com.economizate.servicios.IEncryption;
 import com.economizate.servicios.INube;
 import com.economizate.servicios.impl.AESEncrypt;
@@ -84,8 +84,8 @@ public class EncriptadoTest {
 		File file = new File(Propiedad.getInstance().getPropiedad("resourcesTesting") + "archivoEncriptadoRSA.csv");
 		encoded.writeData(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";")));
 		
-		ClassLoader parentClassLoader = MyClassLoader.class.getClassLoader();
-	    MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
+		ClassLoader parentClassLoader = LoaderClase.class.getClassLoader();
+	    LoaderClase classLoader = new LoaderClase(parentClassLoader);
 	    Class myObjectClass = classLoader.loadClass("ConnectorDrive");
 	    classLoader.loadClass("NubeEnum");
 	    classLoader.loadClass("NubePropiedades");
@@ -108,8 +108,8 @@ public class EncriptadoTest {
 		
 		//encoded.readData().equals(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";")));
 		
-		ClassLoader parentClassLoader = MyClassLoader.class.getClassLoader();
-	    MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
+		ClassLoader parentClassLoader = LoaderClase.class.getClassLoader();
+	    LoaderClase classLoader = new LoaderClase(parentClassLoader);
 	    Class myObjectClass = classLoader.loadClass("ConnectorDrive");
 	    classLoader.loadClass("NubeEnum");
 	    classLoader.loadClass("NubePropiedades");

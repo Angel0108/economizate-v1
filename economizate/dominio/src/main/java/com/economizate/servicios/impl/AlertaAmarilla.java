@@ -17,13 +17,6 @@ public class AlertaAmarilla implements IAlertas {
 				Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"));
 	}
 	
-	public String getMensaje() {
-		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"); 
-	}
 	
-	@Override
-	public String toString() {
-		return Propiedad.getInstance().getPropiedad("mensajeAlerta80Porciento"); 
-	}
 
 }
