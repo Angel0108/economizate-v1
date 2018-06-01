@@ -53,6 +53,7 @@ public class ConnectorDrive implements INube{
      */
     private static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
         // Load client secrets.
+    	System.out.println(CLIENT_SECRET_DIR);
         InputStream in = ConnectorDrive.class.getResourceAsStream(CLIENT_SECRET_DIR);
         GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
 
@@ -96,12 +97,15 @@ public class ConnectorDrive implements INube{
     	
     	Drive service = authorize();
     	
+    	java.io.File filePath = new java.io.File(pathFile);
+    	String[] nombreArchivo = filePath.getName().split("\\.");
+    	
     	File fileMetadata = new File();
-    	fileMetadata.setName(NubePropiedades.getInstance().getPropiedad("FILE_TO_UPLOAD") + new Date().getTime());
+    	fileMetadata.setName(nombreArchivo[0] + new Date().getTime());
     	fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
 
-    	java.io.File filePath = new java.io.File(pathFile);
-    	FileContent mediaContent = new FileContent("text/csv", filePath);
+    	
+    	FileContent mediaContent = new FileContent("text/" + nombreArchivo[1], filePath);
     	File file;
 		
 			file = service.files().create(fileMetadata, mediaContent)
@@ -146,12 +150,15 @@ public class ConnectorDrive implements INube{
     	String id ="";
     	Drive service = authorize();
     	
-    	File fileMetadata = new File();
-    	fileMetadata.setName("historial-movimientos"+ new Date().getTime() );
-    	fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
+    	
 
     	java.io.File filePath = new java.io.File(pathFile);
-    	FileContent mediaContent = new FileContent("text/csv", filePath);
+    	String[] nombreArchivo = filePath.getName().split("\\.");
+    	File fileMetadata = new File();
+    	fileMetadata.setName(nombreArchivo[0]+ new Date().getTime() );
+    	fileMetadata.setMimeType("application/vnd.google-apps.spreadsheet");
+    	
+    	FileContent mediaContent = new FileContent("text/"+nombreArchivo[1], filePath);
     	File file;
 		try {
 			file = service.files().create(fileMetadata, mediaContent)
