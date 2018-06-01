@@ -90,7 +90,7 @@ public class ConnectorDrive implements INube{
 	}
     
     @Override
-    public boolean upload(String pathFile){
+    public boolean upload(String pathFile) throws IOException{
     	this.pathFile = pathFile;
     	boolean result = false;
     	
@@ -103,15 +103,13 @@ public class ConnectorDrive implements INube{
     	java.io.File filePath = new java.io.File(pathFile);
     	FileContent mediaContent = new FileContent("text/csv", filePath);
     	File file;
-		try {
+		
 			file = service.files().create(fileMetadata, mediaContent)
 			.setFields("id")
 			.execute();
 			
 	    	System.out.println("File ID: " + file.getId());
-		} catch (IOException f) {
-			f.printStackTrace();
-		}
+		
     	result = true;
     	return result;
     }
@@ -166,26 +164,4 @@ public class ConnectorDrive implements INube{
 		}
     	return id;
     }
-
-    public static void main(String... args) throws IOException, GeneralSecurityException {
-        // Build a new authorized API client service.
-    	
-        new ConnectorDrive().upload("src/main/resources/reporte-test.csv");
-    	
-        // Print the names and IDs for up to 10 files.
-        /*FileList result = service.files().list()
-                .setPageSize(10)
-                .setFields("nextPageToken, files(id, name)")
-                .execute();
-        List<File> files = result.getFiles();
-        if (files == null || files.isEmpty()) {
-            System.out.println("No files found.");
-        } else {
-            System.out.println("Files:");
-            for (File file : files) {
-                System.out.printf("%s (%s)\n", file.getName(), file.getId());
-            }
-        }*/
-    }
-
 }

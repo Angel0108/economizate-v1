@@ -1,6 +1,7 @@
 package com.economizate.nubeManager;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -15,31 +16,34 @@ public class DriveTest {
 	
 	private static final String UBICACION_INGRESO_MENSUAL= "src/main/resources/";
 	
-	//@Test
-	public void conectarConGoogleDriveYSubirArchivo() {
+	//US1
+	@Test
+	public void conectarConGoogleDriveYSubirArchivo() throws IOException {
 		ConnectorDrive drive = new ConnectorDrive();
 		
-		//subo archivo
+		//subo archivo: true si es exitoso
 		boolean resultado = drive.upload(UBICACION_INGRESO_MENSUAL + "ingreso-mensual.csv");
 		assertTrue("el archivo fue subido: ", resultado);
 	}
 	
-	//@Test
+	//US1
+	@Test
 	public void conectarConDriveYSubirArchivoOkConChequeoDeIdArchivo() throws IOException {
 		ConnectorDrive drive = new ConnectorDrive();
 		
-		//Subo archivo
+		//Subo archivo: retorna id de archivo en GoogleDrive
 		String id = drive.uploadId(UBICACION_INGRESO_MENSUAL + "ingreso-mensual.csv");
 		
-		//Lo busco en el Drive
+		//Lo busco en el Drive por su id
 		List<File> archivos = ReaderDrive.leerArchivosDrive(drive);
 		File nuevo = buscarFilePorId(archivos, id);
 		
-		assertTrue("Busco el archivo subido al Drive: ", nuevo.getName().equals("historial-movimientos"));
+		assertTrue("Busco el archivo subido al Drive: ", nuevo.getId().equals(id));
 		
 	}
 	
-	//@Test
+	//US2
+	@Test
 	public void conectarConGoogleDriveYSubirArchivoSinInternet() throws java.net.UnknownHostException {
 		ConnectorDrive drive = new ConnectorDrive();
 		boolean resultado = false;
@@ -50,12 +54,10 @@ public class DriveTest {
 		}catch(Exception e) {
 			assertTrue("el archivo NO fue subido: ", resultado==false);
 		}
-		
-		
-		
 	}
 	
-	//@Test
+	//US3
+	@Test
 	public void conectarConGoogleDriveConCredecialesInexistentes() throws IOException, GeneralSecurityException{
 		String ubicacionCredencalesErroneas = "src/resources";
 		
@@ -66,6 +68,22 @@ public class DriveTest {
 			assertTrue("Tengo credenciales: ", credenciales != null);
 		}catch(Exception e) {
 			assertTrue("No tengo credenciales: ", credenciales == null);
+		}
+	}
+	
+	//US4
+	@Test
+	public void buscarReportesInexistentesParaSubirAlDriveYObtenerArchivoInvalido() throws GeneralSecurityException{
+		ConnectorDrive drive = new ConnectorDrive(); 
+		final String UBICACION_ERRONEA = "inexistente";
+		
+		try {
+			//subo archivo: true si es exitoso
+			boolean resultado = drive.upload(UBICACION_ERRONEA + "ingreso-mensual.csv");
+			
+			fail("Encontro el archivo cuando no debería");
+		}catch(IOException e) {
+			assertTrue("test que evalúa la ubicación del archivo: ", true);
 		}
 	}
 	
