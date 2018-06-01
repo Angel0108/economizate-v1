@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.economizate.loader.Loader;
@@ -20,7 +21,7 @@ import com.economizate.servicios.impl.TXTWriter;
 public class EncriptadoTest {
 
 
-	//@Test
+	@Test
 	public void encriptarTest() throws FileNotFoundException {
 		
         IEncryption encriptador = new AESEncrypt();
@@ -41,7 +42,7 @@ public class EncriptadoTest {
 		assertTrue(texto.equals(textoDesencriptado));
 	}*/
 	
-	//@Test
+	@Test
 	public void encriptarRSATest() throws FileNotFoundException {
 		
         IEncryption encriptador = new RSAEncrypt();
@@ -51,7 +52,7 @@ public class EncriptadoTest {
 		assertTrue(texto.equals(textoDesencriptado));
 	}
 	
-	@Test
+	@Ignore@Test
 	public void driveEncriptado() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, IOException {
 		IEncryption encriptador = new RSAEncrypt();
         String texto = "Hola Mundooooooooooooo";
