@@ -14,7 +14,7 @@ import com.google.api.services.drive.model.File;
 
 public class DriveTest {
 	
-	private static final String UBICACION_INGRESO_MENSUAL= "src/main/resources/";
+	private static final String UBICACION_INGRESO_MENSUAL= "src/test/resources/";
 	
 	//US1
 	@Test
