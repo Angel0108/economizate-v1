@@ -10,6 +10,8 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.poi.EmptyFileException;
+
 import com.economizate.servicios.IEncryption;
 
 public class AESEncrypt implements IEncryption {
@@ -36,7 +38,7 @@ public class AESEncrypt implements IEncryption {
 	@Override
 	public byte[] encrypt(String texto) {
 		String encryptedVal = null;
-
+		
 	    try {
 	        
 	        c.init(Cipher.ENCRYPT_MODE, key);
@@ -70,4 +72,5 @@ public class AESEncrypt implements IEncryption {
 	    return key;
 	}
 
+	
 }
