@@ -12,6 +12,7 @@ public class DataSourceDecorator implements DataSource {
 	
 	@Override
 	public void writeData(String data) {
+		
 		wrappee.writeData(data);
 	}
 

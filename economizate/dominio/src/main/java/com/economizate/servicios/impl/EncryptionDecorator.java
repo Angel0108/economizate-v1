@@ -29,6 +29,8 @@ public class EncryptionDecorator extends DataSourceDecorator {
 
 	@Override
     public void writeData(String data) {
+		if(data.isEmpty())
+			throw new IllegalArgumentException("El contenido no puede ser vacío.");
         super.writeData(encode(data));
     }
 
