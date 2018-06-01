@@ -25,13 +25,6 @@ public class CompressionDecorator extends DataSourceDecorator {
 		super(source);
 	}
 
-	public int getCompressionLevel() {
-		return compLevel;
-	}
-
-	public void setCompressionLevel(int value) {
-		compLevel = value;
-	}
 
 	@Override
 	public void writeData(String data) {
