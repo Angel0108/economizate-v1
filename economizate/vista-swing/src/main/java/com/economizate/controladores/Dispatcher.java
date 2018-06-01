@@ -13,8 +13,8 @@ public class Dispatcher {
     }
 
     public void dispatch(String request){
-       if(request.equalsIgnoreCase("STUDENT")){
-          //studentView.show();
+       if(request.equalsIgnoreCase("RESTO")){
+          
        }
        else{
           homeView.iniciarVista();
