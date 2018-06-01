@@ -50,7 +50,7 @@ public class EncriptadoTest {
 		assertTrue(texto.equals(textoDesencriptado));
 	}
 	
-	@Test
+	@Ignore@Test
 	public void driveEncriptado() throws ClassNotFoundException, InstantiationException, IllegalAccessException, FileNotFoundException, IOException {
 		IEncryption encriptador = new RSAEncrypt();
         String texto = "Hola Mundooooooooooooo";
