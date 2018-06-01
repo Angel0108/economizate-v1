@@ -56,7 +56,7 @@ public class DriveCoberturaTest {
 	public void conectarConGoogleYLeerSusArchivosOK() throws IOException {
 		ConnectorDrive drive = new ConnectorDrive();
 		List<File> archivos = new ReaderDrive().leerArchivosDrive(drive);
-		
+		archivos = drive.leerArchivos();
 		assertTrue("Lista leída: ", !archivos.isEmpty());
 	}
 	
