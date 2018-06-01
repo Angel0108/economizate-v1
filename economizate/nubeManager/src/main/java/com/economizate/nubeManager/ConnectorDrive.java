@@ -172,4 +172,9 @@ public class ConnectorDrive implements INube{
 		}
     	return id;
     }
+
+	@Override
+	public List<File> leerArchivos() throws IOException {
+		return authorize().files().list().execute().getFiles();
+	}
 }

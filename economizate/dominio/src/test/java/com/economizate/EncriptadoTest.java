@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -90,7 +91,11 @@ public class EncriptadoTest {
 	    classLoader.loadClass("NubePropiedades");
 	    INube drive = (INube) myObjectClass.newInstance();
 	      drive.conectar();
-	    drive.upload(file.getAbsolutePath());
+	      String id = drive.uploadId(file.getAbsolutePath());
+  	    
+		    com.google.api.services.drive.model.File nuevo = buscarFilePorId(drive.leerArchivos(), id);
+		    assertTrue(encoded.readData().equals(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";"))));
+			assertTrue("Busco el archivo subido al Drive: ", nuevo.getId().equals(id));
 	}
 	
 	@Test
@@ -101,13 +106,31 @@ public class EncriptadoTest {
 		File file = new File(Propiedad.getInstance().getPropiedad("resourcesTesting") + "archivoEncriptadoAES.csv");
 		encoded.writeData(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";")));
 		
+		//encoded.readData().equals(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";")));
+		
 		ClassLoader parentClassLoader = MyClassLoader.class.getClassLoader();
 	    MyClassLoader classLoader = new MyClassLoader(parentClassLoader);
 	    Class myObjectClass = classLoader.loadClass("ConnectorDrive");
 	    classLoader.loadClass("NubeEnum");
 	    classLoader.loadClass("NubePropiedades");
+	    
 	    INube drive = (INube) myObjectClass.newInstance();
 	      drive.conectar();
-	    drive.upload(file.getAbsolutePath());
+	    String id = drive.uploadId(file.getAbsolutePath());
+	    	    
+	    com.google.api.services.drive.model.File nuevo = buscarFilePorId(drive.leerArchivos(), id);
+	    assertTrue(encoded.readData().equals(ConvertListaMovimientosToString.getRegistros(conector.getMovimientos().getTodos(), new ConversorMovimientoSinCuota(";"))));
+		assertTrue("Busco el archivo subido al Drive: ", nuevo.getId().equals(id));
+	    
+	}
+	
+	private com.google.api.services.drive.model.File buscarFilePorId(
+			List<com.google.api.services.drive.model.File> archivos, String id) {
+		com.google.api.services.drive.model.File nuevo = null;
+		for(com.google.api.services.drive.model.File f : archivos) {
+			if (f.getId().equals(id))
+				nuevo = f;
+		}
+		return nuevo;
 	}
 }

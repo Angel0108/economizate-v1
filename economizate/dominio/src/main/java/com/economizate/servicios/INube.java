@@ -2,6 +2,9 @@ package com.economizate.servicios;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.List;
+
+import com.google.api.services.drive.model.File;
 
 public interface INube {
 	
@@ -19,6 +22,7 @@ public interface INube {
 	 */
 	public boolean upload(String pathFile) throws IOException;
 	
+	public String uploadId(String pathFile) throws IOException;
 	
 	/**
 	 * Devuelve que tipo de servicio en la nube brinda
@@ -27,6 +31,6 @@ public interface INube {
 	
 	public Enum<?> getTipo();
 	
-	
+	public List<File> leerArchivos() throws IOException;
 
 }
